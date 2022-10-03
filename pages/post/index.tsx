@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
+const Post: NextPage = () => {
   return (
     <div>
-      find pets
+      post pet
     </div>      
   )
 }
 
-export default Home
+export default Post
