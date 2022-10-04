@@ -1,10 +1,11 @@
+import {Container} from 'components'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <div>
-      find pets
-    </div>      
+      <Container>
+          menem
+      </Container>
   )
 }
 

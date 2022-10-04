@@ -1,15 +1,13 @@
 import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
-import { Layout } from 'components'
+import type { Session } from 'next-auth'
 
 
-const App = ({ Component, pageProps }: AppProps<{ session: any }>) => {
+const App = ({ Component, pageProps }: AppProps<{ session: Session }>) => {
   return (
     <SessionProvider session={pageProps.session}>
-      <Layout>
         <Component {...pageProps} />
-      </Layout>
     </SessionProvider>)
 }
 

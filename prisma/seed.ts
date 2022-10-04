@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const seed_data = require("./seed_data");
 const { animals, breeds } = seed_data;
 
-const prisma = new PrismaClient();
+const { prismaClinet } = new PrismaClient();
 
 function populate<A, R>(input: A, fn: (seed: A) => Promise<R>) {
   return fn(input)
@@ -17,7 +17,7 @@ async function main() {
   populate(animals, (seed) => {
     return Promise.all(
       seed.map((animal: any) =>
-        prisma.animal.create({ data: { name: animal.name } })
+      prismaClinet.animal.create({ data: { name: animal.name } })
       )
     );
   });
@@ -26,7 +26,7 @@ async function main() {
     populate(breeds[animal], (seed) => {
       return Promise.all(
         seed.map((breed: any) =>
-          prisma.breed.create({
+        prismaClinet.breed.create({
             data: {
               name: breed,
               animal: { connect: { name: animal } },
@@ -40,10 +40,10 @@ async function main() {
 
 main()
   .then(async () => {
-    await prisma.$disconnect();
+    await prismaClinet.$disconnect();
   })
   .catch(async (e) => {
     console.error(e);
-    await prisma.$disconnect();
+    await prismaClinet.$disconnect();
     process.exit(1);
   });

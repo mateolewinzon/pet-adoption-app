@@ -1,10 +1,11 @@
+import { Container } from 'components'
 import type { NextPage } from 'next'
 
 const Profile: NextPage = () => {
   return (
-    <div>
+    <Container>
       my profile
-    </div>      
+    </Container>      
   )
 }
 
