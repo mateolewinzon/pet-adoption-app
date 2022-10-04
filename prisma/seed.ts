@@ -47,3 +47,5 @@ main()
     await prismaClinet.$disconnect();
     process.exit(1);
   });
+
+  export {}

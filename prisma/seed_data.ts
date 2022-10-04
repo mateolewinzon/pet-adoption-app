@@ -1,6 +1,7 @@
 type Breeds = {
   [key: string]: string[];
 };
+
 type Animals = {
   name: string;
 }[];
@@ -146,3 +147,4 @@ const data: { breeds: Breeds; animals: Animals } = {
 };
 
 module.exports = data
+export {}
