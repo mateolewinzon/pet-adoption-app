@@ -15,7 +15,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
@@ -31,6 +31,9 @@
       ],
       "config/*": [
         "config/*"
+      ],
+      "lib/*": [
+        "lib/*"
       ]
     }
   },
@@ -41,5 +44,10 @@
   ],
   "exclude": [
     "node_modules",
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

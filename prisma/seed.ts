@@ -1,51 +1,31 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient, Prisma } from "@prisma/client";
+import species from "./data";
 
-const seed_data = require("./seed_data");
-const { animals, breeds } = seed_data;
-
-const { prismaClinet } = new PrismaClient();
-
-function populate<A, R>(input: A, fn: (seed: A) => Promise<R>) {
-  return fn(input)
-    .then((result: R) =>
-      console.info("[SEED] Succussfully created records", result)
-    )
-    .catch((e) => console.error("[SEED] Failed to create records", e));
-}
+const prisma = new PrismaClient();
 
 async function main() {
-  populate(animals, (seed) => {
-    return Promise.all(
-      seed.map((animal: any) =>
-      prismaClinet.animal.create({ data: { name: animal.name } })
-      )
-    );
-  });
-
-  for (let animal in breeds) {
-    populate(breeds[animal], (seed) => {
-      return Promise.all(
-        seed.map((breed: any) =>
-        prismaClinet.breed.create({
-            data: {
-              name: breed,
-              animal: { connect: { name: animal } },
-            },
-          })
-        )
-      );
-    });
+  try {
+    for (let animal in species) {
+      await prisma.animal.create({ data: { name: animal } });
+      for (let breed in species[animal]) {
+        const name = species[animal][breed];
+        await prisma.breed.create({
+          data: { name, animal: { connect: { name: animal } } },
+        });
+      }
+    }
+    console.log("DB seeded successfully");
+  } catch (error) {
+    console.log("An error occurred when seeding:", error);
   }
 }
 
 main()
   .then(async () => {
-    await prismaClinet.$disconnect();
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
     console.error(e);
-    await prismaClinet.$disconnect();
+    await prisma.$disconnect();
     process.exit(1);
   });
-
-  export {}

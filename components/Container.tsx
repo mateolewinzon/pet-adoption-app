@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { NavLink, Footer } from "components"
+import { Header, Footer } from "components"
 
 type Props = {
     children: React.ReactNode
@@ -20,18 +20,7 @@ export const Container = ({ children, ...customMeta }: Props) => {
             <meta property="og:description" content={meta.description} />
             <meta property="og:title" content={meta.title} />
         </Head>
-        <div className="flex flex-row justify-center px-8">
-            <div className="flex items-center justify-between w-full max-w-3xl">
-                <nav className="flex">
-                    <NavLink href='/' text="Browse" />
-                    <NavLink href='/post' text="Post" />
-                </nav>
-                <nav className="flex">
-                    <NavLink href='/profile' text="Profile" />
-                    {/* <NavLink href='/login' text="Loign" /> */}
-                </nav>
-            </div>
-        </div>
+        <Header />
         <main className="flex flex-col justify-center px-8">
             {children}
         </main>
