@@ -4,7 +4,7 @@ import { getProviders, useSession } from "next-auth/react";
 import { useI18n } from "next-localization";
 
 import { Container, SocialSignInButton } from "components";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 type Props = { [key: string]: AppProvider };
 
@@ -28,7 +28,7 @@ const SignIn = ({ providers }: { providers: Props }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const providers = await getProviders();
 
