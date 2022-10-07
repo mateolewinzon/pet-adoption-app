@@ -1,0 +1,8 @@
+{
+    "signin": {
+        "messages": {
+            "signin_required_post": "Iniciá sesión para publicar una mascota",
+            "signin_required_profile": "Iniciá sesión para ver tu perfil"
+        }
+    }
+}
