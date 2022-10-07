@@ -1,6 +1,8 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { AuthSettings } from "types";
+import { Container } from ".";
 
 type Props = {
   children: React.ReactElement;
@@ -11,23 +13,22 @@ export const Auth = ({ children, auth }: Props) => {
   const { requiredStatus, message } = auth;
   const router = useRouter();
   const { status } = useSession();
-  console.log(status);
+
+  useEffect(() => {
+    if (requiredStatus === "authenticated" && status === "unauthenticated") {
+      redirect("/signin", message);
+    }
+
+    if (requiredStatus === "unauthenticated" && status === "authenticated") {
+      redirect("/", message);
+    }
+  }, [status, requiredStatus]);
 
   const redirect = (to: string, message?: string) =>
     router.push({ pathname: to, query: message && { message } });
 
-  if (status === "loading") {
-    return null;
-  }
-
-  if (requiredStatus === "authenticated" && status === "unauthenticated") {
-    redirect("/signin", message);
-    return null;
-  }
-
-  if (requiredStatus === "unauthenticated" && status === "authenticated") {
-    redirect("/", message);
-    return null;
+  if (status !== requiredStatus) {
+    return <Container> </Container>;
   }
 
   return children;
