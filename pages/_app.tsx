@@ -1,13 +1,29 @@
-import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
-import type { Session } from "next-auth";
+import { I18nProvider } from "next-localization";
+import { useRouter } from "next/router";
+import { Auth } from "components";
+import "../styles/globals.css";
+import { CustomAppProps } from "types";
 
-const App = ({ Component, pageProps }: AppProps<{ session: Session }>) => {
+const App = ({
+  Component,
+  pageProps: { session, lngDict, ...pageProps },
+}: CustomAppProps) => {
+  const router = useRouter();
+  const pageAuthSettings = Component.auth;
+
   return (
-    <SessionProvider session={pageProps.session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <I18nProvider locale={router.locale as string} lngDict={lngDict}>
+      <SessionProvider session={session}>
+        {pageAuthSettings ? (
+          <Auth auth={pageAuthSettings}>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SessionProvider>
+    </I18nProvider>
   );
 };
 

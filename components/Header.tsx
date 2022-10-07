@@ -20,7 +20,7 @@ export const Header = () => {
               <Span className="px-4"><a onClick={()=>signOut()} href="#"> Sign out</a></Span>
             </>
           ) : (
-            <NavLink href="/login" text="Sign in" />
+            <NavLink href="/signin" text="Sign in" />
           )}
         </nav>
       </div>
