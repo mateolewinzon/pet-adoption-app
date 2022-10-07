@@ -14,6 +14,9 @@ export const Auth = ({ children, auth }: Props) => {
   const router = useRouter();
   const { status } = useSession();
 
+  const redirect = (to: string, message?: string) =>
+    router.push({ pathname: to, query: message && { message } });
+
   useEffect(() => {
     if (requiredStatus === "authenticated" && status === "unauthenticated") {
       redirect("/signin", message);
@@ -23,9 +26,6 @@ export const Auth = ({ children, auth }: Props) => {
       redirect("/", message);
     }
   }, [status, requiredStatus]);
-
-  const redirect = (to: string, message?: string) =>
-    router.push({ pathname: to, query: message && { message } });
 
   if (status !== requiredStatus) {
     return <Container> </Container>;
