@@ -1,27 +1,20 @@
 import { SessionProvider } from "next-auth/react";
 import { I18nProvider } from "next-localization";
+import { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { Auth } from "components";
 import "../styles/globals.css";
-import { CustomAppProps } from "types";
+import type { Session } from "next-auth";
 
 const App = ({
   Component,
   pageProps: { session, lngDict, ...pageProps },
-}: CustomAppProps) => {
+}: AppProps<{ session: Session; lngDict: {} }>) => {
   const router = useRouter();
-  const pageAuthSettings = Component.auth;
 
-  return (
+  return (  
     <I18nProvider locale={router.locale as string} lngDict={lngDict}>
       <SessionProvider session={session}>
-        {pageAuthSettings ? (
-          <Auth auth={pageAuthSettings}>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
+        <Component {...pageProps} />
       </SessionProvider>
     </I18nProvider>
   );

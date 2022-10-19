@@ -1,8 +1,13 @@
 import { Container } from 'components'
-import type { PagetWithAuth } from 'types'
-import { SIGNIN_REQUIRED_PROFILE } from 'utils/errorCodes'
+import { NextPage } from 'next'
+import { useSession } from 'next-auth/react';
 
-const Profile: PagetWithAuth = () => {
+const Profile: NextPage = () => {
+
+  const session = useSession();
+
+  console.log(session);
+
   return (
     <Container>
       my profile
@@ -11,8 +16,3 @@ const Profile: PagetWithAuth = () => {
 }
 
 export default Profile
-
-Profile.auth = {
-  requiredStatus: 'authenticated',
-  message: SIGNIN_REQUIRED_PROFILE
-}

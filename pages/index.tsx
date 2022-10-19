@@ -1,12 +1,13 @@
-import { Container } from 'components'
-import type { NextPage } from 'next'
+import { Container } from "components";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
-const Home: NextPage = () => {
-  return (
-    <Container>
-      menem
-    </Container>
-  )
-}
+const Home = () => {
+  const {data: session} = useSession();
 
-export default Home
+  console.log(session);
+
+  return <Container>menem</Container>;
+};
+
+export default Home;

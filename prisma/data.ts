@@ -135,4 +135,4 @@ const species: { [key: string]: string[] } = {
   ],
 };
 
-export default species
+export default species;

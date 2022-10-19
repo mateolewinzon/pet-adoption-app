@@ -1,14 +1,8 @@
 import { Container } from "components";
-import { PagetWithAuth } from "types";
-import { SIGNIN_REQUIRED_POST } from "utils/errorCodes";
+import { NextPage } from "next";
 
-const Post: PagetWithAuth = () => {
+const Post: NextPage = () => {
   return <Container>post pet</Container>;
 };
 
 export default Post;
-
-Post.auth = {
-  requiredStatus: 'authenticated',
-  message: SIGNIN_REQUIRED_POST
-}
