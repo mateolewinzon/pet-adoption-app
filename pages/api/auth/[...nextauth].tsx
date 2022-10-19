@@ -15,7 +15,9 @@ const authOptions: NextAuthOptions = {
   theme: {
     logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Paw-print.svg/1200px-Paw-print.svg.png",
   },
+  session: {
+    strategy: "jwt"
 }
-
+}
 export default NextAuth(authOptions)
 
