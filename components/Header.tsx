@@ -7,7 +7,7 @@ export const Header = () => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="flex flex-row justify-center px-8">
+    <div className="flex flex-row justify-center py-2 px-4 md:px-8">
       <div className="flex items-center justify-between w-full max-w-3xl">
         <nav className="flex">
           <NavLink href="/" text="Browse" />
@@ -17,7 +17,12 @@ export const Header = () => {
           {session ? (
             <>
               <NavLink href="/profile" text="Profile" />
-              <Span className="px-4"><a onClick={()=>signOut()} href="#"> Sign out</a></Span>
+              <Span className="px-4">
+                <a onClick={() => signOut()} href="#">
+                  {" "}
+                  Sign out
+                </a>
+              </Span>
             </>
           ) : (
             <NavLink href="/signin" text="Sign in" />
