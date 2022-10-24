@@ -5,7 +5,7 @@ type Response = {
 
 export default async function (
   path: string,
-  config?: RequestInit
+  config?: object
 ): Promise<any> {
   const response: Response = {
     data: {},

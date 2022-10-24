@@ -1,4 +1,6 @@
+import { FormValues } from "pages/post";
 import { get, post } from "./privateApi";
+import { uploadImages } from "./uploadImage";
 
 export const getPets = async () => {
   const data = await get("pets");
@@ -15,12 +17,10 @@ export const getBreeds = async () => {
   return data;
 };
 
-export const postPet = async (body: {}) => {
-  try {
-    
-  } catch (error) {
-    
-  }
-  const data = await post("pets", body);
+export const postPet = async (body: FormValues) => {
+  
+  const uploadedImages = await uploadImages(body.images);
+
+  const data = await post("pets", { ...body, images: uploadedImages });
   return data;
 };

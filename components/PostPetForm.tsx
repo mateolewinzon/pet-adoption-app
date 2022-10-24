@@ -63,7 +63,7 @@ export const PostPetForm = ({
                       .map((b) => ({ value: b.id, text: b.name })),
                   ]}
                 />
-                <FormFileField label="Image" name="image" />
+                <FormFileField label="Image" name="images" />
                 <div className="flex my-4">
                   <FormButton text="Post" isLoading={status === "loading"} />
                   {error && (

@@ -26,15 +26,13 @@ const Post = ({ data: {animals, breeds} }: Props) => {
     setStatus("loading");
     setError(null);
     const { data, error } = await postPet(values);
-    console.log(data, error);
     if (data.success) {
       setStatus("success");
     }
     if (error) {
       setStatus("idle");
-      setError("An error occurred");
+      setError("An error occurred" + error && error );
     }
-    console.log(status);
   };
 
   const initialValues: FormValues = {

@@ -37,8 +37,8 @@ export const FormSelectField = ({
         id={id}
         name={name}
       >
-        {options.map((option: Option) => (
-          <option value={option.value}>{option.text}</option>
+        {options.map((option: Option, key) => (
+          <option key={key} value={option.value}>{option.text}</option>
         ))}
       </Field>
       <p className="italic text-red-500">{field.touched && field.error}</p>
