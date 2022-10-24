@@ -5,8 +5,6 @@ import { useEffect } from "react";
 const Home = () => {
   const {data: session} = useSession();
 
-  console.log(session);
-
   return <Container>menem</Container>;
 };
 
