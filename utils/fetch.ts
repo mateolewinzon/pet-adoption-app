@@ -1,24 +1,18 @@
-type Response = {
-  data: { success?: boolean };
+export type Response = {
+  success: boolean;
+  data: object;
   error: unknown;
 };
 
-export default async function (
-  path: string,
-  config?: object
-): Promise<any> {
-  const response: Response = {
-    data: {},
-    error: null,
-  };
-
+export default async function (path: string, config?: object): Promise<any> {
   try {
     const res = await fetch(path, config);
     const data = await res.json();
-    response.data = data;
+    return data;
   } catch (error) {
-    response.error = error;
+    return {
+      error: "Unable to connect with the server. Check your internt connection",
+      success: false,
+    };
   }
-
-  return response;
 }

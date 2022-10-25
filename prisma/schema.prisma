@@ -12,7 +12,7 @@ model Pet {
   title       String
   description String
   adopted     Boolean  @default(false)
-  birthYear   Int
+  birthYear   String
   userId      String
   animalId    String
   breedId     String

@@ -11,16 +11,16 @@ import type { DbData, FormValues } from "pages/post";
 
 type Props = {
   data: { [key: string]: DbData[] };
-  error: { error: string | null; setError: any };
-  status: { status: string | null; setStatus: any };
+  error: string | null;
+  isLoading: boolean;
   handleSubmit: (values: FormValues) => any;
   initialValues: FormValues;
 };
 
 export const PostPetForm = ({
   data: { animals, breeds },
-  error: { error },
-  status: { status },
+  error,
+  isLoading,
   handleSubmit,
   initialValues,
 }: Props) => {
@@ -35,8 +35,8 @@ export const PostPetForm = ({
           <div className="w-full max-w-lg">
             <Form>
               <fieldset
-                className={status !== "idle" ? "text-gray-400" : ""}
-                disabled={status !== "idle"}
+                className={isLoading ? "text-gray-400" : ""}
+                disabled={isLoading}
               >
                 <FormTextField name="title" label="Title" />
                 <FormTextField
@@ -65,7 +65,7 @@ export const PostPetForm = ({
                 />
                 <FormFileField label="Image" name="images" />
                 <div className="flex my-4">
-                  <FormButton text="Post" isLoading={status === "loading"} />
+                  <FormButton text="Post" isLoading={isLoading} />
                   {error && (
                     <Span className="my-1 mx-4 text-red-500">{error}</Span>
                   )}

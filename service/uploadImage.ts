@@ -3,7 +3,7 @@ import { generateSignature } from "./getSignature";
 
 const uploadRequest = async (formData: FormData) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD;
-  const { data } = await fetcher(
+  const data = await fetcher(
     `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
     { method: "POST", body: formData }
   );
@@ -27,6 +27,5 @@ export const uploadImages = async (images: File[]) => {
     const { url } = await uploadRequest(formData);
     urls.push(url);
   }
-
   return urls;
 };

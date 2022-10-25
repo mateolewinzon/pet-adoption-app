@@ -5,11 +5,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
   const apiSecret = process.env.CLOUDINARY_SECRET;
 
   const signedRequestParams = {
     timestamp: new Date().getTime() / 1000,
-    upload_preset: "ml_defauslt",
+    upload_preset: "ml_default",
     transformation: "w_1000,h_1000,c_limit",
   };
 
@@ -18,11 +19,8 @@ export default async function handler(
       signedRequestParams,
       apiSecret!
     );
-
-    return res.json({ success: true, signature, ...signedRequestParams });
+    return res.json({ signature, ...signedRequestParams });
   } catch (error) {
-    console.log(error);
-
-    return res.json({ success: false });
+    return res.status(500)
   }
 }

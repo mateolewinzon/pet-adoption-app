@@ -19,19 +19,21 @@ export type FormValues = {
 };
 
 const Post = ({ data: {animals, breeds} }: Props) => {
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
   const handleSubmit = async (values: FormValues) => {
-    setStatus("loading");
+    setLoading(true);
     setError(null);
-    const { data, error } = await postPet(values);
-    if (data.success) {
-      setStatus("success");
+    const { data, error, success } = await postPet(values);
+    console.log(data, success)
+
+    setLoading(false);
+    if (success) {
+      alert('success')
     }
     if (error) {
-      setStatus("idle");
-      setError("An error occurred" + error && error );
+      setError("An unexpected error occurred");
     }
   };
 
@@ -47,8 +49,8 @@ const Post = ({ data: {animals, breeds} }: Props) => {
   return (
     <Container>
       <PostPetForm
-        error={{ error, setError }}
-        status={{ status, setStatus }}
+        error={error}
+        isLoading={loading}
         data={{ animals, breeds }}
         initialValues={initialValues}
         handleSubmit={(values) => handleSubmit(values)}
