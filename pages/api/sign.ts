@@ -1,10 +1,17 @@
 import { v2 as cloudinary } from "cloudinary";
 import type { NextApiRequest, NextApiResponse } from "next";
+import type { Response } from "utils/fetch";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  const response: Response = {
+    data: {},
+    success: false,
+    error: null,
+  };
 
   const apiSecret = process.env.CLOUDINARY_SECRET;
 
@@ -19,8 +26,11 @@ export default async function handler(
       signedRequestParams,
       apiSecret!
     );
-    return res.json({ signature, ...signedRequestParams });
+    response.data = { signature, ...signedRequestParams }
+    response.success = true
+    return res.json(response);
   } catch (error) {
-    return res.status(500)
+    response.error = 'Error when signing'
+    return res.status(500).json(response)
   }
 }

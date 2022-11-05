@@ -1,7 +1,7 @@
 import { post } from "./privateApi";
 
 export const generateSignature = async (extraParams?: object) => {
-  const data = await post("sign", extraParams);
+  const response = await post("sign", extraParams);
 
-  return data 
+  return response.data 
 }

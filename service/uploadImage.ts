@@ -3,11 +3,11 @@ import { generateSignature } from "./getSignature";
 
 const uploadRequest = async (formData: FormData) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD;
-  const data = await fetcher(
+  const response = await fetcher(
     `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
     { method: "POST", body: formData }
   );
-  return data;
+  return response
 };
 
 export const uploadImages = async (images: File[]) => {

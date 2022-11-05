@@ -20,9 +20,11 @@ export const getBreeds = async () => {
 export const postPet = async (body: FormValues) => {
   try {
     const uploadedImages = await uploadImages(body.images);
+    console.log(uploadedImages);
     const data = await post("pets", { ...body, images: uploadedImages });
     return data;
   } catch (error) {
-    return {error: "An error occurred when uploading images", success: false}
+    console.log(error);
+    return { error: "An error occurred when uploading images", success: false };
   }
 };

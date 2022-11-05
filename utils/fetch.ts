@@ -1,10 +1,13 @@
 export type Response = {
   success: boolean;
-  data: object;
-  error: unknown;
+  data?: any;
+  error?: unknown;
 };
 
-export default async function (path: string, config?: object): Promise<any> {
+export default async function (
+  path: string,
+  config?: object
+): Promise<any> {
   try {
     const res = await fetch(path, config);
     const data = await res.json();

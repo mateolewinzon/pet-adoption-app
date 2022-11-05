@@ -17,7 +17,7 @@ export default async function handler(
     response.data = breeds;
     response.success = true;
   } catch (error) {
-    response.error = error;
+    response.error = 'Unable to fetch pets';
     res.status(500)
   }
 
