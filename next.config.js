@@ -4,8 +4,9 @@ const nextConfig = {
   swcMinify: true,
   i18n: {
     locales: ["en", "es"],
-    defaultLocale: "en"
+    defaultLocale: "en",
   },
-}
+  images: { domains: ["res.cloudinary.com", "lh3.googleusercontent.com"] },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

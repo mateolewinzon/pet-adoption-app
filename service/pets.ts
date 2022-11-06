@@ -3,7 +3,7 @@ import { get, post } from "./privateApi";
 import { uploadImages } from "./uploadImage";
 
 export const getPets = async () => {
-  const { data } = await get("pets");
+  const data = await get("pets");
   return data;
 };
 

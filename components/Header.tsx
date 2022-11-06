@@ -25,7 +25,7 @@ export const Header = () => {
               </Span>
             </>
           ) : (
-            <NavLink href="/signin" text="Sign in" />
+            <NavLink href="/api/auth/signin" text="Sign in" />
           )}
         </nav>
       </div>

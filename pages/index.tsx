@@ -9,18 +9,20 @@ type Props = {
 };
 
 const Home = ({ pets }: Props) => {
-  console.log(pets)
+  console.log(pets);
   return (
     <Container>
-      {pets.map((pet) => (
-        <PetCard pet={pet} />
-      ))}
+      <div className="grid lg:grid-cols-2 gap-10">
+        {pets.map((pet) => (
+          <PetCard key={pet.id} pet={pet} />
+        ))}
+      </div>
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const pets = await getPets();
+  const { data: pets } = await getPets();
   return {
     props: {
       pets,

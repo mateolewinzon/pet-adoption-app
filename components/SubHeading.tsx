@@ -2,7 +2,7 @@ import { TextComponent } from "components";
 
 type Props = {
   children: React.ReactNode,
-  className: string,
+  className?: string,
   as?: React.ElementType
 }
 

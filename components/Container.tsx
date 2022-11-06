@@ -22,7 +22,7 @@ export const Container = ({ children, ...customMeta }: Props) => {
         <meta property="og:title" content={meta.title} />
       </Head>
       <Header />
-      <main className="flex flex-col justify-center px-8">{children}</main>
+      <main className="flex flex-col items-center">{children}</main>
       <Footer />
     </div>
   );
