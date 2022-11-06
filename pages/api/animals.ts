@@ -13,12 +13,12 @@ export default async function handler(
   };
 
   try {
-    const animals = await prisma.animal.findMany();
+    const animals = await prisma.animal.findMany({ include: { breeds: true } });
     response.data = animals;
     response.success = true;
   } catch (error: any) {
     response.error = error.message;
-    res.status(500)
+    res.status(500);
   }
 
   res.json(response);

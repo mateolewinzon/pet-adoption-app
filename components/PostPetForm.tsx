@@ -7,10 +7,11 @@ import {
   Span,
   FormButton,
 } from "components";
-import type { DbData, FormValues } from "pages/post";
+import type { FormValues } from "pages/post";
+import { AnimalWithBreeds } from "prisma/types";
 
 type Props = {
-  data: { [key: string]: DbData[] };
+  animals: AnimalWithBreeds[]
   error: string | null;
   isLoading: boolean;
   handleSubmit: (values: FormValues) => any;
@@ -18,7 +19,7 @@ type Props = {
 };
 
 export const PostPetForm = ({
-  data: { animals, breeds },
+  animals,
   error,
   isLoading,
   handleSubmit,
@@ -58,8 +59,8 @@ export const PostPetForm = ({
                       value: "",
                       text: "Select one",
                     },
-                    ...breeds
-                      .filter((b) => b.animalId === values["animalId"])
+                    ...animals
+                      .filter((a) => a.id === values["animalId"])[0].breeds
                       .map((b) => ({ value: b.id, text: b.name })),
                   ]}
                 />

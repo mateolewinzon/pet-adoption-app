@@ -12,10 +12,6 @@ export const getAnimals = async () => {
   return data;
 };
 
-export const getBreeds = async () => {
-  const data = await get("breeds");
-  return data;
-};
 
 export const postPet = async (body: FormValues) => {
   try {

@@ -11,3 +11,9 @@ export type UserWithPets = Prisma.UserGetPayload<{
     pets: true;
   };
 }>;
+
+export type AnimalWithBreeds = Prisma.AnimalGetPayload<{
+    include: {
+        breeds: true
+    }
+}>

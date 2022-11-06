@@ -1,13 +1,11 @@
 import { Container, PostPetForm } from "components";
 import { GetStaticProps } from "next";
+import {useRouter} from "next/router";
+import { AnimalWithBreeds } from "prisma/types";
 import { useState } from "react";
-import { getAnimals, getBreeds, postPet } from "service/pets";
+import { getAnimals, postPet } from "service/pets";
 
-export type DbData = {
-  [key: string]: string
-}
-
-type Props =  { data: { [key: string]: DbData[] } }
+type Props =  { animals: AnimalWithBreeds[] }
 
 export type FormValues = {
   title: string;
@@ -18,7 +16,7 @@ export type FormValues = {
   images: File[];
 };
 
-const Post = ({ data: {animals, breeds} }: Props) => {
+const Post = ({ animals }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
@@ -26,11 +24,10 @@ const Post = ({ data: {animals, breeds} }: Props) => {
     setLoading(true);
     setError(null);
     const { data, error, success } = await postPet(values);
-    console.log(data, success)
 
     setLoading(false);
     if (success) {
-      alert('success')
+      // Router
     }
     if (error) {
       setError("An unexpected error occurred");
@@ -51,7 +48,7 @@ const Post = ({ data: {animals, breeds} }: Props) => {
       <PostPetForm
         error={error}
         isLoading={loading}
-        data={{ animals, breeds }}
+        animals={animals}
         initialValues={initialValues}
         handleSubmit={(values) => handleSubmit(values)}
       />
@@ -63,11 +60,10 @@ export default Post;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data: animals } = await getAnimals();
-  const { data: breeds } = await getBreeds();
 
   return {
     props: {
-      data: { animals, breeds },
+      animals,
     },
   };
 };

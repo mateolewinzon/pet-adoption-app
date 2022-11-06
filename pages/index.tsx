@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Home = ({ pets }: Props) => {
-  console.log(pets);
   return (
     <Container>
       <div className="grid lg:grid-cols-2 gap-10">
