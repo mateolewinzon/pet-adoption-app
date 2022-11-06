@@ -3,7 +3,7 @@ import { get, post } from "./privateApi";
 import { uploadImages } from "./uploadImage";
 
 export const getPets = async () => {
-  const data = await get("pets");
+  const { data } = await get("pets");
   return data;
 };
 
@@ -20,11 +20,10 @@ export const getBreeds = async () => {
 export const postPet = async (body: FormValues) => {
   try {
     const uploadedImages = await uploadImages(body.images);
-    console.log(uploadedImages);
+    console.log(uploadedImages)
     const data = await post("pets", { ...body, images: uploadedImages });
     return data;
   } catch (error) {
-    console.log(error);
     return { error: "An error occurred when uploading images", success: false };
   }
 };

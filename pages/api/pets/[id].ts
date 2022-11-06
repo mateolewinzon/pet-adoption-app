@@ -18,8 +18,8 @@ export default async function handler(
     const pets = await prisma.pet.findMany({ where: { id: id } });
     response.data = pets
     response.success = true
-  } catch (error) {
-    response.error = error
+  } catch (error: any) {
+    response.error = error.message
     res.status(500)
   }
 

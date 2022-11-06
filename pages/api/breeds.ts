@@ -16,8 +16,8 @@ export default async function handler(
     const breeds = await prisma.breed.findMany();
     response.data = breeds;
     response.success = true;
-  } catch (error) {
-    response.error = 'Unable to fetch pets';
+  } catch (error: any) {
+    response.error = error.message
     res.status(500)
   }
 

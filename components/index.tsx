@@ -7,6 +7,7 @@ export { FormSelectField } from "./FormSelectField";
 export { Header } from "./Header";
 export { Heading } from "./Heading";
 export { NavLink } from "./NavLink";
+export { PetCard } from "./PetCard";
 export { PostPetForm } from "./PostPetForm";
 export { Span } from "./Span";
 export { SocialSignInButton } from "./SocialSignInButton";

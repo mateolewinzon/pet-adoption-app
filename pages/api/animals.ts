@@ -16,8 +16,8 @@ export default async function handler(
     const animals = await prisma.animal.findMany();
     response.data = animals;
     response.success = true;
-  } catch (error) {
-    response.error = error;
+  } catch (error: any) {
+    response.error = error.message;
     res.status(500)
   }
 
