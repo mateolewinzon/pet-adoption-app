@@ -1,4 +1,5 @@
-import { Field, useField, useFormikContext } from "formik";
+import { Field as FormikField } from "formik";
+import { Field } from 'components'
 
 type Props = {
   name: string;
@@ -15,27 +16,16 @@ export const FormTextField = ({
   isTextarea = false,
   type = "text",
 }: Props) => {
-  const { 1: field } = useField(id);
-
-  const { isSubmitting } = useFormikContext();
 
   return (
-    <div className="my-3">
-      <label
-        className=" block text-gray-700 uppercase font-semibold mb-2"
-        htmlFor={id}
-      >
-        {label}
-      </label>
-      <Field
+    <Field name={name} label={label}>
+      <FormikField
         type={type}
         as={isTextarea && "textarea"}
         className="w-[80vw] md:w-[30vw] bg-gray-50 rounded p-2 mb-2"
         id={id}
-        disabled={isSubmitting}
         name={name}
       />
-      <p className="italic text-red-500">{field.touched && field.error}</p>
-    </div>
+    </Field>
   );
 };

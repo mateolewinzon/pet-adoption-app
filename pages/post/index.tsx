@@ -1,11 +1,11 @@
 import { Container, PostPetForm } from "components";
 import { GetStaticProps } from "next";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { AnimalWithBreeds } from "prisma/types";
 import { useState } from "react";
 import { getAnimals, postPet } from "service/pets";
 
-type Props =  { animals: AnimalWithBreeds[] }
+type Props = { animals: AnimalWithBreeds[] };
 
 export type FormValues = {
   title: string;
@@ -14,6 +14,8 @@ export type FormValues = {
   animalId: string;
   breedId: string;
   images: File[];
+  country: string;
+  region: string;
 };
 
 const Post = ({ animals }: Props) => {
@@ -41,6 +43,8 @@ const Post = ({ animals }: Props) => {
     animalId: animals[1].id,
     breedId: "",
     images: [],
+    country: "",
+    region: "",
   };
 
   return (

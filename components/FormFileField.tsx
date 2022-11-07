@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import { Field } from "components";
 
 type Props = {
   name: string;
@@ -8,19 +9,13 @@ type Props = {
 };
 
 export const FormFileField = ({ name, id = name, label }: Props) => {
+  
   const {
-    1: { touched, error },
     2: { setValue },
   } = useField(id);
 
   return (
-    <div className="my-3">
-      <label
-        className=" block text-gray-700 uppercase font-semibold mb-2"
-        htmlFor={id}
-      >
-        {label}
-      </label>
+    <Field name={name} label={label}>
       <input
         multiple={true}
         type="file"
@@ -29,7 +24,6 @@ export const FormFileField = ({ name, id = name, label }: Props) => {
         id={id}
         name={name}
       />
-      <p className="italic text-red-500">{touched && error}</p>
-    </div>
+    </Field>
   );
 };

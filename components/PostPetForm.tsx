@@ -4,6 +4,7 @@ import {
   FormFileField,
   FormTextField,
   FormSelectField,
+  LocationSelect,
   Span,
   FormButton,
 } from "components";
@@ -11,7 +12,7 @@ import type { FormValues } from "pages/post";
 import { AnimalWithBreeds } from "prisma/types";
 
 type Props = {
-  animals: AnimalWithBreeds[]
+  animals: AnimalWithBreeds[];
   error: string | null;
   isLoading: boolean;
   handleSubmit: (values: FormValues) => any;
@@ -31,7 +32,7 @@ export const PostPetForm = ({
       onSubmit={handleSubmit}
       initialValues={initialValues}
     >
-      {({ values }) => (
+      {({ values, setFieldValue }) => (
         <div className="mx-auto my-10">
           <div className="w-full max-w-lg">
             <Form>
@@ -60,11 +61,12 @@ export const PostPetForm = ({
                       text: "Select one",
                     },
                     ...animals
-                      .filter((a) => a.id === values["animalId"])[0].breeds
-                      .map((b) => ({ value: b.id, text: b.name })),
+                      .filter((a) => a.id === values["animalId"])[0]
+                      .breeds.map((b) => ({ value: b.id, text: b.name })),
                   ]}
                 />
                 <FormFileField label="Image" name="images" />
+                <LocationSelect/>
                 <div className="flex my-4">
                   <FormButton text="Post" isLoading={isLoading} />
                   {error && (
