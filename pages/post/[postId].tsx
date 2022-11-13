@@ -1,12 +1,12 @@
-import { Container, PostPetForm } from "components";
-import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { AnimalWithBreeds } from "prisma/types";
+import { Container, PostPetForm, SubHeading } from "components";
+import { GetServerSideProps } from "next";
+import { getUser } from "pages/api/auth/[...nextauth]";
 import { useState } from "react";
-import { getAnimals, postPet } from "service/pets";
+import { getAnimals, getPet, updatePet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
+import type { AnimalWithBreeds, Pet } from "prisma/types";
 
-type Props = { animals: AnimalWithBreeds[] };
+type Props = { animals: AnimalWithBreeds[]; pet: Pet };
 
 export type FormValues = {
   title: string;
@@ -19,14 +19,14 @@ export type FormValues = {
   region: string;
 };
 
-const Post = ({ animals }: Props) => {
+const EditPost = ({ animals, pet }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
 
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
-    const { data, error, success } = await postPet(values);
+    const { data, error, success } = await updatePet(values, pet.id);
 
     setLoading(false);
     if (success) {
@@ -38,18 +38,13 @@ const Post = ({ animals }: Props) => {
   };
 
   const initialValues: FormValues = {
-    title: "",
-    description: "",
-    birthYear: "",
-    animalId: animals[1].id,
-    breedId: "",
+    ...pet,
     images: [],
-    country: "",
-    region: "",
   };
 
   return (
     <Container>
+      <SubHeading>Update your pet</SubHeading>
       <PostPetForm
         validationSchema={PetSchema}
         error={error}
@@ -62,14 +57,43 @@ const Post = ({ animals }: Props) => {
   );
 };
 
-export default Post;
+export default EditPost;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const user = await getUser(req, res);
+  const { data: pet } = await getPet(query.postId as string);
+
+  if (!user) {
+    return {
+      redirect: { destination: "/api/auth/signin", permanent: true },
+    };
+  }
+
+  if (!pet) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (pet?.userId !== user?.id) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: true,
+      },
+    };
+  }
+
   const { data: animals } = await getAnimals();
 
   return {
     props: {
       animals,
+      pet,
     },
   };
 };

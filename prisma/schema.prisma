@@ -17,6 +17,8 @@ model Pet {
   animalId    String
   breedId     String
   images      String[]
+  country     String
+  region      String
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
   animal      Animal   @relation(fields: [animalId], references: [id])

@@ -6,6 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
+import type { IncomingMessage, ServerResponse } from "http";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -25,7 +26,10 @@ export const authOptions: NextAuthOptions = {
 };
 export default NextAuth(authOptions);
 
-export const getUser = async (req: NextApiRequest, res: NextApiResponse) => {
+export const getUser = async (
+  req: IncomingMessage & { cookies: Partial<{ [key: string]: string }> },
+  res: ServerResponse
+) => {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {

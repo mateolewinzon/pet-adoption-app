@@ -15,3 +15,12 @@ export const post = async (url: string, body: { [key: string]: any} | undefined)
   });
   return data;
 };
+
+export const patch = async (url: string, body: { [key: string]: any} | undefined) => {
+  const data = await fetcher(baseURL + url, {
+    method: "PATCH",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  });
+  return data;
+};

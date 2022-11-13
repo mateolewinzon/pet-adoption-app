@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const response: Response = {
-    data: {},
+    data: null,
     success: false,
     error: null,
   };

@@ -1,5 +1,6 @@
 import { Field as FormikField } from "formik";
 import { Field } from "components";
+import { FormValues } from "pages/post";
 
 type Props = {
   name: string;

@@ -6,23 +6,46 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-
   const response: Response = {
-    data: {},
+    data: null,
     success: false,
     error: null,
   };
+  const id = req.query.id as string;
 
-  try {
-    const id = req.query.id as string;
-    const pets = await prisma.pet.findMany({ where: { id: id } });
-    response.data = pets
-    response.success = true
-  } catch (error: any) {
-    response.error = error.message
-    res.status(500)
+  if (req.method === "GET") {
+    try {
+      const pet = await prisma.pet.findUnique({ where: { id: id } });
+      response.data = pet;
+      response.success = true;
+    } catch (error: any) {
+      response.error = error.message;
+      res.status(500);
+    }
+  }
+  if (req.method === "PATCH") {
+
+    const data: any = {}
+
+    for (let value in req.body) {
+      data[value] = req.body[value] || undefined 
+    }
+
+    data.id = undefined
+
+    try {
+      const pet = await prisma.pet.update({
+        where: { id },
+        data,
+      });
+      response.data = pet;
+      response.success = true;
+    } catch (error: any) {
+      response.error = error.message;
+      console.log(error);
+      res.status(500);
+    }
   }
 
- 
   res.json(response);
 }

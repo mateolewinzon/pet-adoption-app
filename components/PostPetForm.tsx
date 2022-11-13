@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { Formik, Form } from "formik";
-import { PetSchema } from "utils/formValidation";
 import {
   FormFileField,
   FormTextField,
-  FormSelectField,
+  AnimalSelect,
   LocationSelect,
   Span,
   FormButton,
@@ -17,6 +17,7 @@ type Props = {
   isLoading: boolean;
   handleSubmit: (values: FormValues) => any;
   initialValues: FormValues;
+  validationSchema: any
 };
 
 export const PostPetForm = ({
@@ -25,59 +26,43 @@ export const PostPetForm = ({
   isLoading,
   handleSubmit,
   initialValues,
+  validationSchema
 }: Props) => {
+  useEffect(() => {});
+
   return (
     <Formik
-      validationSchema={PetSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
       initialValues={initialValues}
     >
-      {({ values, setFieldValue }) => (
-        <div className="mx-auto my-10">
-          <div className="w-full max-w-lg">
-            <Form>
-              <fieldset
-                className={isLoading ? "text-gray-400" : ""}
-                disabled={isLoading}
-              >
-                <FormTextField name="title" label="Title" />
-                <FormTextField
-                  name="description"
-                  label="Description"
-                  isTextarea
-                />
-                <FormTextField name="birthYear" label="Birth year" />
-                <FormSelectField
-                  name="animalId"
-                  label="Animal"
-                  options={animals.map((a) => ({ value: a.id, text: a.name }))}
-                />
-                <FormSelectField
-                  name="breedId"
-                  label="Breed"
-                  options={[
-                    {
-                      value: "",
-                      text: "Select one",
-                    },
-                    ...animals
-                      .filter((a) => a.id === values["animalId"])[0]
-                      .breeds.map((b) => ({ value: b.id, text: b.name })),
-                  ]}
-                />
-                <FormFileField label="Image" name="images" />
-                <LocationSelect/>
-                <div className="flex my-4">
-                  <FormButton text="Post" isLoading={isLoading} />
-                  {error && (
-                    <Span className="my-1 mx-4 text-red-500">{error}</Span>
-                  )}
-                </div>
-              </fieldset>
-            </Form>
-          </div>
+      <div className="mx-auto my-10">
+        <div className="w-full max-w-lg">
+          <Form>
+            <fieldset
+              className={isLoading ? "text-gray-400" : ""}
+              disabled={isLoading}
+            >
+              <FormTextField name="title" label="Title" />
+              <FormTextField
+                name="description"
+                label="Description"
+                isTextarea
+              />
+              <FormTextField name="birthYear" label="Birth year" />
+              <AnimalSelect animals={animals} />
+              <FormFileField label="Image" name="images" />
+              <LocationSelect />
+              <div className="flex my-4">
+                <FormButton text="Post" isLoading={isLoading} />
+                {error && (
+                  <Span className="my-1 mx-4 text-red-500">{error}</Span>
+                )}
+              </div>
+            </fieldset>
+          </Form>
         </div>
-      )}
+      </div>
     </Formik>
   );
 };
