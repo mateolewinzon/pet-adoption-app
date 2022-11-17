@@ -10,8 +10,8 @@ export default async function (
 ): Promise<any> {
   try {
     const res = await fetch(path, config);
+    console.log(res)
     const data = await res.json();
-    console.log(data)
     return data;
   } catch (error) {
     console.log(error)
