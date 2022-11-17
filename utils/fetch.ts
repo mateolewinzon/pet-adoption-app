@@ -3,16 +3,15 @@ export type Response = {
   data?: any;
   error?: unknown;
 };
-console.log(process.env.NEXT_PUBLIC_URL)
+
 export default async function (
   path: string,
   config?: object
 ): Promise<any> {
   try {
     const res = await fetch(path, config);
-    const data = await res.json() 
-    console.log(path, data)
-    return data
+    const data = await res.json();
+    return data;
   } catch (error) {
     return {
       error: "Unable to connect with the server. Check your internt connection",
