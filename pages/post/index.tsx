@@ -65,7 +65,7 @@ const Post = ({ animals }: Props) => {
 export default Post;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await getAnimals() || null
+  const { data } = await getAnimals()
   console.log(data)
 
   return {
