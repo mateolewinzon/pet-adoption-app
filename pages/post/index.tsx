@@ -1,4 +1,4 @@
-import { Container, PostPetForm } from "components";
+import { AnimalSelect, Container, PostPetForm } from "components";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { AnimalWithBreeds } from "prisma/types";
@@ -65,11 +65,12 @@ const Post = ({ animals }: Props) => {
 export default Post;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: animals } = await getAnimals() || null
+  const { data } = await getAnimals() || null
+  console.log(data)
 
   return {
     props: {
-      animals,
+      animals: data
     },
   };
 };
