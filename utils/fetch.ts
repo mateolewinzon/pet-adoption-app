@@ -11,9 +11,12 @@ export default async function (
   try {
     const res = await fetch(path, config);
     const data = await res.json();
+    console.log(data)
     return data;
   } catch (error) {
+    console.log(error)
     return {
+      
       error: "Unable to connect with the server. Check your internt connection",
       success: false,
     };
