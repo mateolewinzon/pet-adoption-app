@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!user) {
     return {
-      redirect: { destination: "/api/auth/signin", permanent: true },
+      redirect: { destination: `/api/auth/signin?callbackUrl=%2Fpost/${pet.id}`, permanent: true },
     };
   }
 

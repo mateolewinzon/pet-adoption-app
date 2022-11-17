@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "lib/prisma";
 import type { Response } from "utils/fetch";
+import { getUser } from "../auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,20 +24,25 @@ export default async function handler(
       res.status(500);
     }
   }
+
   if (req.method === "PATCH") {
+    const user = await getUser(req, res);
+    const pet = await prisma.pet.findUnique({ where: { id } });
 
-    const data: any = {}
-
-    for (let value in req.body) {
-      data[value] = req.body[value] || undefined 
+    if (user?.id !== pet?.userId) {
+      response.error = "unauthorized";
+      res.status(401);
+      return res.json(response);
     }
-
-    data.id = undefined
 
     try {
       const pet = await prisma.pet.update({
         where: { id },
-        data,
+        data: {
+          ...req.body,
+          images: req.body.images.length ? req.body.images : undefined,
+          id: undefined
+        },
       });
       response.data = pet;
       response.success = true;

@@ -28,8 +28,6 @@ export const PetCard = ({ pet }: Props) => {
 
       <div className="relative">
         <Image
-          width={350}
-          height={350}
           objectFit='cover'
           layout="fill"
           src={pet.images[0]}

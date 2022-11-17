@@ -19,7 +19,7 @@ export const uploadImages = async (images: File[]) => {
   for (const file of images) {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY!);
+    formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_PUBLIC!);
     formData.append("upload_preset", upload_preset);
     formData.append("signature", signature);
     formData.append("timestamp", timestamp);
