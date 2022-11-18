@@ -1,9 +1,8 @@
 import fetcher from "utils/fetch";
 
-const baseURL =
-  process.env.VERCEL_ENV === "preview"
-    ? process.env.VERCEL_URL + "/api/"
-    : process.env.NEXT_PUBLIC_URL + "/api/";
+const baseURL = process.env.VERCEL_ENV
+  ? process.env.VERCEL_URL + "/api/"
+  : process.env.NEXT_PUBLIC_URL + "/api/";
 
 export const get = async (url: string) => {
   const data = await fetcher(baseURL + url);
