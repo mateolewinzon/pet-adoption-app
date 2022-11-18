@@ -1,17 +1,13 @@
 import fetcher from "utils/fetch";
 
-const baseURL = "api/";
+const baseURL = process.env.NEXT_PUBLIC_URL + "/api/";
 
 export const get = async (url: string) => {
   const data = await fetcher(baseURL + url);
   return data;
 };
 
-export const post = async (
-  url: string,
-  body: { [key: string]: any } | undefined
-) => {
-  console.log(baseURL)
+export const post = async (url: string, body: { [key: string]: any} | undefined) => {
   const data = await fetcher(baseURL + url, {
     method: "POST",
     body: JSON.stringify(body),
@@ -20,10 +16,7 @@ export const post = async (
   return data;
 };
 
-export const patch = async (
-  url: string,
-  body: { [key: string]: any } | undefined
-) => {
+export const patch = async (url: string, body: { [key: string]: any} | undefined) => {
   const data = await fetcher(baseURL + url, {
     method: "PATCH",
     body: JSON.stringify(body),
