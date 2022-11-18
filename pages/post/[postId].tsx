@@ -66,13 +66,21 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const user = await getUser(req, res);
-  const pet = await prisma.pet.findUnique({where: { id: query.postId as string }})
 
   if (!user) {
     return {
-      redirect: { destination: `/api/auth/signin?callbackUrl=%2Fpost/${pet?.id}`, permanent: true },
+      redirect: {
+        destination: `/api/auth/signin?callbackUrl=%2Fpost/${query.postId}}`,
+        permanent: true,
+      },
     };
   }
+
+  const pet = await prisma.pet
+    .findUnique({
+      where: { id: query.postId as string },
+    })
+    .catch(() => null);
 
   if (!pet) {
     return {
@@ -80,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
-  if (pet?.userId !== user?.id) {
+  if (pet.userId !== user.id) {
     return {
       redirect: {
         destination: "/",
@@ -93,8 +101,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      animals,
-      pet,
+      animals: JSON.parse(JSON.stringify(animals)),
+      pet: JSON.parse(JSON.stringify(pet)),
     },
   };
 };

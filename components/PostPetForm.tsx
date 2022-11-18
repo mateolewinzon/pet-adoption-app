@@ -28,7 +28,6 @@ export const PostPetForm = ({
   initialValues,
   validationSchema
 }: Props) => {
-  useEffect(() => {});
 
   return (
     <Formik

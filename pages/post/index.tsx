@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      animals,
+      animals: JSON.parse(JSON.stringify(animals)),
     },
   };
 };
