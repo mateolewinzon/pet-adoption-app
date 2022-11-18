@@ -8,11 +8,6 @@ export const getPets = async (query?: { [key in PetFields]?: string }) => {
   return data;
 };
 
-export const getPet = async (id: string) => {
-  const data = await get(`pets/${id}`);
-  return data;
-};
-
 export const postPet = async (body: FormValues) => {
   try {
     const uploadedImages = await uploadImages(body.images);

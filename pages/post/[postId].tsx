@@ -1,10 +1,11 @@
 import { Container, PostPetForm, SubHeading } from "components";
-import { GetServerSideProps } from "next";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { useState } from "react";
-import { getAnimals, getPet, updatePet } from "service/pets";
+import { updatePet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
+import prisma from "lib/prisma";
 import type { AnimalWithBreeds, Pet } from "prisma/types";
+import type { GetServerSideProps } from "next";
 
 type Props = { animals: AnimalWithBreeds[]; pet: Pet };
 
@@ -65,11 +66,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const user = await getUser(req, res);
-  const { data: pet } = await getPet(query.postId as string);
+  const pet = await prisma.pet.findUnique({where: { id: query.postId as string }})
 
   if (!user) {
     return {
-      redirect: { destination: `/api/auth/signin?callbackUrl=%2Fpost/${pet.id}`, permanent: true },
+      redirect: { destination: `/api/auth/signin?callbackUrl=%2Fpost/${pet?.id}`, permanent: true },
     };
   }
 
@@ -88,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
-  const { data: animals } = await getAnimals();
+  const animals = await prisma.animal.findMany({ include: { breeds: true } });
 
   return {
     props: {
