@@ -1,8 +1,6 @@
 import fetcher from "utils/fetch";
 
-const baseURL = process.env.VERCEL_ENV
-  ? process.env.VERCEL_URL + "/api/"
-  : process.env.NEXT_PUBLIC_URL + "/api/";
+const baseURL = "api/";
 
 export const get = async (url: string) => {
   const data = await fetcher(baseURL + url);
@@ -13,6 +11,7 @@ export const post = async (
   url: string,
   body: { [key: string]: any } | undefined
 ) => {
+  console.log(baseURL)
   const data = await fetcher(baseURL + url, {
     method: "POST",
     body: JSON.stringify(body),

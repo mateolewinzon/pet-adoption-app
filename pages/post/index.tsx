@@ -1,10 +1,10 @@
-import { AnimalSelect, Container, PostPetForm } from "components";
-import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { AnimalWithBreeds } from "prisma/types";
+import { Container, PostPetForm } from "components";
 import { useState } from "react";
-import { getAnimals, postPet } from "service/pets";
+import { postPet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
+import prisma from "lib/prisma";
+import type { GetStaticProps } from "next";
+import type { AnimalWithBreeds } from "prisma/types";
 
 type Props = { animals: AnimalWithBreeds[] };
 
@@ -65,11 +65,11 @@ const Post = ({ animals }: Props) => {
 export default Post;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await getAnimals()
+  const animals = await prisma.animal.findMany({ include: { breeds: true } });
 
   return {
     props: {
-      animals: data
+      animals,
     },
   };
 };

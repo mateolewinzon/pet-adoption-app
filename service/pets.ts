@@ -13,11 +13,6 @@ export const getPet = async (id: string) => {
   return data;
 };
 
-export const getAnimals = async () => {
-  const data = await get("animals");
-  return data;
-};
-
 export const postPet = async (body: FormValues) => {
   try {
     const uploadedImages = await uploadImages(body.images);
