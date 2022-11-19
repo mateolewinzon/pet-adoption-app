@@ -70,6 +70,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model User {
@@ -79,6 +80,7 @@ model User {
   emailVerified Boolean?
   image         String
   phone         String?
+  contactInfo   String?
   pets          Pet[]
   accounts      Account[]
   sessions      Session[]
@@ -92,6 +94,7 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sessions")
 }
 
 model VerificationToken {
@@ -101,4 +104,5 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification tokens")
 }

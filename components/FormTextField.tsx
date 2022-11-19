@@ -7,6 +7,7 @@ type Props = {
   label: string;
   isTextarea?: boolean;
   type?: string;
+  placeholder?: string
 };
 
 export const FormTextField = ({
@@ -15,6 +16,7 @@ export const FormTextField = ({
   label,
   isTextarea = false,
   type = "text",
+  placeholder
 }: Props) => {
 
   return (
@@ -22,9 +24,10 @@ export const FormTextField = ({
       <FormikField
         type={type}
         as={isTextarea && "textarea"}
-        className="w-[80vw] md:w-[30vw] bg-gray-50 rounded p-2 mb-2"
+        className="w-full bg-gray-50 rounded p-2 mb-2"
         id={id}
         name={name}
+        placeholder={placeholder}
       />
     </Field>
   );

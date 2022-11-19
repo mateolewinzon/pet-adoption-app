@@ -12,7 +12,7 @@ const Home = ({ pets }: Props) => {
   return (
     <Container>
       <div className="grid lg:grid-cols-2 gap-10">
-        {pets.map((pet) => (
+        {pets?.map((pet) => (
           <PetCard key={pet.id} pet={pet} />
         ))}
       </div>

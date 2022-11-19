@@ -1,13 +1,13 @@
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { useFormikContext } from "formik";
 import { Field } from "components";
-import type { FormValues } from "pages/post";
+import type { PetFormValues } from "utils/formTypes";
 
 export const LocationSelect = () => {
   const { setFieldValue, values, setFieldError, setFieldTouched } =
-    useFormikContext<FormValues>();
+    useFormikContext<PetFormValues>();
 
-  function handleChange(field: keyof FormValues, value: string): void {
+  function handleChange(field: keyof PetFormValues, value: string): void {
     setFieldValue(field, value);
     setFieldTouched(field, false);
     setFieldError(field, "");
@@ -17,14 +17,14 @@ export const LocationSelect = () => {
     <>
       <Field name="country" label="Country">
         <CountryDropdown
-          classes="w-[80vw] md:w-[30vw] bg-gray-50 p-2 mb-2 rounded focus:bg-white"
+          classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
           value={values.country}
           onChange={(value) => handleChange("country", value)}
         />
       </Field>
       <Field name="region" label="Region">
         <RegionDropdown
-          classes="w-[80vw] md:w-[30vw] bg-gray-50 p-2 mb-2 rounded focus:bg-white"
+          classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
           country={values.country}
           value={values.region}
           onChange={(value) => {

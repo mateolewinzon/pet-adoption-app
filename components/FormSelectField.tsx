@@ -1,6 +1,5 @@
 import { Field as FormikField } from "formik";
 import { Field } from "components";
-import { FormValues } from "pages/post";
 
 type Props = {
   name: string;
@@ -27,7 +26,7 @@ export const FormSelectField = ({
       <FormikField
         type={type}
         component={"select"}
-        className="w-[80vw] md:w-[30vw] bg-gray-50 rounded p-2 mb-2"
+        className="w-full bg-gray-50 rounded p-2 mb-2"
         id={id}
         name={name}
       >

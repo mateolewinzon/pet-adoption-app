@@ -13,7 +13,7 @@ export const Field = ({ name, id = name, label, children }: Props) => {
   return (
     <div className="my-3">
       <label
-        className=" block text-gray-700 uppercase font-semibold mb-2"
+        className="block text-gray-700 uppercase font-semibold mb-2"
         htmlFor={id}
       >
         {label}

@@ -1,23 +1,13 @@
-import { Container, PostPetForm } from "components";
+import { Container, Heading, PetForm } from "components";
 import { useState } from "react";
 import { postPet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
 import prisma from "lib/prisma";
 import type { GetStaticProps } from "next";
 import type { AnimalWithBreeds } from "prisma/types";
+import type { PetFormValues as FormValues } from "utils/formTypes";
 
 type Props = { animals: AnimalWithBreeds[] };
-
-export type FormValues = {
-  title: string;
-  description: string;
-  birthYear: string;
-  animalId: string;
-  breedId: string;
-  images: File[];
-  country: string;
-  region: string;
-};
 
 const Post = ({ animals }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,7 +40,8 @@ const Post = ({ animals }: Props) => {
 
   return (
     <Container>
-      <PostPetForm
+      <Heading>Post a pet</Heading>
+      <PetForm
         validationSchema={PetSchema}
         error={error}
         isLoading={loading}

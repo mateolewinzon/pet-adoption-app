@@ -1,4 +1,4 @@
-import { Container, PostPetForm, SubHeading } from "components";
+import { Container, Heading, PetForm } from "components";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { useState } from "react";
 import { updatePet } from "service/pets";
@@ -6,19 +6,9 @@ import { PetSchema } from "utils/formValidation";
 import prisma from "lib/prisma";
 import type { AnimalWithBreeds, Pet } from "prisma/types";
 import type { GetServerSideProps } from "next";
+import type { PetFormValues as FormValues } from "utils/formTypes";
 
 type Props = { animals: AnimalWithBreeds[]; pet: Pet };
-
-export type FormValues = {
-  title: string;
-  description: string;
-  birthYear: string;
-  animalId: string;
-  breedId: string;
-  images: File[];
-  country: string;
-  region: string;
-};
 
 const EditPost = ({ animals, pet }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,8 +35,8 @@ const EditPost = ({ animals, pet }: Props) => {
 
   return (
     <Container>
-      <SubHeading>Update your pet</SubHeading>
-      <PostPetForm
+      <Heading>Update your pet</Heading>
+      <PetForm
         validationSchema={PetSchema}
         error={error}
         isLoading={loading}

@@ -3,9 +3,14 @@ import { Header, Footer } from "components";
 
 type Props = {
   children: React.ReactNode;
+  width?: string;
 };
 
-export const Container = ({ children, ...customMeta }: Props) => {
+export const Container = ({
+  children,
+  width = "max-w-2xl",
+  ...customMeta
+}: Props) => {
   const meta = {
     title: "Pet Adoption App",
     description: "Browse and post pets for adoption worldwide.",
@@ -22,7 +27,7 @@ export const Container = ({ children, ...customMeta }: Props) => {
         <meta property="og:title" content={meta.title} />
       </Head>
       <Header />
-      <main className="flex flex-col items-center">{children}</main>
+      <main className={`flex flex-col ${width} px-4 py-4 mx-auto`}>{children}</main>
       <Footer />
     </div>
   );

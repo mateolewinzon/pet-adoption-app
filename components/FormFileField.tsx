@@ -20,7 +20,7 @@ export const FormFileField = ({ name, id = name, label }: Props) => {
         multiple={true}
         type="file"
         onChange={(e) => setValue(e.target.files)}
-        className="w-[80vw] md:w-[30vw] bg-gray-50 rounded p-2 mb-2"
+        className="w-full bg-gray-50 rounded p-2 mb-2"
         id={id}
         name={name}
       />

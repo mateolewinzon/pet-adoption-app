@@ -8,7 +8,7 @@ export const Header = () => {
 
   return (
     <div className="flex flex-row justify-center py-2 px-4 md:px-8">
-      <div className="flex items-center justify-between w-full max-w-3xl">
+      <div className="flex items-center justify-between w-full max-w-2xl">
         <nav className="flex">
           <NavLink href="/" text="Browse" />
           <NavLink href="/post" text="Post" />

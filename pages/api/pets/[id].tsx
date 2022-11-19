@@ -48,7 +48,6 @@ export default async function handler(
       response.success = true;
     } catch (error: any) {
       response.error = error.message;
-      console.log(error);
       res.status(500);
     }
   }

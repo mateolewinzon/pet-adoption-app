@@ -9,3 +9,9 @@ export const PetSchema = Yup.object().shape({
   country: Yup.string().min(2).max(100).required(),
   region: Yup.string().min(2).max(100).required(),
 });
+
+export const ProfileSchema = Yup.object().shape({
+  name: Yup.string().min(3).max(100).required(),
+  contactInfo: Yup.string().min(10).max(500).required(),
+  phone: Yup.string().min(5).max(100).required(),
+})
