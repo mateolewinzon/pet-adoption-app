@@ -37,6 +37,6 @@ export const updatePet = async (body: FormValues, id: string) => {
     }
   }
 
-  const data = await patch(`pets/${id}`, { ...body, images: images || undefined });
+  const data = await patch(`pets/${id}`, { ...body, images: images });
   return data;
 };

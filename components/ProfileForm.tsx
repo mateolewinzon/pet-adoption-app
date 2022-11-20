@@ -37,7 +37,7 @@ export const ProfileForm = ({
               isTextarea
             />
 
-            <FormFileField label="Image" name="images" />
+            <FormFileField label="Image" name="image" />
             <div className="flex my-4">
               <FormButton text="Post" isLoading={isLoading} />
               {error && <Span className="my-1 mx-4 text-red-500">{error}</Span>}

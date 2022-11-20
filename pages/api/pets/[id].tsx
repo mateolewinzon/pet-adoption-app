@@ -30,7 +30,7 @@ export default async function handler(
     const pet = await prisma.pet.findUnique({ where: { id } });
 
     if (user?.id !== pet?.userId) {
-      response.error = "unauthorized";
+      response.error = "login required";
       res.status(401);
       return res.json(response);
     }

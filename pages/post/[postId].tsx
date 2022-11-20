@@ -30,7 +30,7 @@ const EditPost = ({ animals, pet }: Props) => {
 
   const initialValues: FormValues = {
     ...pet,
-    images: null,
+    images: undefined,
   };
 
   PetSchema.fields.images.withMutation(schema=> schema.notRequired())

@@ -1,8 +1,7 @@
 import * as Yup from "yup";
 
-function checkIfFilesAreTooBig(files?: File[]): boolean {
+function checkFileSize(files?: File[]): boolean {
   let valid = true;
-
   if (files) {
     Array.from(files)?.forEach((file: File) => {
       const size = file.size / 1024 / 1024;
@@ -11,13 +10,11 @@ function checkIfFilesAreTooBig(files?: File[]): boolean {
       }
     });
   }
-
   return valid;
 }
 
-function checkIfFilesAreCorrectType(files?: File[]): boolean {
+function checkImageFormat(files?: File[]): boolean {
   let valid = true;
-
   if (files) {
     Array.from(files)?.forEach((file) => {
       if (!["image/jpeg", "image/png"].includes(file.type)) {
@@ -25,9 +22,21 @@ function checkIfFilesAreCorrectType(files?: File[]): boolean {
       }
     });
   }
-
   return valid;
 }
+
+const validateImage = Yup.mixed()
+.required()
+.test(
+  "fileFormat",
+  "Images must be .jpeg, .jpg or .png",
+  checkImageFormat
+)
+.test(
+  "fileSize",
+  "Image size must be less than 5mb",
+  checkFileSize
+)
 
 export const PetSchema = Yup.object().shape({
   title: Yup.string().min(5).max(100).required(),
@@ -39,22 +48,12 @@ export const PetSchema = Yup.object().shape({
   breedId: Yup.string().length(24).required(),
   country: Yup.string().min(2).max(100).required(),
   region: Yup.string().min(2).max(100).required(),
-  images: Yup.mixed()
-    .required()
-    .test(
-      "fileFormat",
-      "Images must be .jpeg, .jpg or .png",
-      checkIfFilesAreCorrectType
-    )
-    .test(
-      "fileSize",
-      "Image size must be less than 5mb",
-      checkIfFilesAreTooBig
-    ),
+  images: validateImage
 });
 
 export const ProfileSchema = Yup.object().shape({
   name: Yup.string().min(3).max(100).required(),
   contactInfo: Yup.string().min(10).max(500),
   phone: Yup.string().min(5).max(100),
+  image: validateImage.withMutation((field)=>field.notRequired())
 });

@@ -4,7 +4,7 @@ export type PetFormValues = {
     birthYear: string;
     animalId: string;
     breedId: string;
-    images: File[] | null;
+    images?: File[];
     country: string;
     region: string;
 };

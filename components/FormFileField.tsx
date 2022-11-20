@@ -19,7 +19,6 @@ export const FormFileField = ({ name, id = name, label }: Props) => {
         multiple={true}
         type="file"
         onChange={(e) => {
-          console.log(e.target.files)
           setTouched(true);
           setValue(e.target.files?.length ? e.target.files : null);
         }}

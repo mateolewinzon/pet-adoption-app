@@ -33,7 +33,7 @@ const Post = ({ animals }: Props) => {
     birthYear: "",
     animalId: animals[1].id,
     breedId: "",
-    images: null,
+    images: undefined,
     country: "",
     region: "",
   };
