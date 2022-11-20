@@ -11,7 +11,7 @@ type Props = {
 const Home = ({ pets }: Props) => {
   return (
     <Container>
-      <div className="grid lg:grid-cols-2 gap-10">
+      <div className="grid sm:grid-cols-2 gap-6">
         {pets?.map((pet) => (
           <PetCard key={pet.id} pet={pet} />
         ))}
