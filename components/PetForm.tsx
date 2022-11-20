@@ -8,7 +8,7 @@ import {
   FormButton,
 } from "components";
 import type { PetFormValues as FormValues } from "utils/formTypes";
-import { AnimalWithBreeds } from "prisma/types";
+import type { AnimalWithBreeds } from "prisma/types";
 
 type Props = {
   animals: AnimalWithBreeds[];

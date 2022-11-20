@@ -14,6 +14,7 @@ export { PetCard } from "./PetCard";
 export { PetForm } from "./PetForm";
 export { ProfileForm } from "./ProfileForm";
 export { Span } from "./Span";
+export { SpanSecondary } from "./SpanSecondary";
 export { SocialSignInButton } from "./SocialSignInButton";
 export { SubHeading } from "./SubHeading";
 export { TextComponent } from "./TextComponent";

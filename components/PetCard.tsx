@@ -1,8 +1,6 @@
 import Image from "next/image";
-import { PetWithUser } from "prisma/types";
-import { Span } from "./Span";
-import { SpanSecondary } from "./SpanSecondary";
-import { SubHeading } from "./SubHeading";
+import { Span, SpanSecondary, SubHeading } from "components";
+import type { PetWithUser } from "prisma/types";
 
 type Props = {
   pet: PetWithUser;
@@ -32,7 +30,7 @@ export const PetCard = ({ pet }: Props) => {
           layout="fill"
           src={pet.images[0]}
         ></Image>
-        <div className="flex flex-col w-full justify-end relative h-[350px] w-[350px]">
+        <div className="flex flex-col w-full justify-end relative h-[350px]">
           <div className="bg-opacity-40 bg-black font-semibold px-2 ">
             <SubHeading as={'h3'} className="text-white line-clamp-2">{pet.title}</SubHeading>
             <Span className="text-gray-200 line-clamp-3">{pet.description}</Span>

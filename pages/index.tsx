@@ -22,6 +22,7 @@ const Home = ({ pets }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: pets } = await getPets();
+  
   return {
     props: {
       pets,

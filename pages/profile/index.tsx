@@ -5,6 +5,7 @@ import { ProfileSchema } from "utils/formValidation";
 import type { GetServerSideProps } from "next";
 import type { UserWithPets } from "prisma/types";
 import type {ProfileFormValues as FormValues} from 'utils/formTypes'
+import { updateProfile } from "service/profile";
 
 type Props = {
   user: UserWithPets;
@@ -13,9 +14,20 @@ type Props = {
 const Profile = ({ user }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
-  const [editing, setEditing] = useState<boolean>(false);
 
-  const handleSubmit = (values: FormValues) => {};
+  const handleSubmit = async (values: FormValues) => {
+    setLoading(true);
+    setError(null);
+    const { data, error, success } = await updateProfile(values);
+
+    setLoading(false);
+    if (success) {
+      // Router
+    }
+    if (error) {
+      setError("An unexpected error occurred");
+    }
+  };
 
   const initialValues: FormValues = {
     name: user.name,

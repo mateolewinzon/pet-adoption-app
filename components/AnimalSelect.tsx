@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { AnimalWithBreeds } from "prisma/types";
 import { FormSelectField } from "components";
 import { useFormikContext } from "formik";
-import { FormValues } from "pages/post";
+import type { AnimalWithBreeds } from "prisma/types";
+import type { PetFormValues as FormValues } from "utils/formTypes";
 
 type Props = {
   animals: AnimalWithBreeds[];

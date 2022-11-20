@@ -9,9 +9,8 @@ type Props = {
 };
 
 export const FormFileField = ({ name, id = name, label }: Props) => {
-  
   const {
-    2: { setValue },
+    2: { setValue, setTouched},
   } = useField(id);
 
   return (
@@ -19,7 +18,11 @@ export const FormFileField = ({ name, id = name, label }: Props) => {
       <input
         multiple={true}
         type="file"
-        onChange={(e) => setValue(e.target.files)}
+        onChange={(e) => {
+          console.log(e.target.files)
+          setTouched(true);
+          setValue(e.target.files?.length ? e.target.files : null);
+        }}
         className="w-full bg-gray-50 rounded p-2 mb-2"
         id={id}
         name={name}

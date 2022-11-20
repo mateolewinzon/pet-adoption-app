@@ -40,7 +40,6 @@ export default async function handler(
         where: { id },
         data: {
           ...req.body,
-          images: req.body.images.length ? req.body.images : undefined,
           id: undefined
         },
       });

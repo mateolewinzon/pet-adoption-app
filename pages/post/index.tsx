@@ -26,14 +26,14 @@ const Post = ({ animals }: Props) => {
       setError("An unexpected error occurred");
     }
   };
-
+  
   const initialValues: FormValues = {
     title: "",
     description: "",
     birthYear: "",
     animalId: animals[1].id,
     breedId: "",
-    images: [],
+    images: null,
     country: "",
     region: "",
   };

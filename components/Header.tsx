@@ -1,5 +1,4 @@
 import { NavLink } from "./NavLink";
-import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Span } from "components";
 

@@ -1,29 +1,42 @@
-import { FormValues } from "pages/post";
 import { get, patch, post } from "./privateApi";
 import { uploadImages } from "./uploadImage";
-import { PetFields } from "prisma/types";
+import type { PetFields } from "prisma/types";
+import type { PetFormValues as FormValues } from "utils/formTypes";
+import { getQueryParams } from "utils/getQueryParams";
 
 export const getPets = async (query?: { [key in PetFields]?: string }) => {
-  const data = await get(`pets?${new URLSearchParams(query).toString()}`);
+  const data = await get(`pets${query ? `?${getQueryParams(query)}` : ""}`);
+
   return data;
 };
 
 export const postPet = async (body: FormValues) => {
+  let images: string[] = [];
+
   try {
-    const uploadedImages = await uploadImages(body.images);
-    const data = await post("pets", { ...body, images: uploadedImages });
-    return data;
+    images = await uploadImages(body.images!);
   } catch (error) {
     return { error: "An error occurred when uploading images", success: false };
   }
+
+  const data = await post("pets", { ...body, images });
+  return data;
 };
 
 export const updatePet = async (body: FormValues, id: string) => {
-  try {
-    const uploadedImages = body.images.length && (await uploadImages(body.images));
-    const data = await patch(`pets/${id}`, { ...body, images: uploadedImages });
-    return data;
-  } catch (error) {
-    return { error: "An error occurred when uploading images", success: false };
+  let images: undefined | string[];
+
+  if (body.images) {
+    try {
+      images = await uploadImages(body.images);
+    } catch (error) {
+      return {
+        error: "An error occurred when uploading images",
+        success: false,
+      };
+    }
   }
+
+  const data = await patch(`pets/${id}`, { ...body, images: images || undefined });
+  return data;
 };

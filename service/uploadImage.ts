@@ -10,7 +10,7 @@ const uploadRequest = async (formData: FormData) => {
   return response
 };
 
-export const uploadImages = async (images: File[]) => {
+export const uploadImages = async (images: File[]): Promise<string[]> => {
   const urls = [];
 
   const { signature, timestamp, transformation, upload_preset } =
