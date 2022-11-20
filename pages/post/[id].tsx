@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!user) {
     return {
       redirect: {
-        destination: `/api/auth/signin?callbackUrl=%2Fpost/${query.postId}}`,
+        destination: `/api/auth/signin?callbackUrl=%2Fpost/${query.id}}`,
         permanent: true,
       },
     };
@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const pet = await prisma.pet
     .findUnique({
-      where: { id: query.postId as string },
+      where: { id: query.id as string },
     })
     .catch(() => null);
 

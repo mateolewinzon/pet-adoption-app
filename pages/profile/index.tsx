@@ -53,6 +53,15 @@ const Profile = ({ user }: Props) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const user = await getUser(req, res);
 
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/api/auth/signin?callbackUrl=%2Fprofile",
+        permanent: true
+      }
+    }
+  }
+
   return {
     props: { user },
   };

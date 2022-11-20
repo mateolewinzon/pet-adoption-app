@@ -15,7 +15,7 @@ export default async function handler(
 
   if (req.method === "POST") {
     const user = await getUser(req, res);
-   
+
     if (!user) {
       response.error = "login required";
       res.status(401);
@@ -35,8 +35,12 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
+    console.log(req.query)
     try {
-      const pets = await prisma.pet.findMany({include: {user: true}});
+      const pets = await prisma.pet.findMany({
+        where: { ...req.query },
+        include: { user: true },
+      });
       response.data = pets;
       response.success = true;
     } catch (error: any) {
