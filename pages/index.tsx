@@ -1,36 +1,34 @@
 import { useState } from "react";
-import { Container, PetCard } from "components";
-import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
+import { Container, PetCard, PetFilters } from "components";
 import { getPets } from "service/pets";
+import usePets from "service/usePets";
+import type { GetServerSideProps } from "next";
 import type { PetWithUser } from "prisma/types";
-import { BrowseFilters } from "components/BrowseFilters";
 
 type Props = {
-  pets: PetWithUser[];
+  initialPets: any;
 };
 
-const Home = ({ pets }: Props) => {
-  const [results, setResults] = useState(pets);
+const Home = ({ initialPets }: Props) => {
+  const [filters, setFilters] = useState(null);
+
+  const { pets, isLoading, isError } = usePets(filters, initialPets);
 
   return (
     <Container>
-      <BrowseFilters setResults={setResults} />
-      <div className="grid sm:grid-cols-2 gap-6">
-        {results?.map((pet) => (
-          <PetCard key={pet.id} pet={pet} />
-        ))}
-      </div>
+        <PetFilters filters={{ filters, setFilters }} />
+        <div className="grid sm:grid-cols-2 gap-6">
+          {pets.map((pet: PetWithUser) => <PetCard key={pet.id} pet={pet} />)}
+        </div>
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: pets } = await getPets();
-
+  const pets = await getPets();
   return {
     props: {
-      pets,
+      initialPets: pets
     },
   };
 };

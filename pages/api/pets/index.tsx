@@ -35,19 +35,10 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
-    console.log(req.query)
-    try {
-      const pets = await prisma.pet.findMany({
-        where: { ...req.query },
-        include: { user: true },
-      });
-      response.data = pets;
-      response.success = true;
-    } catch (error: any) {
-      response.error = error.message;
-      res.status(500);
-    }
+    const pets = await prisma.pet.findMany({
+      where: { ...req.query },
+      include: { user: true },
+    });
+    res.json(pets);
   }
-
-  res.json(response);
 }
