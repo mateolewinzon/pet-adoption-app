@@ -11,6 +11,7 @@ export { Heading } from "./Heading";
 export { LocationSelect } from "./LocationSelect";
 export { NavLink } from "./NavLink";
 export { PetCard } from "./PetCard";
+export { PetFilters } from "./PetFilters"
 export { PetForm } from "./PetForm";
 export { ProfileForm } from "./ProfileForm";
 export { Span } from "./Span";

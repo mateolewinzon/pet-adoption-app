@@ -19,7 +19,6 @@ const Profile = ({ user }: Props) => {
     setLoading(true);
     setError(null);
     const { data, error, success } = await updateProfile(values);
-    console.log(data)
     setLoading(false);
     if (success) {
       // Router
