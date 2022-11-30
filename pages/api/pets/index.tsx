@@ -9,7 +9,6 @@ export default async function handler(
 ) {
   const response: Response = {
     data: null,
-    success: false,
     error: null,
   };
 
@@ -27,18 +26,21 @@ export default async function handler(
         data: { ...req.body, userId: user.id },
       });
       response.data = pet;
-      response.success = true;
     } catch (error: any) {
-      response.error = error.message;
       res.status(500);
     }
   }
 
   if (req.method === "GET") {
-    const pets = await prisma.pet.findMany({
-      where: { ...req.query },
-      include: { user: true },
-    });
-    res.json(pets);
+    try {
+      const pets = await prisma.pet.findMany({
+        where: { ...req.query },
+        include: { user: true },
+      });
+      response.data = pets;
+    } catch (error) {
+      res.status(500)
+    }
   }
+  res.json(response);
 }

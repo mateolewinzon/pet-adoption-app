@@ -6,7 +6,6 @@ import { getQueryParams } from "utils/getQueryParams";
 
 export const getPets = async (query?: { [key in PetFields]?: string }) => {
   const data = await get(`pets${query ? `?${getQueryParams(query)}` : ""}`);
-
   return data;
 };
 

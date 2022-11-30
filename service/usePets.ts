@@ -5,7 +5,6 @@ import type { PetFields, PetWithUser } from "prisma/types";
 
 const usePets = (
   query: { [key in PetFields]?: string } | null,
-  initialPets: PetWithUser[]
 ) => {
   let url = "/api/pets";
 
@@ -13,12 +12,11 @@ const usePets = (
     url += getQueryParams(query);
   }
 
-  const { data, error } = useSWR(url, fetcher, { fallbackData: initialPets });
+  const { data, error } = useSWR(url, fetcher);
 
   return {
     pets: data,
-    isLoading: !error && !data,
-    isError: error,
+    error
   };
 };
 

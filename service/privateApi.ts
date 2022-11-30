@@ -1,26 +1,38 @@
-import fetcher from "utils/fetch";
+import fetcher, { Response } from "utils/fetch";
 
 const baseURL = process.env.NEXT_PUBLIC_URL + "/api/";
+const headers = { "Content-Type": "application/json" };
 
-export const get = async (url: string) => {
-  const data = await fetcher(baseURL + url);
-  return data;
+const privateApi = async (
+  method: string,
+  url: string,
+  body?: { [key: string]: any },
+  headers?: { [key: string]: string }
+) => {
+
+  const response: Response = {
+    data: null,
+    error: null,
+  };
+
+  try {
+    const data = await fetcher(baseURL+url, {
+      method,
+      body: JSON.stringify(body),
+      headers,
+    });
+    response.data = data;
+  } catch (error: any) {
+    response.error = error;
+  }
+
+  return response;
 };
 
-export const post = async (url: string, body: { [key: string]: any} | undefined) => {
-  const data = await fetcher(baseURL + url, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
-  });
-  return data;
-};
+export const get = async (url: string) => await privateApi("GET", url);
 
-export const patch = async (url: string, body: { [key: string]: any} | undefined) => {
-  const data = await fetcher(baseURL + url, {
-    method: "PATCH",
-    body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
-  });
-  return data;
-};
+export const post = async (url: string, body?: { [key: string]: any }) =>
+  await privateApi("POST", url, body, headers);
+
+export const patch = async (url: string, body: { [key: string]: any }) =>
+  await privateApi("PATCH", url, body, headers);

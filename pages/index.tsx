@@ -4,31 +4,46 @@ import { getPets } from "service/pets";
 import usePets from "service/usePets";
 import type { GetServerSideProps } from "next";
 import type { PetWithUser } from "prisma/types";
+import { SWRConfig } from "swr";
 
 type Props = {
-  initialPets: any;
+  fallback: any;
 };
 
-const Home = ({ initialPets }: Props) => {
+const BrowsePets = () => {
   const [filters, setFilters] = useState(null);
-
-  const { pets, isLoading, isError } = usePets(filters, initialPets);
+  const { pets, error } = usePets(filters);
 
   return (
+    <>
+      <PetFilters filters={{ filters, setFilters }} />
+      <div className="grid sm:grid-cols-2 gap-6">
+        {error && "An error occurred when fetching pets"}
+        {pets?.length === 0 && "No pets found"}
+        {pets?.map((pet: PetWithUser) => (
+          <PetCard key={pet.id} pet={pet} />
+        ))}
+      </div>
+    </>
+  );
+};
+
+const Home = ({ fallback }: Props) => {
+  return (
     <Container>
-        <PetFilters filters={{ filters, setFilters }} />
-        <div className="grid sm:grid-cols-2 gap-6">
-          {pets.map((pet: PetWithUser) => <PetCard key={pet.id} pet={pet} />)}
-        </div>
+      <SWRConfig value={{ fallback }}>
+        <BrowsePets />
+      </SWRConfig>
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const pets = await getPets();
+  const { data } = await getPets();
+
   return {
     props: {
-      initialPets: pets
+      fallback: { "/api/pets": data },
     },
   };
 };
