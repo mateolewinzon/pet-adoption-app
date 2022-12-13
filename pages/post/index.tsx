@@ -16,10 +16,10 @@ const Post = ({ animals }: Props) => {
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
-    const { data, error, success } = await postPet(values);
+    const { data, error } = await postPet(values);
 
     setLoading(false);
-    if (success) {
+    if (data) {
       // Router
     }
     if (error) {

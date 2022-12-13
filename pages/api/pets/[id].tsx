@@ -42,7 +42,6 @@ export default async function handler(
         },
       });
       response.data = pet;
-      response.success = true;
     } catch (error: any) {
       response.error = error.message;
       res.status(500);

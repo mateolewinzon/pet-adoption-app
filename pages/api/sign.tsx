@@ -26,7 +26,6 @@ export default async function handler(
       apiSecret!
     );
     response.data = { signature, ...signedRequestParams }
-    response.success = true
     return res.json(response);
   } catch (error) {
     response.error = 'Error when signing'

@@ -26,7 +26,6 @@ export default async function handler(
         data: req.body,
       });
       response.data = updatedUser;
-      response.success = true;
     } catch (error: any) {
       res.status(500)
       response.error = error.message;

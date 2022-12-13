@@ -17,10 +17,10 @@ const EditPost = ({ animals, pet }: Props) => {
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
-    const { data, error, success } = await updatePet(values, pet.id);
+    const { data, error } = await updatePet(values, pet.id);
 
     setLoading(false);
-    if (success) {
+    if (data) {
       // Router
     }
     if (error) {
