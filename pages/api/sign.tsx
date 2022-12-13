@@ -9,7 +9,6 @@ export default async function handler(
 
   const response: Response = {
     data: null,
-    success: false,
     error: null,
   };
 

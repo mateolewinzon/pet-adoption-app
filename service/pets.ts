@@ -15,7 +15,7 @@ export const postPet = async (body: FormValues) => {
   try {
     images = await uploadImages(body.images!);
   } catch (error) {
-    return { error: "An error occurred when uploading images", success: false };
+    return { error: "An error occurred when uploading images" };
   }
 
   const data = await post("pets", { ...body, images });
@@ -31,7 +31,6 @@ export const updatePet = async (body: FormValues, id: string) => {
     } catch (error) {
       return {
         error: "An error occurred when uploading images",
-        success: false,
       };
     }
   }

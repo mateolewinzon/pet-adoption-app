@@ -9,7 +9,6 @@ export default async function handler(
 ) {
   const response: Response = {
     data: null,
-    success: false,
     error: null,
   };
   const id = req.query.id as string;
@@ -18,7 +17,6 @@ export default async function handler(
     try {
       const pet = await prisma.pet.findUnique({ where: { id: id } });
       response.data = pet;
-      response.success = true;
     } catch (error: any) {
       response.error = error.message;
       res.status(500);

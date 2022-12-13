@@ -12,7 +12,6 @@ export const updateProfile = async (body: FormValues) => {
     } catch (e) {
       return {
         error: "An error occurred when uploading profile picture.",
-        success: false,
       };
     }
   }
