@@ -17,7 +17,7 @@ const BrowsePets = () => {
   return (
     <>
       <PetFilters filters={{ filters, setFilters }} />
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-3 gap-6">
         {error && "An error occurred when fetching pets"}
         {pets?.length === 0 && "No pets found"}
         {pets?.map((pet: PetWithUser) => (

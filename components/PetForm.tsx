@@ -43,7 +43,7 @@ export const PetForm = ({
             <FormTextField name="description" label="Description" isTextarea />
             <FormTextField name="birthYear" label="Birth year" />
             <AnimalSelect animals={animals} />
-            <FormFileField label="Image" name="images" />
+            <FormFileField label="Images" name="images" />
             <LocationSelect />
             <div className="flex my-4">
               <FormButton text="Post" isLoading={isLoading} />

@@ -6,6 +6,8 @@ export type PetFields = Prisma.PetScalarFieldEnum
 export type PetWithUser = Prisma.PetGetPayload<{
   include: {
     user: true;
+    breed: true
+    animal: true
   };
 }>;
 
@@ -17,6 +19,6 @@ export type UserWithPets = Prisma.UserGetPayload<{
 
 export type AnimalWithBreeds = Prisma.AnimalGetPayload<{
     include: {
-        breeds: true
+        breeds: true,
     }
 }>

@@ -8,10 +8,11 @@ export { FormTextField } from "./FormTextField";
 export { FormSelectField } from "./FormSelectField";
 export { Header } from "./Header";
 export { Heading } from "./Heading";
+export { ImageCarousel } from "./ImageCarousel";
 export { LocationSelect } from "./LocationSelect";
 export { NavLink } from "./NavLink";
 export { PetCard } from "./PetCard";
-export { PetFilters } from "./PetFilters"
+export { PetFilters } from "./PetFilters";
 export { PetForm } from "./PetForm";
 export { ProfileForm } from "./ProfileForm";
 export { Span } from "./Span";

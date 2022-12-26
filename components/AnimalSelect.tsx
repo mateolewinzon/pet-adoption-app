@@ -3,6 +3,7 @@ import { FormSelectField } from "components";
 import { useFormikContext } from "formik";
 import type { AnimalWithBreeds } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
+import capitalize from "utils/capitalize";
 
 type Props = {
   animals: AnimalWithBreeds[];
@@ -26,11 +27,9 @@ export const AnimalSelect = ({ animals }: Props) => {
         name="animalId"
         label="Animal"
         options={animals.map((a) => {
-          const text = a.name.charAt(0).toUpperCase() + a.name.slice(1);
-
           return {
             value: a.id,
-            text,
+            text: capitalize(a.name),
           };
         })}
       />
@@ -45,13 +44,9 @@ export const AnimalSelect = ({ animals }: Props) => {
           ...animals
             .filter((a) => a.id === values.animalId)[0]
             .breeds.map((b) => {
-              const text =
-                b.name.charAt(0).toUpperCase() +
-                b.name.slice(1).replaceAll("_", " ");
-
               return {
                 value: b.id,
-                text,
+                text: capitalize(b.name),
               };
             }),
         ]}

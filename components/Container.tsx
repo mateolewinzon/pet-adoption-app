@@ -4,11 +4,12 @@ import { Header, Footer } from "components";
 type Props = {
   children: React.ReactNode;
   width?: string;
+  title?: string
 };
 
 export const Container = ({
   children,
-  width = "max-w-2xl",
+  width = "max-w-5xl",
   ...customMeta
 }: Props) => {
   const meta = {
