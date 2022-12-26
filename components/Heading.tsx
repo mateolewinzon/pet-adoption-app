@@ -10,7 +10,7 @@ export const Heading = ({ children, className, as = "h1", ...props }: Props) => 
   return (
     <TextComponent
       {...props}
-      defaultStyles={"text-3xl font-bold text-black dark:text-white inline pb-4"}
+      defaultStyles={"text-3xl font-bold text-orange-800 dark:text-white inline pb-4"}
       overrideStyles={className}
       as={as}
     >

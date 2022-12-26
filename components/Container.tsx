@@ -28,7 +28,7 @@ export const Container = ({
         <meta property="og:title" content={meta.title} />
       </Head>
       <Header />
-      <main className={`flex flex-col ${width} px-4 py-4 mx-auto`}>{children}</main>
+      <main className={`flex flex-col ${width} px-4 py-4 mx-auto min-h-[90vh]`}>{children}</main>
       <Footer />
     </div>
   );

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Container, Heading, ProfileForm } from "components";
+import { Container, Heading, ProfileForm, Span } from "components";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { ProfileSchema } from "utils/formValidation";
 import type { GetServerSideProps } from "next";
 import type { UserWithPets } from "prisma/types";
-import type {ProfileFormValues as FormValues} from 'utils/formTypes'
+import type { ProfileFormValues as FormValues } from "utils/formTypes";
 import { updateProfile } from "service/profile";
 
 type Props = {
@@ -14,14 +14,17 @@ type Props = {
 const Profile = ({ user }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
+    setSuccess(false);
     const { data, error } = await updateProfile(values);
     setLoading(false);
+
     if (data) {
-      // Router
+      setSuccess(true);
     }
     if (error) {
       setError("An unexpected error occurred");
@@ -30,10 +33,10 @@ const Profile = ({ user }: Props) => {
 
   const initialValues: FormValues = {
     name: user.name,
-    contactInfo: user.contactInfo || '',
-    phone: user.phone|| '',
+    contactInfo: user.contactInfo || "",
+    phone: user.phone || "",
     image: undefined,
-  }
+  };
 
   return (
     <Container>
@@ -45,6 +48,7 @@ const Profile = ({ user }: Props) => {
         initialValues={initialValues}
         handleSubmit={(values) => handleSubmit(values)}
       />
+      {success && <Span className="text-green-600">Profile updated successfully</Span>}
     </Container>
   );
 };
@@ -56,9 +60,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return {
       redirect: {
         destination: "/api/auth/signin?callbackUrl=%2Fprofile",
-        permanent: true
-      }
-    }
+        permanent: true,
+      },
+    };
   }
 
   return {

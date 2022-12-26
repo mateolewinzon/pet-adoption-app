@@ -3,10 +3,12 @@ import {
   Heading,
   ImageCarousel,
   Span,
+  SpanSecondary,
   SubHeading,
 } from "components";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
+import Image from "next/image";
 import type { PetWithUser } from "prisma/types";
 import capitalize from "utils/capitalize";
 
@@ -22,8 +24,20 @@ const ViewPost = ({ pet }: Props) => {
   return (
     <Container title={`Pets Adoption - ${pet.title}`}>
       <div className="sm:grid grid-cols-2 gap-3 width-full">
-        <ImageCarousel images={pet.images} />
         <div className="flex flex-col">
+          <ImageCarousel images={pet.images} />
+        </div>
+        <div className="flex flex-col">
+        <div className="flex items-center">
+            <Image
+              className="rounded-3xl"
+              width={40}
+              height={40}
+              src={pet.user.image}
+            />
+            <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+          </div>
+          <hr className="mt-4 mb-4"/>
           <Heading>{pet.title}</Heading>
           <Span>{pet.description}</Span>
         </div>
@@ -66,10 +80,6 @@ const ViewPost = ({ pet }: Props) => {
           />
           <TableRow title="Country" info={pet.country} />
           <TableRow title="Region" info={pet.region} />
-          <TableRow
-            title="Has been adopted"
-            info={pet.adopted ? "Yes" : "No"}
-          />
         </tbody>
       </table>
     </Container>
