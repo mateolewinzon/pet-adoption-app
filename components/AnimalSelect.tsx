@@ -11,7 +11,7 @@ type Props = {
 
 export const AnimalSelect = ({ animals }: Props) => {
   const { values, setFieldValue } = useFormikContext<FormValues>();
-
+  
   useEffect(() => {
     if (
       !animals
@@ -22,7 +22,7 @@ export const AnimalSelect = ({ animals }: Props) => {
   }, [values.animalId]);
 
   return (
-    <>
+    <div className="grid grid-cols-2 gap-2">
       <FormSelectField
         name="animalId"
         label="Animal"
@@ -51,6 +51,6 @@ export const AnimalSelect = ({ animals }: Props) => {
             }),
         ]}
       />
-    </>
+    </div>
   );
 };

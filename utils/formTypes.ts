@@ -7,6 +7,7 @@ export type PetFormValues = {
     images?: File[];
     country: string;
     region: string;
+    sex: string
 };
 
 export type ProfileFormValues = {

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Container, Heading, PetForm } from "components";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { useState } from "react";
@@ -13,18 +14,19 @@ type Props = { animals: AnimalWithBreeds[]; pet: Pet };
 const EditPost = ({ animals, pet }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
+  const router = useRouter();
 
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
     const { data, error } = await updatePet(values, pet.id);
 
-    setLoading(false);
     if (data) {
-      // Router
+      router.push(`/pet/${data.id}`);
     }
     if (error) {
       setError("An unexpected error occurred");
+      setLoading(false);
     }
   };
 
@@ -33,7 +35,7 @@ const EditPost = ({ animals, pet }: Props) => {
     images: undefined,
   };
 
-  PetSchema.fields.images.withMutation(schema=> schema.notRequired())
+  PetSchema.fields.images.withMutation((schema) => schema.notRequired());
 
   return (
     <Container>

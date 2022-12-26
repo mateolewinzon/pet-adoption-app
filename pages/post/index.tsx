@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Container, Heading, PetForm } from "components";
 import { useState } from "react";
 import { postPet } from "service/pets";
@@ -12,21 +13,22 @@ type Props = { animals: AnimalWithBreeds[] };
 const Post = ({ animals }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
+  const router = useRouter();
 
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
     const { data, error } = await postPet(values);
 
-    setLoading(false);
     if (data) {
-      // Router
+      router.push(`/pet/${data.id}`);
     }
     if (error) {
       setError("An unexpected error occurred");
+      setLoading(false);
     }
   };
-  
+
   const initialValues: FormValues = {
     title: "",
     description: "",
@@ -36,6 +38,7 @@ const Post = ({ animals }: Props) => {
     images: undefined,
     country: "",
     region: "",
+    sex: "male",
   };
 
   return (
@@ -57,7 +60,6 @@ export default Post;
 
 export const getStaticProps: GetStaticProps = async () => {
   const animals = await prisma.animal.findMany({ include: { breeds: true } });
-
   return {
     props: {
       animals: JSON.parse(JSON.stringify(animals)),

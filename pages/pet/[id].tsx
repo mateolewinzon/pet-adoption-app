@@ -39,6 +39,7 @@ const ViewPost = ({ pet }: Props) => {
         <tbody>
           <TableRow title="Animal" info={capitalize(pet.animal.name)} />
           <TableRow title="Breed" info={capitalize(pet.breed.name)} />
+          <TableRow title="Sex" info={capitalize(pet.sex)} />
           <TableRow title="Birth Year" info={pet.birthYear} />
           <TableRow title="Country" info={pet.country} />
           <TableRow title="Region" info={pet.region} />
