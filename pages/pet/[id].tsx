@@ -40,9 +40,7 @@ const ViewPost = ({ pet }: Props) => {
           <hr className="mt-4 mb-4"/>
           <Heading>{pet.title}</Heading>
           <Span>{pet.description}</Span>
-        </div>
-      </div>
-      <table className="mt-5">
+          <table className="mt-5">
         <thead>
           <tr>
             <th className="pb-5 text-start">
@@ -63,6 +61,9 @@ const ViewPost = ({ pet }: Props) => {
           />
         </tbody>
       </table>
+        </div>
+      </div>
+      
       <table className="mt-5">
         <thead>
           <tr>

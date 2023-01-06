@@ -14,7 +14,7 @@ export const SubHeading = ({
 }: Props) => {
   return (
     <TextComponent
-      defaultStyles={"text-2xl font-semibold text-orange-800 dark:text-white"}
+      defaultStyles={"text-2xl font-semibold text-slate-700 dark:text-white"}
       overrideStyles={className}
       {...props}
       as={as || 'h2'}

@@ -6,7 +6,7 @@ export const Header = () => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="flex flex-row justify-center py-2 px-4 md:px-8 bg-orange-500 text-white">
+    <div className="flex flex-row justify-center py-2 px-4 md:px-8 bg-purple-900 text-white">
       <div className="flex items-center justify-between w-full max-w-5xl">
         <nav className="flex">
           <NavLink href="/" text="Browse" />

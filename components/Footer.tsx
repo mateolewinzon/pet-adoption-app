@@ -1,5 +1,5 @@
 export const Footer = () => {
-    return <div  className="bg-orange-500">
+    return <div  className="bg-purple-900">
         Footer
     </div>
 }

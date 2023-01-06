@@ -14,7 +14,7 @@ export const ImageCarousel = ({ images }: Props) => {
         <Image objectFit="cover" src={images[index]} height={600} width={600} />
         <a
           className="absolute left-0"
-          onClick={() => setIndex(index === 0 ? 0 : index - 1)}
+          onClick={() => setIndex(index === 0 ? images.length - 1 : index - 1)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ export const ImageCarousel = ({ images }: Props) => {
         <a
           className="absolute right-0"
           onClick={() =>
-            setIndex(index + 1 === images.length ? index : index + 1)
+            setIndex(index + 1 === images.length ? 0 : index + 1)
           }
         >
           <svg
