@@ -45,7 +45,7 @@ const ViewPost = ({ pet, user }: Props) => {
         <div className="flex flex-col">
           <div className="flex justify-between items-center ">
             <Heading>{pet.title}</Heading>
-            {pet.userId === user.id && (
+            {pet.userId === user?.id && (
               <div className="flex gap-2">
                 <SpanSecondary className="text-gray-500">
                   <Link href={`/post/${pet.id}`}>Edit post</Link>
