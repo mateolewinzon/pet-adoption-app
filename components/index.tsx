@@ -1,4 +1,5 @@
 export { AnimalSelect } from "./AnimalSelect";
+export { ContactInformationSection } from "./ContactInformationSection";
 export { Container } from "./Container";
 export { Field } from "./Field";
 export { Footer } from "./Footer";
@@ -14,9 +15,11 @@ export { NavLink } from "./NavLink";
 export { PetCard } from "./PetCard";
 export { PetFilters } from "./PetFilters";
 export { PetForm } from "./PetForm";
+export { PetInformationSection } from "./PetInformationSection";
 export { ProfileForm } from "./ProfileForm";
 export { Span } from "./Span";
 export { SpanSecondary } from "./SpanSecondary";
 export { SocialSignInButton } from "./SocialSignInButton";
 export { SubHeading } from "./SubHeading";
+export { TableRow } from "./TableRow";
 export { TextComponent } from "./TextComponent";

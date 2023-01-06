@@ -38,10 +38,25 @@ export default async function handler(
         where: { id },
         data: {
           ...req.body,
-          id: undefined
+          id: undefined,
         },
       });
       response.data = pet;
+    } catch (error: any) {
+      response.error = error.message;
+      res.status(500);
+    }
+  }
+
+  if (req.method === "DELETE") {
+    const user = await getUser(req, res);
+    try {
+      const pet = await prisma.pet.findUnique({ where: { id } });
+      if (pet?.userId === user?.id) {
+        await prisma.pet.delete({ where: { id } });
+      } else {
+        res.status(401);
+      }
     } catch (error: any) {
       response.error = error.message;
       res.status(500);

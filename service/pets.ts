@@ -1,4 +1,4 @@
-import { get, patch, post } from "./privateApi";
+import { get, patch, post, deleteRequest } from "./privateApi";
 import { uploadImages } from "./uploadImage";
 import type { PetFields } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
@@ -38,3 +38,5 @@ export const updatePet = async (body: FormValues, id: string) => {
   const data = await patch(`pets/${id}`, { ...body, images: images });
   return data;
 };
+
+export const deletePet = async (id: string) => await deleteRequest(`pets/${id}`);

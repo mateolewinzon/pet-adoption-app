@@ -1,93 +1,83 @@
+import { User } from "@prisma/client";
 import {
+  ContactInformationSection,
   Container,
   Heading,
   ImageCarousel,
+  PetInformationSection,
   Span,
   SpanSecondary,
-  SubHeading,
 } from "components";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { getUser } from "pages/api/auth/[...nextauth]";
 import type { PetWithUser } from "prisma/types";
-import capitalize from "utils/capitalize";
+import { deletePetConfirmation, deleteSuccess } from "utils/alert";
 
-type Props = { pet: PetWithUser };
+type Props = { pet: PetWithUser; user: User };
 
-const TableRow = ({ title, info }: { title: string; info: string }) => (
-  <tr>
-    <td className="border outline-slate-300 pl-4 font-semibold">{title}</td>
-    <td className="border outline-slate-300 pl-4">{info}</td>
-  </tr>
-);
-const ViewPost = ({ pet }: Props) => {
+const ViewPost = ({ pet, user }: Props) => {
+  const router = useRouter();
+
   return (
     <Container title={`Pets Adoption - ${pet.title}`}>
       <div className="sm:grid grid-cols-2 gap-3 width-full">
         <div className="flex flex-col">
-          <ImageCarousel images={pet.images} />
-        </div>
-        <div className="flex flex-col">
-        <div className="flex items-center">
+          <div className="flex items-center mb-2">
             <Image
               className="rounded-3xl"
               width={40}
               height={40}
               src={pet.user.image}
             />
-            <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+            <div className="flex flex-col">
+              <SpanSecondary className="mx-2 text-gray-400 text-xs">
+                Owner / Shelterer
+              </SpanSecondary>
+              <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+            </div>
           </div>
-          <hr className="mt-4 mb-4"/>
-          <Heading>{pet.title}</Heading>
+          <ImageCarousel images={pet.images} />
+        </div>
+        <div className="flex flex-col">
+          <div className="flex justify-between items-center ">
+            <Heading>{pet.title}</Heading>
+            {pet.userId === user.id && (
+              <div className="flex gap-2">
+                <SpanSecondary className="text-gray-500">
+                  <Link href={`/post/${pet.id}`}>Edit post</Link>
+                </SpanSecondary>
+                <button
+                  className="text-red-700"
+                  onClick={() =>
+                    deletePetConfirmation(pet)
+                      .then(() => router.push("/"))
+                      .then(() => deleteSuccess())
+                  }
+                >
+                  Delete post
+                </button>
+              </div>
+            )}
+          </div>
           <Span>{pet.description}</Span>
-          <table className="mt-5">
-        <thead>
-          <tr>
-            <th className="pb-5 text-start">
-              <SubHeading>Pet Information</SubHeading>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <TableRow title="Animal" info={capitalize(pet.animal.name)} />
-          <TableRow title="Breed" info={capitalize(pet.breed.name)} />
-          <TableRow title="Sex" info={capitalize(pet.sex)} />
-          <TableRow title="Birth Year" info={pet.birthYear} />
-          <TableRow title="Country" info={pet.country} />
-          <TableRow title="Region" info={pet.region} />
-          <TableRow
-            title="Has been adopted"
-            info={pet.adopted ? "Yes" : "No"}
-          />
-        </tbody>
-      </table>
+          <PetInformationSection pet={pet} />
         </div>
       </div>
-      
-      <table className="mt-5">
-        <thead>
-          <tr>
-            <th className="pb-5 text-start">
-              <SubHeading>Contact Information</SubHeading>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <TableRow title="Email" info={pet.user.email} />
-          <TableRow title="Phone" info={pet.user.phone || "-"} />
-          <TableRow
-            title="Additional contact information"
-            info={pet.user.contactInfo || "-"}
-          />
-          <TableRow title="Country" info={pet.country} />
-          <TableRow title="Region" info={pet.region} />
-        </tbody>
-      </table>
+      <ContactInformationSection pet={pet} />
     </Container>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+  res,
+}) => {
+  const user = await getUser(req, res);
   const pet = await prisma.pet
     .findUnique({
       where: { id: query.id as string },
@@ -100,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 
   return {
-    props: { pet: JSON.parse(JSON.stringify(pet)) },
+    props: { pet: JSON.parse(JSON.stringify(pet)), user },
   };
 };
 

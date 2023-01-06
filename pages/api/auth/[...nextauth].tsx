@@ -5,7 +5,6 @@ import NextAuth, {
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "lib/prisma";
-import type { NextApiRequest, NextApiResponse } from "next";
 import type { IncomingMessage, ServerResponse } from "http";
 
 export const authOptions: NextAuthOptions = {

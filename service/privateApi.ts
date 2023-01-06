@@ -36,3 +36,5 @@ export const post = async (url: string, body?: { [key: string]: any }) =>
 
 export const patch = async (url: string, body: { [key: string]: any }) =>
   await privateApi("PATCH", url, body, headers);
+
+export const deleteRequest = async (url: string) => await privateApi("DELETE", url) 
