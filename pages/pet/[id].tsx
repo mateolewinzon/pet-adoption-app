@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import type { PetWithUser } from "prisma/types";
-import { deletePetConfirmation, deleteSuccess } from "utils/alert";
+import { deletePetConfirmation, deleteSuccess } from "utils/confirmationAlerts";
 
 type Props = { pet: PetWithUser; user: User };
 
@@ -54,11 +54,13 @@ const ViewPost = ({ pet, user }: Props) => {
                 </SpanSecondary>
                 <button
                   className="text-red-700"
-                  onClick={() =>
-                    deletePetConfirmation(pet)
-                      .then(() => router.push("/"))
-                      .then(() => deleteSuccess())
-                  }
+                  onClick={async () => {
+                    const confirmed = await deletePetConfirmation(pet);
+                    if (confirmed) {
+                      await router.push("/");
+                      deleteSuccess();
+                    }
+                  }}
                 >
                   Delete post
                 </button>

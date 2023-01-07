@@ -3,16 +3,17 @@ import Swal from "sweetalert2";
 import type { SweetAlertOptions } from "sweetalert2";
 import type { Pet } from "@prisma/client";
 
-const alert = (action: (() => void) | null, config: SweetAlertOptions = {}) => {
+const alert = (actions: (() => any) | null, config: SweetAlertOptions = {}) => {
   return Swal.fire(config).then(({ isConfirmed }) => {
-    if (isConfirmed && action) {
-      action();
+    if (isConfirmed && actions) {
+      actions();
     }
+    return isConfirmed ? true : false;
   });
 };
 
 export const deletePetConfirmation = (pet: Pet) =>
-  alert(() => deletePet(pet.id).then(), {
+  alert(() => deletePet(pet.id), {
     title: `Are you sure you want to delete ${pet.title}?`,
     showDenyButton: true,
     confirmButtonText: "Delete",
