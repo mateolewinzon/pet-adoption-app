@@ -10,6 +10,7 @@ import {
 } from "components";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -21,6 +22,7 @@ type Props = { pet: PetWithUser; user: User };
 
 const ViewPost = ({ pet, user }: Props) => {
   const router = useRouter();
+  const { data } = useSession();
 
   return (
     <Container title={`Pets Adoption - ${pet.title}`}>
@@ -45,7 +47,7 @@ const ViewPost = ({ pet, user }: Props) => {
         <div className="flex flex-col">
           <div className="flex justify-between items-center ">
             <Heading>{pet.title}</Heading>
-            {pet.userId === user?.id && (
+            {pet.userId === data?.user.id && (
               <div className="flex gap-2">
                 <SpanSecondary className="text-gray-500">
                   <Link href={`/post/${pet.id}`}>Edit post</Link>
@@ -72,12 +74,7 @@ const ViewPost = ({ pet, user }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-  req,
-  res,
-}) => {
-  const user = await getUser(req, res);
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const pet = await prisma.pet
     .findUnique({
       where: { id: query.id as string },
@@ -90,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   return {
-    props: { pet: JSON.parse(JSON.stringify(pet)), user },
+    props: { pet: JSON.parse(JSON.stringify(pet)) },
   };
 };
 
