@@ -8,13 +8,12 @@ import {
   Span,
   SpanSecondary,
 } from "components";
+import { ThreeDotsDropdown } from "components/ThreeDotsDropdown";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { getUser } from "pages/api/auth/[...nextauth]";
 import type { PetWithUser } from "prisma/types";
 import { deletePetConfirmation, deleteSuccess } from "utils/confirmationAlerts";
 
@@ -48,23 +47,25 @@ const ViewPost = ({ pet, user }: Props) => {
           <div className="flex justify-between items-center ">
             <Heading>{pet.title}</Heading>
             {pet.userId === data?.user.id && (
-              <div className="flex gap-2">
-                <SpanSecondary className="text-gray-500">
-                  <Link href={`/post/${pet.id}`}>Edit post</Link>
-                </SpanSecondary>
-                <button
-                  className="text-red-700"
-                  onClick={async () => {
-                    const confirmed = await deletePetConfirmation(pet);
-                    if (confirmed) {
-                      await router.push("/");
-                      deleteSuccess();
-                    }
-                  }}
-                >
-                  Delete post
-                </button>
-              </div>
+              <ThreeDotsDropdown
+                items={[
+                  {
+                    text: "Edit post",
+                    onClick: () => router.push(`/post/${pet.id}`),
+                  },
+                  {
+                    text: "Delete post",
+                    className: "text-red-400",
+                    onClick: async () => {
+                      const confirmed = await deletePetConfirmation(pet);
+                      if (confirmed) {
+                        await router.push("/");
+                        deleteSuccess();
+                      }
+                    },
+                  },
+                ]}
+              />
             )}
           </div>
           <Span>{pet.description}</Span>

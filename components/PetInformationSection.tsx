@@ -12,7 +12,7 @@ export const PetInformationSection = ({ pet }: { pet: PetWithUser }) =>
     </th>
   </tr>
 </thead>
-<tbody>
+<tbody className="bg-white">
   <TableRow title="Animal" info={capitalize(pet.animal.name)} />
   <TableRow title="Breed" info={capitalize(pet.breed.name)} />
   <TableRow title="Sex" info={capitalize(pet.sex)} />
