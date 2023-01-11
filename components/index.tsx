@@ -23,3 +23,4 @@ export { SocialSignInButton } from "./SocialSignInButton";
 export { SubHeading } from "./SubHeading";
 export { TableRow } from "./TableRow";
 export { TextComponent } from "./TextComponent";
+export { ThreeDotsDropdown } from "./ThreeDotsDropdown";

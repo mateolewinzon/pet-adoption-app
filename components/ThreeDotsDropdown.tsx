@@ -1,6 +1,6 @@
-import useOutsideClick from "hooks/useOutsideClick";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import useOutsideClickOrEsc from "hooks/useOutsideClickOrEsc";
 
 type Props = {
   items: { text: string; onClick: () => void; className?: string }[];
@@ -10,12 +10,13 @@ export const ThreeDotsDropdown = ({ items }: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const wrapperRef = useRef(null);
 
-  useOutsideClick(wrapperRef, () => {
+  useOutsideClickOrEsc(wrapperRef, () => {
+    console.log('reaadas')
       setShowMenu(false);
   });
 
   return (
-    <div ref={wrapperRef}>
+    <div ref={wrapperRef} tabIndex={1}>
       <button
         onClick={() => setShowMenu(showMenu ? false : true)}
         id="dropdownDefaultButton"
