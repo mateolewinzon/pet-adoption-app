@@ -11,12 +11,11 @@ type Props = {
 
 export const AnimalSelect = ({ animals }: Props) => {
   const { values, setFieldValue } = useFormikContext<FormValues>();
-  
+  const currentAnimal = animals.filter((a) => a.id === values.animalId)[0];
+
   useEffect(() => {
     if (
-      !animals
-        .filter((a) => a.id === values.animalId)[0]
-        .breeds.filter((b) => b.id === values.breedId).length
+      !currentAnimal.breeds.some((breed) => breed.id === values.breedId) 
     )
       setFieldValue("breedId", "");
   }, [values.animalId]);
