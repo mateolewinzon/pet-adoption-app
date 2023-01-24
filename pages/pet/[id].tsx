@@ -7,7 +7,7 @@ import {
   PetInformationSection,
   Span,
   SpanSecondary,
-  ThreeDotsDropdown
+  ThreeDotsDropdown,
 } from "components";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
@@ -29,6 +29,7 @@ const ViewPost = ({ pet, user }: Props) => {
         <div className="flex flex-col">
           <div className="flex items-center mb-2">
             <Image
+              alt={user.name}
               className="rounded-3xl"
               width={40}
               height={40}

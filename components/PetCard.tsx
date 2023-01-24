@@ -15,6 +15,7 @@ export const PetCard = ({ pet }: Props) => {
           <div className="flex items-center justify-between my-2">
             <div className="flex items-center">
               <Image
+                alt={pet.user.name}
                 className="rounded-3xl"
                 width={40}
                 height={40}
@@ -28,7 +29,12 @@ export const PetCard = ({ pet }: Props) => {
           </div>
 
           <div className="relative">
-            <Image objectFit="cover" layout="fill" src={pet.images[0].url}></Image>
+            <Image
+              alt={pet.title}
+              objectFit="cover"
+              layout="fill"
+              src={pet.images[0].url}
+            ></Image>
             <div className="flex flex-col w-full justify-end relative h-[350px]">
               <div className="bg-opacity-40 bg-black font-semibold px-2 ">
                 <SubHeading as={"h3"} className="text-white line-clamp-2">
