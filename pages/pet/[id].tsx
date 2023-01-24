@@ -42,7 +42,7 @@ const ViewPost = ({ pet, user }: Props) => {
               <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
             </div>
           </div>
-          <ImageCarousel images={pet.images} />
+          <ImageCarousel alt={pet.title} images={pet.images} />
         </div>
         <div className="flex flex-col">
           <div className="flex justify-between items-center ">
