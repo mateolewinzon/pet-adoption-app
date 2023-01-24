@@ -33,7 +33,7 @@ export const PetCard = ({ pet }: Props) => {
               alt={pet.title}
               objectFit="cover"
               layout="fill"
-              src={pet.images[0].url}
+              src={pet.images[0].url!} 
             ></Image>
             <div className="flex flex-col w-full justify-end relative h-[350px]">
               <div className="bg-opacity-40 bg-black font-semibold px-2 ">
