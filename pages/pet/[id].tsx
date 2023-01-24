@@ -17,9 +17,9 @@ import { useRouter } from "next/router";
 import type { Pet } from "prisma/types";
 import { deletePetConfirmation } from "utils/confirmationAlerts";
 
-type Props = { pet: Pet; user: User };
+type Props = { pet: Pet };
 
-const ViewPost = ({ pet, user }: Props) => {
+const ViewPost = ({ pet }: Props) => {
   const router = useRouter();
   const { data } = useSession();
 
@@ -29,7 +29,7 @@ const ViewPost = ({ pet, user }: Props) => {
         <div className="flex flex-col">
           <div className="flex items-center mb-2">
             <Image
-              alt={user.name}
+              alt={pet.user.name}
               className="rounded-3xl"
               width={40}
               height={40}
