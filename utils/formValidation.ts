@@ -44,8 +44,8 @@ export const PetSchema = Yup.object().shape({
   birthYear: Yup.string()
     .matches(/^\d{4}$/, "Must be a valid year")
     .required(),
-  animalId: Yup.string().length(24).required(),
-  breedId: Yup.string().length(24).required(),
+  animalId: Yup.string().length(25).required(),
+  breedId: Yup.string().length(25).required(),
   country: Yup.string().min(2).max(100).required(),
   region: Yup.string().min(2).max(100).required(),
   images: validateImage

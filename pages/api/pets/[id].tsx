@@ -24,10 +24,12 @@ export default async function handler(
   }
 
   if (req.method === "PATCH") {
+    const { animal, breed, images, ...data } = req.body;
+
     const user = await getUser(req, res);
     const pet = await prisma.pet.findUnique({ where: { id } });
 
-    if (user?.id !== pet?.userId) {
+    if (!user || user?.id !== pet?.userId) {
       response.error = "login required";
       res.status(401);
       return res.json(response);
@@ -37,12 +39,19 @@ export default async function handler(
       const pet = await prisma.pet.update({
         where: { id },
         data: {
-          ...req.body,
-          id: undefined,
+          ...data,
+          images: images && {
+            createMany: {
+              data: images?.map((image: string) => {
+                return { url: image, userId: user.id };
+              }),
+            },
+          },
         },
       });
       response.data = pet;
     } catch (error: any) {
+      console.log(error)
       response.error = error.message;
       res.status(500);
     }

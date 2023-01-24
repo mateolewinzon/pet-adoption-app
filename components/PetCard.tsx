@@ -28,7 +28,7 @@ export const PetCard = ({ pet }: Props) => {
           </div>
 
           <div className="relative">
-            <Image objectFit="cover" layout="fill" src={pet.images[0]}></Image>
+            <Image objectFit="cover" layout="fill" src={pet.images[0].url}></Image>
             <div className="flex flex-col w-full justify-end relative h-[350px]">
               <div className="bg-opacity-40 bg-black font-semibold px-2 ">
                 <SubHeading as={"h3"} className="text-white line-clamp-2">

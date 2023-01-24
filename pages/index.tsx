@@ -3,7 +3,7 @@ import { Container, PetCard, PetFilters } from "components";
 import { getPets } from "service/pets";
 import usePets from "service/usePets";
 import type { GetServerSideProps } from "next";
-import type { PetWithUser } from "prisma/types";
+import type { Pet } from "prisma/types";
 import { SWRConfig } from "swr";
 
 type Props = {
@@ -20,7 +20,7 @@ const BrowsePets = () => {
       <div className="grid sm:grid-cols-3 gap-6">
         {error && "An error occurred when fetching pets"}
         {pets?.length === 0 && "No pets found"}
-        {pets?.map((pet: PetWithUser) => (
+        {pets?.map((pet: Pet) => (
           <PetCard key={pet.id} pet={pet} />
         ))}
       </div>

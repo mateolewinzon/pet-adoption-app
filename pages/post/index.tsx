@@ -40,7 +40,6 @@ const Post = ({ animals }: Props) => {
     region: "",
     sex: "male",
   };
-
   return (
     <Container>
       <Heading>Post a pet</Heading>

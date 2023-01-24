@@ -1,13 +1,13 @@
 import { Prisma, Pet as PetSchemaType } from "@prisma/client";
 
-export type Pet = PetSchemaType
 export type PetFields = Prisma.PetScalarFieldEnum
 
-export type PetWithUser = Prisma.PetGetPayload<{
+export type Pet = Prisma.PetGetPayload<{
   include: {
     user: true;
     breed: true
     animal: true
+    images: true
   };
 }>;
 

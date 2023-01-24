@@ -7,17 +7,17 @@ import {
   PetInformationSection,
   Span,
   SpanSecondary,
+  ThreeDotsDropdown
 } from "components";
-import { ThreeDotsDropdown } from "components/ThreeDotsDropdown";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import type { PetWithUser } from "prisma/types";
-import { deletePetConfirmation, deleteSuccess } from "utils/confirmationAlerts";
+import type { Pet } from "prisma/types";
+import { deletePetConfirmation } from "utils/confirmationAlerts";
 
-type Props = { pet: PetWithUser; user: User };
+type Props = { pet: Pet; user: User };
 
 const ViewPost = ({ pet, user }: Props) => {
   const router = useRouter();
@@ -57,11 +57,7 @@ const ViewPost = ({ pet, user }: Props) => {
                     text: "Delete post",
                     className: "text-red-400",
                     onClick: async () => {
-                      const confirmed = await deletePetConfirmation(pet);
-                      if (confirmed) {
-                        await router.push("/");
-                        deleteSuccess();
-                      }
+                      await deletePetConfirmation(pet);
                     },
                   },
                 ]}
@@ -81,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const pet = await prisma.pet
     .findUnique({
       where: { id: query.id as string },
-      include: { animal: true, breed: true, user: true },
+      include: { animal: true, breed: true, user: true, images: true },
     })
     .catch(() => null);
 

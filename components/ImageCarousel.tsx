@@ -3,7 +3,7 @@ import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
-  images: string[];
+  images: {url: string}[];
 };
 
 export const ImageCarousel = ({ images }: Props) => {
@@ -11,7 +11,7 @@ export const ImageCarousel = ({ images }: Props) => {
   return (
     <div className="flex flex-col">
       <div className="flex items-center relative display-inline-block">
-        <Image objectFit="cover" src={images[index]} height={600} width={600} />
+        <Image objectFit="cover" src={images[index].url} height={600} width={600} />
         <a
           className="absolute left-0"
           onClick={() => setIndex(index === 0 ? images.length - 1 : index - 1)}

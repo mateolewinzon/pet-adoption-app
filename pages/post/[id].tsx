@@ -8,6 +8,7 @@ import prisma from "lib/prisma";
 import type { AnimalWithBreeds, Pet } from "prisma/types";
 import type { GetServerSideProps } from "next";
 import type { PetFormValues as FormValues } from "utils/formTypes";
+import exclude from "utils/excludeFromQuery";
 
 type Props = { animals: AnimalWithBreeds[]; pet: Pet };
 
@@ -29,7 +30,7 @@ const EditPost = ({ animals, pet }: Props) => {
       setLoading(false);
     }
   };
-
+  console.log(pet)
   const initialValues: FormValues = {
     ...pet,
     images: undefined,
@@ -92,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   const animals = await prisma.animal.findMany({ include: { breeds: true } });
-
+  console.log(pet);
   return {
     props: {
       animals: JSON.parse(JSON.stringify(animals)),
