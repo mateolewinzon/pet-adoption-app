@@ -9,10 +9,10 @@ import {
   FormSelectField,
 } from "components";
 import type { PetFormValues as FormValues } from "utils/formTypes";
-import type { AnimalWithBreeds } from "prisma/types";
+import type { Animal } from "prisma/types";
 
 type Props = {
-  animals: AnimalWithBreeds[];
+  animals: Animal[];
   error: string | null;
   isLoading: boolean;
   handleSubmit: (values: FormValues) => any;

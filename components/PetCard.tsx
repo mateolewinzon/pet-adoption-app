@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Span, SpanSecondary, SubHeading } from "components";
-import type { PetWithUser } from "prisma/types";
+import type { Pet } from "prisma/types";
 import Link from "next/link";
 
 type Props = {
-  pet: PetWithUser;
+  pet: Pet;
 };
 
 export const PetCard = ({ pet }: Props) => {

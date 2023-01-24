@@ -5,10 +5,10 @@ import { postPet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
 import prisma from "lib/prisma";
 import type { GetStaticProps } from "next";
-import type { AnimalWithBreeds } from "prisma/types";
+import type { Animal } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
 
-type Props = { animals: AnimalWithBreeds[] };
+type Props = { animals: Animal[] };
 
 const Post = ({ animals }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);

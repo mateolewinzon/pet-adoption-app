@@ -3,12 +3,12 @@ import { Container, Heading, ProfileForm, Span } from "components";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { ProfileSchema } from "utils/formValidation";
 import type { GetServerSideProps } from "next";
-import type { UserWithPets } from "prisma/types";
+import type { User } from "prisma/types";
 import type { ProfileFormValues as FormValues } from "utils/formTypes";
 import { updateProfile } from "service/profile";
 
 type Props = {
-  user: UserWithPets;
+  user: User;
 };
 
 const Profile = ({ user }: Props) => {

@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import fetcher from "utils/fetch";
 import { getQueryParams } from "utils/getQueryParams";
-import type { PetFields, PetWithUser } from "prisma/types";
+import type { PetFields } from "prisma/types";
 
 const usePets = (
   query: { [key in PetFields]?: string } | null,

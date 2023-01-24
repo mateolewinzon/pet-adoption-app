@@ -1,8 +1,8 @@
 import { SubHeading, TableRow } from "components";
 import capitalize from "utils/capitalize";
-import type { PetWithUser } from "prisma/types";
+import type { Pet } from "prisma/types";
 
-export const PetInformationSection = ({ pet }: { pet: PetWithUser }) => 
+export const PetInformationSection = ({ pet }: { pet: Pet }) => 
 
 <table className="mt-5">
 <thead>

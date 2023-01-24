@@ -5,12 +5,11 @@ import { useState } from "react";
 import { updatePet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
 import prisma from "lib/prisma";
-import type { AnimalWithBreeds, Pet } from "prisma/types";
+import type { Animal, Pet } from "prisma/types";
 import type { GetServerSideProps } from "next";
 import type { PetFormValues as FormValues } from "utils/formTypes";
-import exclude from "utils/excludeFromQuery";
 
-type Props = { animals: AnimalWithBreeds[]; pet: Pet };
+type Props = { animals: Animal[]; pet: Pet };
 
 const EditPost = ({ animals, pet }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);

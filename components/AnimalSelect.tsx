@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { FormSelectField } from "components";
 import { useFormikContext } from "formik";
-import type { AnimalWithBreeds } from "prisma/types";
+import type { Animal } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
 import capitalize from "utils/capitalize";
 
 type Props = {
-  animals: AnimalWithBreeds[];
+  animals: Animal[];
 };
 
 export const AnimalSelect = ({ animals }: Props) => {
