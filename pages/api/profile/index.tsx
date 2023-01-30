@@ -27,7 +27,6 @@ export default async function handler(
       response.data = updatedUser;
     } catch (error: any) {
       res.status(500)
-      console.log(error)
       response.error = error.message;
     }
   }

@@ -51,7 +51,14 @@ export const PetSchema = Yup.object().shape({
   breedId: Yup.string().length(25).required(),
   country: Yup.string().min(2).max(100).required(),
   region: Yup.string().min(2).max(100).required(),
-  images: Yup.array().of(Yup.object()).min(1).max(5),
+  images: Yup.array()
+    .min(1, "Upload at least one image")
+    .max(5, "Upload up to 5 images")
+    .test(
+      "containsLoading",
+      "Please wait until images are uploaded",
+      (images) => !images!.some((image) => image === null)
+    ),
 });
 
 export const ProfileSchema = Yup.object().shape({

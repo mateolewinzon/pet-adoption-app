@@ -38,7 +38,7 @@ export const PetForm = ({
       {({ setFieldValue, values }) => (
         <Form>
           <fieldset
-            className={`${isLoading ? "text-gray-400" : ''}`}
+            className={`${isLoading ? "text-gray-400" : ""}`}
             disabled={isLoading}
           >
             <FormTextField
