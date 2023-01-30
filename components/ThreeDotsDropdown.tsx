@@ -11,7 +11,6 @@ export const ThreeDotsDropdown = ({ items }: Props) => {
   const wrapperRef = useRef(null);
 
   useOutsideClickOrEsc(wrapperRef, () => {
-    console.log('reaadas')
       setShowMenu(false);
   });
 

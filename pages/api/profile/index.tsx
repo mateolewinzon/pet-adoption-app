@@ -11,7 +11,6 @@ export default async function handler(
     data: null,
     error: null,
   };
-
   if (req.method === "PATCH") {
     const user = await getUser(req, res);
 

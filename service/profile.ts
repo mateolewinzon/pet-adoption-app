@@ -1,21 +1,21 @@
 import { patch } from "./privateApi";
-import { uploadImages } from "./uploadImage";
-import type { ProfileFormValues as FormValues } from "utils/formTypes";
+import { uploadImages } from "lib/cloudinary";
 
-export const updateProfile = async (body: FormValues) => {
-  let image: undefined | string;
-
-  if (body.image) {
-    try {
-      const uploadedImages = await uploadImages(body.image!);
-      image = uploadedImages[0];
-    } catch (e) {
-      return {
-        error: "An error occurred when uploading profile picture.",
-      };
-    }
+export const uploadProfilePicture = async (file: FileList) => {
+  try {
+    const url = await uploadImages(file);
+    return { data: [{ url: url[0] }] };
+  } catch (error) {
+    return { error };
   }
+};
 
-  const data = await patch("profile", { ...body, image: image });
+export const updateProfile = async (body: {
+  name: string;
+  phone: string;
+  contactInfo: string;
+  image: string
+}) => {
+  const data = await patch("profile", body);
   return data;
 };

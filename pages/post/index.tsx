@@ -16,17 +16,17 @@ const Post = ({ animals }: Props) => {
   const router = useRouter();
 
   const handleSubmit = async (values: FormValues) => {
-    setLoading(true);
-    setError(null);
-    const { data, error } = await postPet(values);
+      setLoading(true);
+      setError(null);
+      const { data, error } = await postPet(values);
 
-    if (data) {
-      router.push(`/pet/${data.id}`);
-    }
-    if (error) {
-      setError("An unexpected error occurred");
-      setLoading(false);
-    }
+      if (data) {
+        router.push(`/pet/${data.id}`);
+      }
+      if (error) {
+        setError("An unexpected error occurred");
+        setLoading(false);
+      }
   };
 
   const initialValues: FormValues = {
@@ -35,7 +35,7 @@ const Post = ({ animals }: Props) => {
     birthYear: "",
     animalId: animals[1].id,
     breedId: "",
-    images: undefined,
+    images: [],
     country: "",
     region: "",
     sex: "male",

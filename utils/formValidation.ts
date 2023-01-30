@@ -1,6 +1,10 @@
 import * as Yup from "yup";
 
-function checkFileSize(files?: File[]): boolean {
+const checkRequired = (files: File[]) => files.length !== 0;
+
+const checkNumberOfFiles = (files: File[]) => files.length < 6;
+
+const checkFileSize = (files: File[]): boolean => {
   let valid = true;
   if (files) {
     Array.from(files)?.forEach((file: File) => {
@@ -11,9 +15,9 @@ function checkFileSize(files?: File[]): boolean {
     });
   }
   return valid;
-}
+};
 
-function checkImageFormat(files?: File[]): boolean {
+const checkImageFormat = (files: File[]): boolean => {
   let valid = true;
   if (files) {
     Array.from(files)?.forEach((file) => {
@@ -23,20 +27,19 @@ function checkImageFormat(files?: File[]): boolean {
     });
   }
   return valid;
-}
+};
 
-const validateImage = Yup.mixed()
-.required()
-.test(
-  "fileFormat",
-  "Images must be .jpeg, .jpg or .png",
-  checkImageFormat
-)
-.test(
-  "fileSize",
-  "Image size must be less than 5mb",
-  checkFileSize
-)
+export const validateFilesToUpload = Yup.object().shape({
+  selectedFiles: Yup.mixed()
+    .test(
+      "hasUploadedImages",
+      "You must upload at least one image",
+      checkRequired
+    )
+    .test("numberOfFiles", "Please select up to 5 images", checkNumberOfFiles)
+    .test("fileFormat", "Images must be .jpeg, .jpg or .png", checkImageFormat)
+    .test("fileSize", "Images size must be less than 5mb", checkFileSize),
+});
 
 export const PetSchema = Yup.object().shape({
   title: Yup.string().min(3).max(100).required(),
@@ -48,12 +51,12 @@ export const PetSchema = Yup.object().shape({
   breedId: Yup.string().length(25).required(),
   country: Yup.string().min(2).max(100).required(),
   region: Yup.string().min(2).max(100).required(),
-  images: validateImage
+  images: Yup.array().of(Yup.object()).min(1).max(5),
 });
 
 export const ProfileSchema = Yup.object().shape({
   name: Yup.string().min(3).max(100).required(),
   contactInfo: Yup.string().min(10).max(500),
   phone: Yup.string().min(5).max(100),
-  image: validateImage.withMutation((field)=>field.notRequired())
+  images: Yup.array().of(Yup.object()).min(1).max(5),
 });

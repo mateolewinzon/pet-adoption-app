@@ -1,10 +1,10 @@
-import { User } from "@prisma/client";
 import {
   ContactInformationSection,
   Container,
   Heading,
   ImageCarousel,
   PetInformationSection,
+  ProfilePicture,
   Span,
   SpanSecondary,
   ThreeDotsDropdown,
@@ -12,10 +12,10 @@ import {
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import type { Pet } from "prisma/types";
-import { deletePetConfirmation } from "utils/confirmationAlerts";
+import { deletePet } from "service/pets";
+import { confirmDangerousAction } from "utils/alerts";
 
 type Props = { pet: Pet };
 
@@ -28,13 +28,7 @@ const ViewPost = ({ pet }: Props) => {
       <div className="sm:grid grid-cols-2 gap-3 width-full">
         <div className="flex flex-col">
           <div className="flex items-center mb-2">
-            <Image
-              alt={pet.user.name}
-              className="rounded-3xl"
-              width={40}
-              height={40}
-              src={pet.user.image}
-            />
+            <ProfilePicture user={pet.user} />
             <div className="flex flex-col">
               <SpanSecondary className="mx-2 text-gray-400 text-xs">
                 Owner / Shelterer
@@ -58,7 +52,18 @@ const ViewPost = ({ pet }: Props) => {
                     text: "Delete post",
                     className: "text-red-400",
                     onClick: async () => {
-                      await deletePetConfirmation(pet);
+                      await confirmDangerousAction(
+                        {
+                          title: `Are you sure you want to delete ${pet.title}?`,
+                        },
+                        async () => {
+                          const response = await deletePet(pet.id);
+                          if (!response.error) router.push("/");
+                          return response;
+                        },
+                        "Pet deleted successfully",
+                        "An error occurred when deleting pet."
+                      );
                     },
                   },
                 ]}

@@ -1,10 +1,12 @@
+import { PetImage } from "@prisma/client";
+
 export type PetFormValues = {
   title: string;
   description: string;
   birthYear: string;
   animalId: string;
   breedId: string;
-  images?: File[];
+  images: (PetImage | null)[];
   country: string;
   region: string;
   sex: string;
@@ -14,5 +16,5 @@ export type ProfileFormValues = {
   name: string;
   contactInfo: string;
   phone: string;
-  image?: File[];
+  image: ({url: string} | null )[];
 };

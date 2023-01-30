@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "lib/prisma";
-import type { Response } from "utils/fetch";
 import { getUser } from "../auth/[...nextauth]";
+import type { Response } from "utils/fetch";
+import type { PetImage } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -40,18 +41,14 @@ export default async function handler(
         where: { id },
         data: {
           ...data,
-          images: images && {
-            createMany: {
-              data: images?.map((image: string) => {
-                return { url: image, userId: user.id };
-              }),
-            },
+          images: {
+            set: [],
+            connect: images.map((i: PetImage) => ({ id: i.id })),
           },
         },
       });
       response.data = pet;
     } catch (error: any) {
-      console.log(error)
       response.error = error.message;
       res.status(500);
     }

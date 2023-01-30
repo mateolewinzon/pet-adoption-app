@@ -29,13 +29,10 @@ const EditPost = ({ animals, pet }: Props) => {
       setLoading(false);
     }
   };
-  console.log(pet)
+
   const initialValues: FormValues = {
     ...pet,
-    images: undefined,
   };
-
-  PetSchema.fields.images.withMutation((schema) => schema.notRequired());
 
   return (
     <Container>
@@ -73,6 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const pet = await prisma.pet
     .findUnique({
       where: { id: query.id as string },
+      include: { images: true },
     })
     .catch(() => null);
 
@@ -92,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   const animals = await prisma.animal.findMany({ include: { breeds: true } });
-  console.log(pet);
+
   return {
     props: {
       animals: JSON.parse(JSON.stringify(animals)),

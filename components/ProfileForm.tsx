@@ -1,6 +1,7 @@
 import { Formik, Form } from "formik";
-import { FormFileField, FormTextField, Span, FormButton } from "components";
+import { FormTextField, Span, FormButton, ImageUploader } from "components";
 import type { ProfileFormValues as FormValues } from "utils/formTypes";
+import { uploadProfilePicture } from "service/profile";
 
 type Props = {
   error: string | null;
@@ -23,12 +24,19 @@ export const ProfileForm = ({
       onSubmit={handleSubmit}
       initialValues={initialValues}
     >
+      {({ values, setFieldValue }) => (
         <Form>
           <fieldset
             className={isLoading ? "text-gray-400" : ""}
             disabled={isLoading}
           >
             <FormTextField name="name" label="Name" />
+            <ImageUploader
+              uploadImages={uploadProfilePicture}
+              limit={1}
+              setUploads={(values) => setFieldValue("image", values)}
+              uploads={values.image}
+            />
             <FormTextField name="phone" label="Phone" />
             <FormTextField
               name="contactInfo"
@@ -37,13 +45,13 @@ export const ProfileForm = ({
               isTextarea
             />
 
-            <FormFileField label="Image" name="image" />
             <div className="flex my-4">
               <FormButton text="Post" isLoading={isLoading} />
               {error && <Span className="my-1 mx-4 text-red-500">{error}</Span>}
             </div>
           </fieldset>
         </Form>
+      )}
     </Formik>
   );
 };

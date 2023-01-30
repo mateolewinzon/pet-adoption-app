@@ -4,15 +4,14 @@ import { Field } from "components";
 import type { PetFormValues } from "utils/formTypes";
 
 export const LocationSelect = () => {
-  const { setFieldValue, values, setFieldError, setFieldTouched, touched } =
+  const { setFieldValue, values, setFieldError, setFieldTouched } =
     useFormikContext<PetFormValues>();
-
   function handleChange(field: keyof PetFormValues, value: string): void {
     setFieldValue(field, value);
     setFieldTouched(field, false);
     setFieldError(field, "");
   }
-  
+
   return (
     <div className="grid grid-cols-2 gap-2">
       <Field name="country" label="Country">

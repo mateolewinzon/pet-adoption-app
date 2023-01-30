@@ -20,7 +20,10 @@ const Profile = ({ user }: Props) => {
     setLoading(true);
     setError(null);
     setSuccess(false);
-    const { data, error } = await updateProfile(values);
+    const { data, error } = await updateProfile({
+      ...values,
+      image: values.image[0]?.url || "",
+    });
     setLoading(false);
 
     if (data) {
@@ -32,10 +35,10 @@ const Profile = ({ user }: Props) => {
   };
 
   const initialValues: FormValues = {
-    name: user.name,
+    ...user,
+    image: user.image ? [{ url: user.image }] : [],
     contactInfo: user.contactInfo || "",
     phone: user.phone || "",
-    image: undefined,
   };
 
   return (
@@ -48,7 +51,9 @@ const Profile = ({ user }: Props) => {
         initialValues={initialValues}
         handleSubmit={(values) => handleSubmit(values)}
       />
-      {success && <Span className="text-green-600">Profile updated successfully</Span>}
+      {success && (
+        <Span className="text-green-600">Profile updated successfully</Span>
+      )}
     </Container>
   );
 };

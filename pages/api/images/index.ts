@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "lib/prisma";
 import { getUser } from "../auth/[...nextauth]";
 import type { Response } from "utils/fetch";
-import type { PetImage } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,7 +12,7 @@ export default async function handler(
     error: null,
   };
 
-  const { animal, breed, images, ...data } = req.body;
+  const { images } = req.body;
 
   if (req.method === "POST") {
     const user = await getUser(req, res);
@@ -25,31 +24,17 @@ export default async function handler(
     }
 
     try {
-      const pet = await prisma.pet.create({
-        data: {
-          ...data,
-          userId: user.id,
-          images: {
-            connect: images.map((i: PetImage) => ({ id: i.id })),
-          },
-        },
-      });
-      response.data = pet;
+      const savedImages = await prisma.$transaction(
+        images.map((image: string) =>
+          prisma.petImage.create({ data: { url: image } })
+        )
+      );
+
+      response.data = savedImages;
     } catch (error: any) {
       res.status(500);
     }
   }
 
-  if (req.method === "GET") {
-    try {
-      const pets = await prisma.pet.findMany({
-        where: { ...req.query },
-        include: { user: true, images: true },
-      });
-      response.data = pets;
-    } catch (error) {
-      res.status(500);
-    }
-  }
   res.json(response);
 }

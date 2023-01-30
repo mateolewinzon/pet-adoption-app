@@ -14,36 +14,35 @@ enum Sex {
   female
 }
 
-model Image {
+model PetImage {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   url       String
-  petId     String
-  userId    String
-  pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+  petId     String?
+  pet       Pet?     @relation(fields: [petId], references: [id], onDelete: Cascade)
 
   @@index([petId])
 }
 
 model Pet {
-  id          String   @id @default(cuid())
-  adopted     Boolean  @default(false)
+  id          String     @id @default(cuid())
+  adopted     Boolean    @default(false)
   birthYear   String
-  description String   @db.Text
-  title       String   @db.Text
+  description String     @db.Text
+  title       String     @db.Text
   sex         Sex
   userId      String
   animalId    String
   breedId     String
-  images      Image[]
+  images      PetImage[]
   country     String
   region      String
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  animal      Animal   @relation(fields: [animalId], references: [id])
-  breed       Breed    @relation(fields: [breedId], references: [id])
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  animal      Animal     @relation(fields: [animalId], references: [id])
+  breed       Breed      @relation(fields: [breedId], references: [id])
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([animalId])
   @@index([breedId])
@@ -98,11 +97,11 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String
-  email         String    @unique
+  email         String        @unique
   emailVerified Boolean?
-  image         String
+  image         String?
   phone         String?
   contactInfo   String?
   pets          Pet[]

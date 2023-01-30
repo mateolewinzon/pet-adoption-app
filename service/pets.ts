@@ -1,8 +1,8 @@
 import { get, patch, post, deleteRequest } from "./privateApi";
-import { uploadImages } from "./uploadImage";
 import type { PetFields } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
 import { getQueryParams } from "utils/getQueryParams";
+import { uploadImages } from "lib/cloudinary";
 
 export const getPets = async (query?: { [key in PetFields]?: string }) => {
   const data = await get(`pets${query ? `?${getQueryParams(query)}` : ""}`);
@@ -10,33 +10,21 @@ export const getPets = async (query?: { [key in PetFields]?: string }) => {
 };
 
 export const postPet = async (body: FormValues) => {
-  let images: string[] = [];
-
-  try {
-    images = await uploadImages(body.images!);
-  } catch (error) {
-    return { error: "An error occurred when uploading images" };
-  }
-
-  const data = await post("pets", { ...body, images });
+  const data = await post("pets", body);
   return data;
 };
 
 export const updatePet = async (body: FormValues, id: string) => {
-  let images: undefined | string[];
-
-  if (body.images) {
-    try {
-      images = await uploadImages(body.images);
-    } catch (error) {
-      return {
-        error: "An error occurred when uploading images",
-      };
-    }
-  }
-
-  const data = await patch(`pets/${id}`, { ...body, images: images });
+  const data = await patch(`pets/${id}`, body);
   return data;
 };
 
-export const deletePet = async (id: string) => await deleteRequest(`pets/${id}`);
+export const savePetImages = async (files: FileList) => {
+  const urls = await uploadImages(files);
+  const data = await post("images", { images: urls });
+
+  return data;
+};
+
+export const deletePet = async (id: string) =>
+  await deleteRequest(`pets/${id}`);

@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import capitalize from "utils/capitalize";
 
 type Props = {
   name: string;
@@ -19,7 +20,10 @@ export const Field = ({ name, id = name, label, children }: Props) => {
         {label}
       </label>
       {children}
-      <p className="italic text-red-500">{field.touched && field.error}</p>
+
+      {field.touched && field.error ? (
+        <p className="italic text-red-500"> {capitalize(field.error)} </p>
+      ) : null}
     </div>
   );
 };
