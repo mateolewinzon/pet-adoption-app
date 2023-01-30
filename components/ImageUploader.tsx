@@ -75,7 +75,7 @@ export function ImageUploader({
   function handleRemoveImage(key: number) {
     confirmDangerousAction(
       {
-        title: "Remove image from post",
+        title: "Remove image",
         text: "Are you sure you want to delete this image from the post? Changes will only be applied when saving.",
       },
       () => {
