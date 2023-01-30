@@ -38,7 +38,7 @@ export const PetForm = ({
       {({ setFieldValue, values }) => (
         <Form>
           <fieldset
-            className={isLoading ? "text-gray-400" : ""}
+            className={`${isLoading ? "text-gray-400" : ''}`}
             disabled={isLoading}
           >
             <FormTextField
@@ -58,7 +58,7 @@ export const PetForm = ({
               placeholder="Please include health information, personality traits, and anything you consider relevant."
               isTextarea
             />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid md:grid-cols-2 gap-2">
               <FormTextField
                 name="birthYear"
                 label="Birth year"

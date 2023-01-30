@@ -1,21 +1,22 @@
 import Image from "next/image";
-import { ProfilePicture, Span, SpanSecondary, SubHeading } from "components";
-import type { Pet } from "prisma/types";
 import Link from "next/link";
+import { ProfilePicture, Span, SpanSecondary, SubHeading } from "components";
+import type { User, Pet, PetImage } from "@prisma/client";
 
 type Props = {
-  pet: Pet;
+  pet: Pet & { images: PetImage[] };
+  author: User;
 };
 
-export const PetCard = ({ pet }: Props) => {
+export const PetCard = ({ pet, author }: Props) => {
   return (
     <Link href={`/pet/${pet.id}`}>
       <a>
         <div className="flex flex-col">
           <div className="flex items-center justify-between my-2">
             <div className="flex items-center">
-              <ProfilePicture user={pet.user} />
-              <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+              <ProfilePicture user={author} />
+              <SpanSecondary className="mx-2">{author.name}</SpanSecondary>
             </div>
             <SpanSecondary className="text-gray-500">
               {new Date(pet.createdAt).toDateString()}

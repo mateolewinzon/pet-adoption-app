@@ -21,7 +21,7 @@ const BrowsePets = () => {
         {error && "An error occurred when fetching pets"}
         {pets?.length === 0 && "No pets found"}
         {pets?.map((pet: Pet) => (
-          <PetCard key={pet.id} pet={pet} />
+          <PetCard author={pet.user} key={pet.id} pet={pet} />
         ))}
       </div>
     </>

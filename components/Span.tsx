@@ -10,7 +10,7 @@ export const Span = ({ as = 'span', children, className, ...props }: Props) => {
   return (
     <TextComponent
       as={as}
-      defaultStyles={"text-lg text-gray-dark dark:text-gray-light"}
+      defaultStyles={"text-lg text-gray-dark"}
       overrideStyles={className}
       {...props}
     >

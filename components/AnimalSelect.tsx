@@ -19,7 +19,7 @@ export const AnimalSelect = ({ animals }: Props) => {
   }, [values.animalId, currentAnimal.breeds, setFieldValue, values.breedId]);
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid md:grid-cols-2 gap-2">
       <FormSelectField
         name="animalId"
         label="Animal"

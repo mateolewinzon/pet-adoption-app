@@ -12,6 +12,6 @@ export const NavLink = ({ href, text }: Props) => {
     const isActive = router.pathname === href;
 
     return <div>
-        <Link href={href}><a><Span className={`mx-4 font-semibold ${isActive && "text-gray-100"}`}>{text}</Span></a></Link>
+        <Link href={href}><a><Span className={`mx-3 font-semibold ${isActive && "text-gray-100"}`}>{text}</Span></a></Link>
     </div>
 }

@@ -35,14 +35,14 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    
-  }
+  },
 };
 export default NextAuth(authOptions);
 
 export const getUser = async (
   req: IncomingMessage & { cookies: Partial<{ [key: string]: string }> },
-  res: ServerResponse
+  res: ServerResponse,
+  includePets: boolean = false
 ) => {
   const session = await unstable_getServerSession(req, res, authOptions);
 
@@ -52,6 +52,7 @@ export const getUser = async (
 
   const user = await prisma.user.findUnique({
     where: { email: session?.user?.email! },
+    include: { pets: { include: { images: includePets } } },
   });
 
   return user;

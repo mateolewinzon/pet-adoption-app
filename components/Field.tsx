@@ -12,7 +12,7 @@ export const Field = ({ name, id = name, label, children }: Props) => {
   const { 1: field } = useField(id);
 
   return (
-    <div className="my-3">
+    <div className="my-3 max-w-[90vw]">
       <label
         className="block text-gray-700 uppercase font-semibold mb-2"
         htmlFor={id}

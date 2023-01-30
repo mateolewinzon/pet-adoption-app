@@ -88,29 +88,31 @@ export function ImageUploader({
 
   return (
     <Field name={id} label="Images">
-      <div className="flex gap-2">
-        {uploads.map((upload, key) =>
-          !upload ? (
-            <Spinner key={key} />
-          ) : (
-            <ImageThumbnail
-              src={upload.url}
-              key={key}
-              onClick={() => handleRemoveImage(key)}
-            />
-          )
-        )}
-        <AddImageButton />
+      <div className="overflow-x-auto py-2">
+        <div className="flex gap-2">
+          {uploads.map((upload, key) =>
+            !upload ? (
+              <Spinner key={key} />
+            ) : (
+              <ImageThumbnail
+                src={upload.url}
+                key={key}
+                onClick={() => handleRemoveImage(key)}
+              />
+            )
+          )}
+          <AddImageButton />
+        </div>
+        <input
+          hidden
+          multiple={limit > 1 && true}
+          type="file"
+          onChange={handleFileSelect}
+          className="w-full bg-gray-50 rounded p-2 mb-2"
+          id={id}
+          name={id}
+        />
       </div>
-      <input
-        hidden
-        multiple={limit > 1 && true}
-        type="file"
-        onChange={handleFileSelect}
-        className="w-full bg-gray-50 rounded p-2 mb-2"
-        id={id}
-        name={id}
-      />
     </Field>
   );
 }

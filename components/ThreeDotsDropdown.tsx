@@ -11,7 +11,7 @@ export const ThreeDotsDropdown = ({ items }: Props) => {
   const wrapperRef = useRef(null);
 
   useOutsideClickOrEsc(wrapperRef, () => {
-      setShowMenu(false);
+    setShowMenu(false);
   });
 
   return (
@@ -36,10 +36,10 @@ export const ThreeDotsDropdown = ({ items }: Props) => {
       {showMenu && (
         <div
           id="dropdown"
-          className="absolute right-0 xl:right-auto z-10 bg-white divide-y divide-gray-100 rounded shadow w-40 dark:bg-gray-700"
+          className="absolute right-0 xl:right-auto z-10 bg-white divide-y divide-gray-100 rounded shadow w-40"
         >
           <ul
-            className="text-sm text-gray-700 dark:text-gray-200"
+            className="text-sm text-gray-700 "
             aria-labelledby="dropdownDefaultButton"
           >
             {items.map((item, key) => (
@@ -48,7 +48,7 @@ export const ThreeDotsDropdown = ({ items }: Props) => {
                   onClick={() => item.onClick()}
                   href="#"
                   className={twMerge(
-                    `block font-semibold px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`,
+                    `block font-semibold px-4 py-2 hover:bg-gray-100 `,
                     item.className
                   )}
                 >

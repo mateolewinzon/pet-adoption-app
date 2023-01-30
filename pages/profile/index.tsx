@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Container, Heading, ProfileForm, Span } from "components";
+import { Container, Heading, PetCard, ProfileForm, Span } from "components";
 import { getUser } from "pages/api/auth/[...nextauth]";
 import { ProfileSchema } from "utils/formValidation";
 import type { GetServerSideProps } from "next";
-import type { User } from "prisma/types";
+import type { Pet, User } from "prisma/types";
 import type { ProfileFormValues as FormValues } from "utils/formTypes";
 import { updateProfile } from "service/profile";
 
 type Props = {
-  user: User;
+  user: User
 };
 
 const Profile = ({ user }: Props) => {
@@ -54,12 +54,18 @@ const Profile = ({ user }: Props) => {
       {success && (
         <Span className="text-green-600">Profile updated successfully</Span>
       )}
+      <Heading>Your posts</Heading>
+      <div className="grid md:grid-cols-3">
+        {user.pets.map((pet, key) => (
+          <PetCard author={user} pet={pet} key={key} />
+        ))}
+      </div>{" "}
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const user = await getUser(req, res);
+  const user = await getUser(req, res, true);
 
   if (!user) {
     return {
@@ -71,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   return {
-    props: { user },
+    props: { user: JSON.parse(JSON.stringify(user)) },
   };
 };
 
