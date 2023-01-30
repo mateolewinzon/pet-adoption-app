@@ -35,7 +35,7 @@ const Profile = ({ user }: Props) => {
   };
 
   const initialValues: FormValues = {
-    ...user,
+    name: user.name,
     image: user.image ? [{ url: user.image }] : [],
     contactInfo: user.contactInfo || "",
     phone: user.phone || "",
