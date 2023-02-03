@@ -38,6 +38,7 @@ const Post = ({ animals }: Props) => {
     images: [],
     country: "",
     region: "",
+    city: "",
     sex: "male",
   };
   return (
