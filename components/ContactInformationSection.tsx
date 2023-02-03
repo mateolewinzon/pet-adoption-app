@@ -17,8 +17,6 @@ export const ContactInformationSection = ({ pet }: { pet: Pet }) => (
         title="Additional contact information"
         info={pet.user.contactInfo || "-"}
       />
-      <TableRow title="Country" info={pet.country} />
-      <TableRow title="Region" info={pet.region} />
     </tbody>
   </table>
 );

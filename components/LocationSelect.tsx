@@ -1,6 +1,6 @@
 import { useFormikContext } from "formik";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import { Field } from "components";
+import { Field, FormTextField } from "components";
 import type { PetFormValues } from "utils/formTypes";
 
 export const LocationSelect = () => {
@@ -31,6 +31,7 @@ export const LocationSelect = () => {
           }}
         />
       </Field>
+      <FormTextField name="city" label="City"/>
     </div>
   );
 };

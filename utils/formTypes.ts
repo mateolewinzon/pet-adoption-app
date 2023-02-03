@@ -9,6 +9,7 @@ export type PetFormValues = {
   images: (PetImage | null)[];
   country: string;
   region: string;
+  city: string;
   sex: string;
 };
 

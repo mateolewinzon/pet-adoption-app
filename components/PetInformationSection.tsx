@@ -19,6 +19,7 @@ export const PetInformationSection = ({ pet }: { pet: Pet }) =>
   <TableRow title="Birth Year" info={pet.birthYear} />
   <TableRow title="Country" info={pet.country} />
   <TableRow title="Region" info={pet.region} />
+  <TableRow title="City" info={pet.city}/>
   <TableRow
     title="Has been adopted"
     info={pet.adopted ? "Yes" : "No"}
