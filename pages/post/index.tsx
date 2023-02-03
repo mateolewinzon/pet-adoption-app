@@ -16,17 +16,17 @@ const Post = ({ animals }: Props) => {
   const router = useRouter();
 
   const handleSubmit = async (values: FormValues) => {
-      setLoading(true);
-      setError(null);
-      const { data, error } = await postPet(values);
+    setLoading(true);
+    setError(null);
+    const { data, error } = await postPet(values);
 
-      if (data) {
-        router.push(`/pet/${data.id}`);
-      }
-      if (error) {
-        setError("An unexpected error occurred");
-        setLoading(false);
-      }
+    if (data) {
+      router.push(`/pet/${data.id}`);
+    }
+    if (error) {
+      setError("An unexpected error occurred");
+      setLoading(false);
+    }
   };
 
   const initialValues: FormValues = {
@@ -34,7 +34,7 @@ const Post = ({ animals }: Props) => {
     description: "",
     birthYear: "",
     animalId: animals[1].id,
-    breedId: "",
+    breedId: animals[1].breeds.find((b) => b.name === "unknown_dog")?.id || "",
     images: [],
     country: "",
     region: "",
@@ -57,11 +57,13 @@ const Post = ({ animals }: Props) => {
 
 export default Post;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const animals = await prisma.animal.findMany({ include: { breeds: true } });
   return {
     props: {
       animals: JSON.parse(JSON.stringify(animals)),
+      lngDict,
     },
   };
 };

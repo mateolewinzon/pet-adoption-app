@@ -79,7 +79,11 @@ const ViewPost = ({ pet }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  locale,
+}) => {
+  const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const pet = await prisma.pet
     .findUnique({
       where: { id: query.id as string },
@@ -92,7 +96,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 
   return {
-    props: { pet: JSON.parse(JSON.stringify(pet)) },
+    props: { pet: JSON.parse(JSON.stringify(pet)), lngDict },
   };
 };
 

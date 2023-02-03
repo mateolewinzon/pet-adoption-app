@@ -55,7 +55,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
   query,
+  locale
 }) => {
+  const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const user = await getUser(req, res);
 
   if (!user) {
@@ -95,6 +97,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       animals: JSON.parse(JSON.stringify(animals)),
       pet: JSON.parse(JSON.stringify(pet)),
+      lngDict
     },
   };
 };

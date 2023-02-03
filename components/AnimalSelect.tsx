@@ -15,7 +15,7 @@ export const AnimalSelect = ({ animals }: Props) => {
   
   useEffect(() => {
     if (!currentAnimal.breeds.some((breed) => breed.id === values.breedId))
-      setFieldValue("breedId", "");
+      setFieldValue("breedId", currentAnimal.breeds.find(b=>b.name.includes('unknown'))?.id);
   }, [values.animalId, currentAnimal.breeds, setFieldValue, values.breedId]);
 
   return (

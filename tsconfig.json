@@ -34,7 +34,8 @@
       ],
       "lib/*": [
         "lib/*"
-      ]
+      ],
+      "locales/*": ["locales/*"]
     }
   },
   "include": [

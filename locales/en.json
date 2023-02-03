@@ -1,4 +1,13 @@
 {
+    "nav": {
+        "browse": "Browse",
+        "post": "Post a Pet",
+        "profile": "Profile",
+        "logout": "Logout"
+      },
+    "browse": {
+        "no_results": "No pets found."
+    },
     "signin": {
         "messages": {
             "signin_required_post": "You must sign in to post a pet",

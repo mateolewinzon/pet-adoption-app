@@ -1,8 +1,17 @@
 {
-    "signin": {
-        "messages": {
-            "signin_required_post": "Iniciá sesión para publicar una mascota",
-            "signin_required_profile": "Iniciá sesión para ver tu perfil"
-        }
+  "nav": {
+    "browse": "Buscar",
+    "post": "Publicar una mascota",
+    "profile": "Mi Perfil",
+    "logout": "Cerrar sesión"
+  },
+  "browse": {
+    "no_results": "No se encontraron mascotas."
+  },
+  "signin": {
+    "messages": {
+      "signin_required_post": "Iniciá sesión para publicar una mascota",
+      "signin_required_profile": "Iniciá sesión para ver tu perfil"
     }
+  }
 }

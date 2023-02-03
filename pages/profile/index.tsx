@@ -8,7 +8,7 @@ import type { ProfileFormValues as FormValues } from "utils/formTypes";
 import { updateProfile } from "service/profile";
 
 type Props = {
-  user: User
+  user: User;
 };
 
 const Profile = ({ user }: Props) => {
@@ -64,7 +64,12 @@ const Profile = ({ user }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  locale,
+}) => {
+  const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const user = await getUser(req, res, true);
 
   if (!user) {
@@ -77,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   return {
-    props: { user: JSON.parse(JSON.stringify(user)) },
+    props: { user: JSON.parse(JSON.stringify(user)), lngDict },
   };
 };
 
