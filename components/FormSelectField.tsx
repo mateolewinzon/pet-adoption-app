@@ -1,28 +1,31 @@
 import { Field as FormikField } from "formik";
 import { Field } from "components";
+import { useI18n } from "next-localization";
 
 type Props = {
   name: string;
   id?: string;
-  label: string;
+  labelId: string;
   type?: string;
   options: Option[];
 };
 
 type Option = {
   value: string;
-  text: string;
+  textId: string;
 };
 
 export const FormSelectField = ({
   name,
   id = name,
-  label,
+  labelId,
   type = "text",
   options,
 }: Props) => {
+  const i18n = useI18n();
+
   return (
-    <Field label={label} name={name}>
+    <Field labelId={labelId} name={name}>
       <FormikField
         type={type}
         component={"select"}
@@ -32,7 +35,7 @@ export const FormSelectField = ({
       >
         {options.map((option: Option, key) => (
           <option key={key} value={option.value}>
-            {option.text}
+            {i18n.t(option.textId)}
           </option>
         ))}
       </FormikField>

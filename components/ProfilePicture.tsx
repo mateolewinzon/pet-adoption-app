@@ -12,6 +12,7 @@ export const ProfilePicture = ({ user }: Props) => {
       className="rounded-3xl"
       width={40}
       height={40}
+      objectFit='cover'
       src={user.image || "/pp_placeholder.png"}
     />
   );

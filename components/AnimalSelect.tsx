@@ -3,7 +3,6 @@ import { FormSelectField } from "components";
 import { useFormikContext } from "formik";
 import type { Animal } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
-import capitalize from "utils/capitalize";
 
 type Props = {
   animals: Animal[];
@@ -22,28 +21,25 @@ export const AnimalSelect = ({ animals }: Props) => {
     <div className="grid md:grid-cols-2 gap-2">
       <FormSelectField
         name="animalId"
-        label="Animal"
+        labelId="pet.animal"
         options={animals.map((a) => {
           return {
             value: a.id,
-            text: capitalize(a.name),
+            textId: `animals.${a.name}`,
           };
         })}
       />
       <FormSelectField
         name="breedId"
-        label="Breed"
+        labelId="pet.breed"
         options={[
-          {
-            value: "",
-            text: "Select one",
-          },
+         
           ...animals
-            .filter((a) => a.id === values.animalId)[0]
+            .find((a) => a.id === values.animalId)!
             .breeds.map((b) => {
               return {
                 value: b.id,
-                text: capitalize(b.name),
+                textId: `breeds.${b.name}`,
               };
             }),
         ]}

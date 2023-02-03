@@ -27,11 +27,12 @@ export const PetCard = ({ pet, author }: Props) => {
             <Image
               alt={pet.title}
               objectFit="cover"
+              className="rounded-xl"
               layout="fill"
               src={pet.images[0].url}
             ></Image>
             <div className="flex flex-col w-full justify-end relative h-[350px]">
-              <div className="bg-opacity-40 bg-black font-semibold px-2 ">
+              <div className="bg-opacity-40 bg-black font-semibold px-2 rounded-b-xl">
                 <SubHeading as={"h3"} className="text-white line-clamp-2">
                   {pet.title}
                 </SubHeading>

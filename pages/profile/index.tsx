@@ -55,7 +55,7 @@ const Profile = ({ user }: Props) => {
         <Span className="text-green-600">Profile updated successfully</Span>
       )}
       <Heading>Your posts</Heading>
-      <div className="grid md:grid-cols-3">
+      <div className="grid md:grid-cols-3 gap-3">
         {user.pets.map((pet, key) => (
           <PetCard author={user} pet={pet} key={key} />
         ))}

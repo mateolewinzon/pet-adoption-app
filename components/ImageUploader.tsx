@@ -87,7 +87,7 @@ export function ImageUploader({
   }
 
   return (
-    <Field name="images" label="Images">
+    <Field name="images" labelId="pet.images">
       <div className="overflow-x-auto py-2">
         <div className="flex gap-2">
           {uploads.map((upload, key) =>

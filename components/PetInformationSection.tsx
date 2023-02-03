@@ -1,28 +1,28 @@
 import { SubHeading, TableRow } from "components";
 import capitalize from "utils/capitalize";
 import type { Pet } from "prisma/types";
+import { useI18n } from "next-localization";
 
-export const PetInformationSection = ({ pet }: { pet: Pet }) => 
-
-<table className="mt-5">
-<thead>
-  <tr>
-    <th className="pb-5 text-start">
-      <SubHeading>Pet Information</SubHeading>
-    </th>
-  </tr>
-</thead>
-<tbody className="bg-white">
-  <TableRow title="Animal" info={capitalize(pet.animal.name)} />
-  <TableRow title="Breed" info={capitalize(pet.breed.name)} />
-  <TableRow title="Sex" info={capitalize(pet.sex)} />
-  <TableRow title="Birth Year" info={pet.birthYear} />
-  <TableRow title="Country" info={pet.country} />
-  <TableRow title="Region" info={pet.region} />
-  <TableRow title="City" info={pet.city}/>
-  <TableRow
-    title="Has been adopted"
-    info={pet.adopted ? "Yes" : "No"}
-  />
-</tbody>
-</table>
+export const PetInformationSection = ({ pet }: { pet: Pet }) => {
+  const i18n = useI18n();
+  return (
+    <div className="flex flex-col">
+      <SubHeading className="my-4">{i18n.t("pet.pet_information")}</SubHeading>
+      <table className="w-full">
+        <tbody className="bg-white">
+          <TableRow titleId="pet.animal" info={capitalize(pet.animal.name)} />
+          <TableRow titleId="pet.breed" info={capitalize(pet.breed.name)} />
+          <TableRow titleId="pet.sex" info={capitalize(pet.sex)} />
+          <TableRow titleId="pet.birth" info={pet.birthYear} />
+          <TableRow titleId="pet.country" info={pet.country} />
+          <TableRow titleId="pet.region" info={pet.region} />
+          <TableRow titleId="pet.city" info={pet.city} />
+          <TableRow
+            titleId="pet.has_been_adopted"
+            info={pet.adopted ? "Yes" : "No"}
+          />
+        </tbody>
+      </table>
+    </div>
+  );
+};

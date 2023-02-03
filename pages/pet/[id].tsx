@@ -12,6 +12,7 @@ import {
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
+import { useI18n } from "next-localization";
 import { useRouter } from "next/router";
 import type { Pet } from "prisma/types";
 import { deletePet } from "service/pets";
@@ -22,6 +23,7 @@ type Props = { pet: Pet };
 const ViewPost = ({ pet }: Props) => {
   const router = useRouter();
   const { data } = useSession();
+  const i18n = useI18n()
 
   return (
     <Container title={`Pets Adoption - ${pet.title}`}>
@@ -31,7 +33,7 @@ const ViewPost = ({ pet }: Props) => {
             <ProfilePicture user={pet.user} />
             <div className="flex flex-col">
               <SpanSecondary className="mx-2 text-gray-400 text-xs">
-                Owner / Shelterer
+                {i18n.t("pet.owner_shelter")}
               </SpanSecondary>
               <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
             </div>
@@ -45,11 +47,11 @@ const ViewPost = ({ pet }: Props) => {
               <ThreeDotsDropdown
                 items={[
                   {
-                    text: "Edit post",
+                    text: i18n.t("pet.edit_post"),
                     onClick: () => router.push(`/post/${pet.id}`),
                   },
                   {
-                    text: "Delete post",
+                    text: i18n.t("pet.delete_post"),
                     className: "text-red-400",
                     onClick: async () => {
                       await confirmDangerousAction(
@@ -90,7 +92,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       include: { animal: true, breed: true, user: true, images: true },
     })
     .catch(() => null);
-
   if (!pet) {
     return { notFound: true };
   }

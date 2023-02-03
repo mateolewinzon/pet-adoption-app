@@ -30,23 +30,23 @@ export const ProfileForm = ({
             className={isLoading ? "text-gray-400" : ""}
             disabled={isLoading}
           >
-            <FormTextField name="name" label="Name" />
+            <FormTextField name="name" labelId="profile.name" />
             <ImageUploader
               uploadImages={uploadProfilePicture}
               limit={1}
               setUploads={(values) => setFieldValue("image", values)}
               uploads={values.image}
             />
-            <FormTextField name="phone" label="Phone" />
+            <FormTextField name="phone" labelId="profile.phone" />
             <FormTextField
               name="contactInfo"
-              label="Contact Info"
-              placeholder="Consider adding any additional contact information in this field"
+              labelId="profile.contact_info"
+              placeholderId="profile.contact_info_placeholder"
               isTextarea
             />
 
             <div className="flex my-4">
-              <FormButton text="Post" isLoading={isLoading} />
+              <FormButton textId="profile.save" isLoading={isLoading} />
               {error && <Span className="my-1 mx-4 text-red-500">{error}</Span>}
             </div>
           </fieldset>

@@ -11,6 +11,7 @@ import {
 import type { PetFormValues as FormValues } from "utils/formTypes";
 import type { Animal } from "prisma/types";
 import { savePetImages } from "service/pets";
+import { useI18n } from "next-localization";
 
 type Props = {
   animals: Animal[];
@@ -29,6 +30,7 @@ export const PetForm = ({
   initialValues,
   validationSchema,
 }: Props) => {
+const i18n = useI18n()
   return (
     <Formik
       validationSchema={validationSchema}
@@ -43,8 +45,7 @@ export const PetForm = ({
           >
             <FormTextField
               name="title"
-              label="Title / Name"
-              placeholder="Fluffy"
+              labelId="pet.title"
             />
             <ImageUploader
               uploadImages={savePetImages}
@@ -54,29 +55,29 @@ export const PetForm = ({
             />
             <FormTextField
               name="description"
-              label="Description"
-              placeholder="Please include health information, personality traits, and anything you consider relevant."
+              labelId="pet.description"
+              placeholderId="pet.description_placeholder"
               isTextarea
             />
             <div className="grid md:grid-cols-2 gap-2">
               <FormTextField
                 name="birthYear"
-                label="Birth year"
-                placeholder="2022"
+                labelId="pet.birth"
+                placeholderId="pet.birth_placeholder"
               />
               <FormSelectField
-                label="Sex"
+                labelId="pet.sex"
                 name="sex"
                 options={[
-                  { text: "Male", value: "male" },
-                  { text: "Female", value: "female" },
+                  { textId: "sex.male", value: "male" },
+                  { textId: "sex.female", value: "female" },
                 ]}
               />
             </div>
             <AnimalSelect animals={animals} />
             <LocationSelect />
             <div className="flex my-4">
-              <FormButton text="Post" isLoading={isLoading} />
+              <FormButton textId="pet.post" isLoading={isLoading} />
               {error && <Span className="my-1 mx-4 text-red-500">{error}</Span>}
             </div>
           </fieldset>
