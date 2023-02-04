@@ -59,7 +59,7 @@ const Profile = ({ user }: Props) => {
         {user.pets.map((pet, key) => (
           <PetCard author={user} pet={pet} key={key} />
         ))}
-      </div>{" "}
+      </div>
     </Container>
   );
 };
