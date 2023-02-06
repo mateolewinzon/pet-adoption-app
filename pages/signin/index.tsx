@@ -3,9 +3,8 @@ import {
   Heading,
   SocialSignInButton,
   Span,
-  SubHeading,
+  Logo,
 } from "components";
-import { Logo } from "components/Logo";
 import providers from "config/authProviders";
 import type { GetServerSideProps } from "next";
 import { unstable_getServerSession } from "next-auth";
@@ -30,8 +29,8 @@ export default function Signin() {
             {i18n.t("signin.welcome_text")}
           </Span>
           <div className="flex flex-col my-4">
-            {providers.map((provider) => (
-              <SocialSignInButton provider={provider} />
+            {providers.map((provider, key) => (
+              <SocialSignInButton key={key} provider={provider} />
             ))}
           </div>
         </div>

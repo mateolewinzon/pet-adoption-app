@@ -9,7 +9,7 @@ export const ImageThumbnail = ({
     onClick: () => void;
   }) => (
     <div className="relative">
-      <Image src={src} objectFit="cover" layout="fill" />
+      <Image alt='thumbnail' src={src}  fill />
       <div className="relative flex justify-center w-[70px] h-[74px]">
         <div className="flex bg-neutral-800 bg-opacity-50 w-full opacity-0 hover:opacity-100">
           <svg

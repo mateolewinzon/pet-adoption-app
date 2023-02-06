@@ -12,6 +12,7 @@ export { ImageCarousel } from "./ImageCarousel";
 export { ImageUploader } from "./ImageUploader";
 export { ImageThumbnail } from "./ImageThumbnail";
 export { LocationSelect } from "./LocationSelect";
+export { Logo } from "./Logo";
 export { NavLink } from "./NavLink";
 export { PetCard } from "./PetCard";
 export { PetFilters } from "./PetFilters";
