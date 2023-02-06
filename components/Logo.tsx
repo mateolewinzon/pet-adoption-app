@@ -7,8 +7,8 @@ export const Logo = ({ size }: Props) => {
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      className={`w-[${size}px] h-[60${size}px] color-gray-200`}
-      viewBox="0 0 119.72 122.88"
+      className={`w-[${size}px] h-[${size}px] color-gray-200`}
+      viewBox="0 0 0 0"
       fill="white"
     >
       <g>

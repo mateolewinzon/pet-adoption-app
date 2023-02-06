@@ -19,7 +19,6 @@ export default function Signin() {
       className="bg-purple-800 max-w-full"
     >
       <div className="flex flex-col items-center relative top-10">
-        <Logo size={60} />
         <span className="text-white text-2xl font-semibold mt-2 mb-8">
           {i18n.t("signin.welcome_title")}
         </span>
