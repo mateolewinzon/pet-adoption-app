@@ -146,7 +146,7 @@
   },
   "footer": {
     "developed_by": "Desarrollado por Mateo Lewinzon",
-    "personal_page": "Mi página eprsonal"
+    "personal_page": "Mi página personal"
   },
   "form": {
     "loading": "Cargando..."
@@ -163,6 +163,10 @@
     "female": "Hembra"
   },
   "signin": {
+    "signin": "Ingresar / Crear cuenta",
+    "welcome_title": "¡Bienvenido a PetAdopters!",
+    "welcome_text": "Para publicar mascotas, seleccione una opción para crear una cuenta o ingresar a una existente.",
+    "signin_with": "Continuar con ",
     "messages": {
       "signin_required_post": "Iniciá sesión para publicar una mascota",
       "signin_required_profile": "Iniciá sesión para ver tu perfil"

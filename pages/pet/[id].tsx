@@ -13,7 +13,7 @@ import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import { useI18n } from "next-localization";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import type { Pet } from "prisma/types";
 import { deletePet } from "service/pets";
 import { confirmDangerousAction } from "utils/alerts";
@@ -23,7 +23,7 @@ type Props = { pet: Pet };
 const ViewPost = ({ pet }: Props) => {
   const router = useRouter();
   const { data } = useSession();
-  const i18n = useI18n()
+  const i18n = useI18n();
 
   return (
     <Container title={`Pets Adoption - ${pet.title}`}>

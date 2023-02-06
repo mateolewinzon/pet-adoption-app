@@ -11,23 +11,26 @@ export const Footer = () => {
         <ul className="flex w-full justify-between">
           {footerLinks.map((item, key) => (
             <li key={key}>
-              <Link href={item.href}>
-                <a className="text-white text-sm md:text-normal hover:underline">
-                  {item.text}
-                </a>
+              <Link
+                className="text-white text-sm md:text-normal hover:underline"
+                href={item.href}
+              >
+                {item.text}
               </Link>
             </li>
           ))}
         </ul>
         <SpanSecondary className="text-white text-sm">
           {i18n.t("footer.developed_by")}
-
-          <Link href="https://lewinzon.vercel.app">
-            <a target={"_blank"} className="font-semibold hover:underline">
-              {i18n.t("footer.personal_page")}
-            </a>
+ {" "}
+          <Link
+            target={"_blank"}
+            className="font-semibold hover:underline"
+            href="https://lewinzon.vercel.app"
+          >
+            {i18n.t("footer.personal_page")}
           </Link>
-        </SpanSecondary>{" "}
+        </SpanSecondary>
       </div>
     </div>
   );

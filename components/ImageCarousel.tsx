@@ -11,13 +11,13 @@ export const ImageCarousel = ({ images, alt }: Props) => {
   const [index, setIndex] = useState(0);
   return (
     <div className="flex flex-col">
-      <div className="flex items-center relative display-inline-block">
+      <div className="flex items-center relative display-inline-block h-[500px]">
         <Image
           alt={alt}
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
+          className="rounded-xl"
           src={images[index].url}
-          height={600}
-          width={600}
+          fill
         />
         <a
           className="absolute left-0"

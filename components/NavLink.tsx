@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import { Span } from "components";
 import { twMerge } from "tailwind-merge";
 
@@ -9,13 +9,12 @@ type Props = {
 };
 
 export const NavLink = ({ href, text }: Props) => {
-  const router = useRouter();
-  const isActive = router.pathname === href;
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <div>
       <Link href={href}>
-        <a>
           <Span
             className={twMerge(
               "px-3 py-1 font-normal text-white rounded-xl hover:bg-purple-800",
@@ -24,7 +23,6 @@ export const NavLink = ({ href, text }: Props) => {
           >
             {text}
           </Span>
-        </a>
       </Link>
     </div>
   );

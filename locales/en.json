@@ -163,6 +163,10 @@
     "female": "Female"
   },
   "signin": {
+    "signin": "Sign in / Sign up",
+    "welcome_title": "Welcome to PetAdopters!",
+    "welcome_text": "In order to post pets, select an option to create an account or log into an existing one.",
+    "signin_with": "Continue with ",
     "messages": {
       "signin_required_post": "You must sign in to post a pet",
       "signin_required_profile": "You must sign in to see your profile"

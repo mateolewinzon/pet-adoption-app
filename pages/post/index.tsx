@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Container, Heading, PetForm } from "components";
 import { useState } from "react";
 import { postPet } from "service/pets";

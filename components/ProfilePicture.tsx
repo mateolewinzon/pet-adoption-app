@@ -7,13 +7,14 @@ type Props = {
 
 export const ProfilePicture = ({ user }: Props) => {
   return (
-    <Image
-      alt={user.name}
-      className="rounded-3xl"
-      width={40}
-      height={40}
-      objectFit='cover'
-      src={user.image || "/pp_placeholder.png"}
-    />
+    <div className="relative h-[40px] w-[40px]">
+      <Image
+        alt={user.name}
+        className="rounded-3xl"
+        fill
+        style={{ objectFit: "cover" }}
+        src={user.image || "/pp_placeholder.png"}
+      />
+    </div>
   );
 };

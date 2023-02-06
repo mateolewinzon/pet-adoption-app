@@ -11,7 +11,6 @@ type Props = {
 export const PetCard = ({ pet, author }: Props) => {
   return (
     <Link href={`/pet/${pet.id}`}>
-      <a>
         <div className="flex flex-col">
           <div className="flex items-center justify-between my-2">
             <div className="flex items-center">
@@ -43,7 +42,6 @@ export const PetCard = ({ pet, author }: Props) => {
             </div>
           </div>
         </div>
-      </a>
     </Link>
   );
 };

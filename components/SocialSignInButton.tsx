@@ -1,13 +1,18 @@
 import { signIn } from "next-auth/react";
-import { AppProvider } from "next-auth/providers";
 import { Span } from "./Span";
+import type { Provider } from "config/authProviders";
+import { useI18n } from "next-localization";
 
-export const SocialSignInButton = ({ provider }: { provider: AppProvider }) => {
+export const SocialSignInButton = ({ provider }: { provider: Provider }) => {
+  const i18n = useI18n();
   return (
-    <div>
-      <a href="#" onClick={() => signIn(provider.id)}>
-        <Span>Sign in with {provider.name}</Span>
-      </a>
-    </div>
+    <button onClick={() => signIn(provider.id)}>
+      <div className="flex items-center justify-between gap-3 shadow-lg bg-white rounded-xl p-4 outline outline-2 outline-purple-200 hover:outline-purple-400">
+        <Span className="font-semibold text-neutral-600">
+          {`${i18n.t("signin.signin_with")} ${provider.name}`}
+        </Span>
+        {provider.logo}
+      </div>
+    </button>
   );
 };
