@@ -16,8 +16,8 @@ export const Container = ({
   ...customMeta
 }: Props) => {
   const meta = {
-    title: "Pet Adoption App",
-    description: "Browse and post pets for adoption worldwide.",
+    title: "PetAdopters",
+    description: "Browse and post pets for adoption.",
     ...customMeta,
   };
   return (
@@ -27,6 +27,7 @@ export const Container = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta property="og:site_name" content={meta.title} />
+        <meta property="og:image" content="https://www.aspca.org/sites/default/files/how-you-can-help_adoptions-tips_main-image-dog.jpg"/>
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
       </Head>
