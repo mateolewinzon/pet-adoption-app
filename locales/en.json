@@ -196,7 +196,8 @@
     "region": "Region",
     "select_one": "Select one",
     "sex": "Sex",
-    "title": "Title / name"
+    "title": "Title / name",
+    "seo_description": "This pet is looking for a home. Can you help?"
   },
   "profile": {
     "name": "Name",

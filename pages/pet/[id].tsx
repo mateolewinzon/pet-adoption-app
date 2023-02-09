@@ -27,7 +27,11 @@ const ViewPost = ({ pet }: Props) => {
   const i18n = useI18n();
 
   return (
-    <Container title={`PetAdopters - ${pet.title}`}>
+    <Container
+      description={i18n.t('pet.seo_description')}
+      title={`PetAdopters - ${pet.title}`}
+      image={pet.images[0].url}
+    >
       <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col">
           <div className="flex items-center p-2 border border-2 border bg-neutral-50 rounded-t-xl">
@@ -40,7 +44,7 @@ const ViewPost = ({ pet }: Props) => {
             </div>
           </div>
           <ImageCarousel alt={pet.title} images={pet.images} />
-          {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone}/>}
+          {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone} />}
         </div>
         <div className="flex gap-2 flex-col">
           <div className="flex justify-between items-center ">

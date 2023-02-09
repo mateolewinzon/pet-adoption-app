@@ -196,7 +196,8 @@
     "region": "Región",
     "select_one": "Seleccione una opción",
     "sex": "Sexo",
-    "title": "Título / nombre"
+    "title": "Título / nombre",
+    "seo_description": "Esta mascota está buscando un hogar. ¿Puedes ayudarla?"
   },
   "profile": {
     "name": "Nombre",

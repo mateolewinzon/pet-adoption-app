@@ -7,6 +7,8 @@ type Props = {
   children: React.ReactNode;
   width?: string;
   title?: string;
+  description?: string;
+  image?: string
   className?: string;
 };
 
@@ -24,6 +26,7 @@ export const Container = ({
   const meta = {
     title: "PetAdopters",
     description: "Browse and post pets for adoption.",
+    image: "https://nationaltoday.com/wp-content/uploads/2021/04/Adopt-A-Shelter-1-640x514.jpg",
     ...customMeta,
   };
   return (
@@ -35,14 +38,10 @@ export const Container = ({
         <meta property="og:site_name" content={meta.title} />
         <meta
           property="og:image"
-          content="https://www.aspca.org/sites/default/files/how-you-can-help_adoptions-tips_main-image-dog.jpg"
-        />
+          content={meta.image}/>
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
-        ></link>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"></link>
       </Head>
       <Header />
       <main
