@@ -1,16 +1,25 @@
-import {
-  Container,
-  Heading,
-  SocialSignInButton,
-  Span,
-} from "components";
+import { Container, Heading, SocialSignInButton, Span, SpanSecondary } from "components";
 import providers from "config/authProviders";
 import type { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { useI18n } from "next-localization";
+import { useRouter } from "next/router";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
+function getErr(code: string): string {
+  switch (code) {
+    case "OAuthAccountNotLinked":
+      return "signin.errors.OAuthAccountNotLinked";
+    default:
+      return "signin.errors.default";
+  }
+}
+
 export default function Signin() {
+  const {
+    query: { error },
+  } = useRouter();
+
   const i18n = useI18n();
   return (
     <Container
@@ -26,11 +35,12 @@ export default function Signin() {
           <Span className="text-neutral-600 text-md text-center">
             {i18n.t("signin.welcome_text")}
           </Span>
-          <div className="flex flex-col my-4">
+          <div className="flex flex-col my-4 gap-4">
             {providers.map((provider, key) => (
               <SocialSignInButton key={key} provider={provider} />
             ))}
           </div>
+          {error && <Span className="text-red-600">{i18n.t(getErr(error as string))}</Span>}
         </div>
       </div>
     </Container>

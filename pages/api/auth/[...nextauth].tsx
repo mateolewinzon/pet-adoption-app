@@ -4,6 +4,7 @@ import NextAuth, {
 } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import prisma from "lib/prisma";
 import type { IncomingMessage, ServerResponse } from "http";
 
@@ -15,12 +16,13 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+    }),
   ],
   pages: {
-    "signIn": "/signin"
-  },
-  theme: {
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Paw-print.svg/1200px-Paw-print.svg.png",
+    signIn: "/signin",
   },
   session: {
     strategy: "jwt",

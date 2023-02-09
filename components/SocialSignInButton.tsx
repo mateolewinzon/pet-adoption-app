@@ -8,7 +8,7 @@ export const SocialSignInButton = ({ provider }: { provider: Provider }) => {
   return (
     <button onClick={() => signIn(provider.id)}>
       <div className="flex items-center justify-between gap-3 shadow-lg bg-white rounded-xl p-4 outline outline-2 outline-purple-200 hover:outline-purple-400">
-        <Span className="font-semibold text-purple-900">
+        <Span className="text-purple-800">
           {`${i18n.t("signin.signin_with")} ${provider.name}`}
         </Span>
         {provider.logo}

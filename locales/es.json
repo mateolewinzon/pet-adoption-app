@@ -170,6 +170,10 @@
     "messages": {
       "signin_required_post": "Iniciá sesión para publicar una mascota",
       "signin_required_profile": "Iniciá sesión para ver tu perfil"
+    },
+    "errors": {
+      "default": "Ha ocurrido un error al iniciar sesión.",
+      "OAuthAccountNotLinked": "El email está asociado a otra cuenta. Intenta iniciar sesión con otro método."
     }
   },
   "pet": {
