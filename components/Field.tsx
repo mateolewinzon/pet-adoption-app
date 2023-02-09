@@ -16,7 +16,7 @@ export const Field = ({ name, id = name, labelId, children }: Props) => {
   return (
     <div className="my-3 max-w-[90vw]">
       <label
-        className="block text-gray-700 uppercase font-semibold mb-2"
+        className="block text-purple-900 uppercase font-semibold mb-2"
         htmlFor={id}
       >
         {i18n.t(labelId)}

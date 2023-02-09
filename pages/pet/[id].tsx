@@ -8,6 +8,7 @@ import {
   Span,
   SpanSecondary,
   ThreeDotsDropdown,
+  WhatsAppOverlay,
 } from "components";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
@@ -26,10 +27,10 @@ const ViewPost = ({ pet }: Props) => {
   const i18n = useI18n();
 
   return (
-    <Container title={`Pets Adoption - ${pet.title}`}>
-      <div className="sm:grid grid-cols-2 gap-3 width-full">
+    <Container title={`PetAdopters - ${pet.title}`}>
+      <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col">
-          <div className="flex items-center mb-2">
+          <div className="flex items-center p-2 border border-2 border bg-neutral-50 rounded-t-xl">
             <ProfilePicture user={pet.user} />
             <div className="flex flex-col">
               <SpanSecondary className="mx-2 text-gray-400 text-xs">
@@ -39,8 +40,9 @@ const ViewPost = ({ pet }: Props) => {
             </div>
           </div>
           <ImageCarousel alt={pet.title} images={pet.images} />
+          {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone}/>}
         </div>
-        <div className="flex flex-col">
+        <div className="flex gap-2 flex-col">
           <div className="flex justify-between items-center ">
             <Heading>{pet.title}</Heading>
             {pet.userId === data?.user.id && (
@@ -72,11 +74,11 @@ const ViewPost = ({ pet }: Props) => {
               />
             )}
           </div>
-          <Span>{pet.description}</Span>
+          <Span className="text-neutral-800">{pet.description}</Span>
           <PetInformationSection pet={pet} />
+          <ContactInformationSection pet={pet} />
         </div>
       </div>
-      <ContactInformationSection pet={pet} />
     </Container>
   );
 };

@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 export const Footer = () => {
   const i18n = useI18n();
   return (
-    <div className="bg-purple-800 min-h-[100px] flex justify-center">
+    <div className="bg-purple-900 min-h-[100px] flex justify-center">
       <div className="m-2 max-w-sm md:max-w-xl flex flex-col items-center justify-evenly">
         <ul className="flex w-full justify-between">
           {footerLinks.map((item, key) => (

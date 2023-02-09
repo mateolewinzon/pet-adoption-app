@@ -9,9 +9,9 @@ export const TableRow = ({
 }) => {
   const i18n = useI18n();
   return (
-    <tr className="odd:bg-purple-50">
-      <td className="border outline-slate-300 pl-4 font-semibold">{i18n.t(titleId)}</td>
-      <td className="border outline-slate-300 pl-4">{info}</td>
+    <tr className="odd:bg-purple-200 even:bg-purple-100">
+      <td className="border text-purple-900 px-4 font-semibold">{i18n.t(titleId)}</td>
+      <td className="border text-purple-900 px-4">{info}</td>
     </tr>
   );
 };

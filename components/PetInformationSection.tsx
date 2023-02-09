@@ -7,7 +7,7 @@ export const PetInformationSection = ({ pet }: { pet: Pet }) => {
   const i18n = useI18n();
   return (
     <div className="flex flex-col">
-      <SubHeading className="my-4">{i18n.t("pet.pet_information")}</SubHeading>
+      <SubHeading className="mb-3">{i18n.t("pet.pet_information")}</SubHeading>
       <table className="w-full">
         <tbody className="bg-white">
           <TableRow titleId="pet.animal" info={capitalize(pet.animal.name)} />

@@ -180,6 +180,7 @@
     "breed": "Raza",
     "city": "Ciudad",
     "contact_information": "Información de contacto",
+    "contact_owner": "Contacta al refugio.",
     "country": "País",
     "delete_post": "Eliminar",
     "description": "Descripción",
@@ -190,7 +191,7 @@
     "images": "Imágenes",
     "owner_shelter": "Dueño / Refugio",
     "pet_information": "Información de la mascota",
-    "phone": "Teléfono",
+    "phone": "Celular (WhatsApp)",
     "post": "Publicar",
     "region": "Región",
     "select_one": "Seleccione una opción",
@@ -199,7 +200,8 @@
   },
   "profile": {
     "name": "Nombre",
-    "phone": "Número de teléfono",
+    "phone": "Celular (WhatsApp)",
+    "phone_placeholder": "",
     "contact_info": "Más información de contacto",
     "contact_info_placeholder": "Agrega la información de contacto que consideres necesaria. Ej: redes sociales, WhatsApp, etc.",
     "save": "Guardar perfil"

@@ -37,7 +37,7 @@ export const ProfileForm = ({
               setUploads={(values) => setFieldValue("image", values)}
               uploads={values.image}
             />
-            <FormTextField name="phone" labelId="profile.phone" />
+            <FormTextField name="phone" labelId="profile.phone" placeholderId="profile.phone_placeholder"/>
             <FormTextField
               name="contactInfo"
               labelId="profile.contact_info"
