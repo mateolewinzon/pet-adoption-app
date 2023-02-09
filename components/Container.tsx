@@ -27,7 +27,7 @@ export const Container = ({
     ...customMeta,
   };
   return (
-    <div>
+    <div className={raleway.className}>
       <Head>
         <title>{meta.title}</title>
         <meta name="twitter:title" content={meta.title} />
@@ -39,13 +39,15 @@ export const Container = ({
         />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"></link>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+        ></link>
       </Head>
       <Header />
       <main
         className={twMerge(
           `flex flex-col ${width} px-4 py-4 mx-auto min-h-[96vh]`,
-          raleway.className,
           className
         )}
       >
