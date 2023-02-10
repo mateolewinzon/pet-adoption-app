@@ -1,5 +1,5 @@
 import NextAuth, {
-  getServerSession,
+  unstable_getServerSession,
   NextAuthOptions,
 } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -49,7 +49,7 @@ export const getUser = async (
   res: ServerResponse,
   includePets: boolean = false
 ) => {
-  const session = await getServerSession(req, res, authOptions);
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
     return null;

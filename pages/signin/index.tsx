@@ -1,7 +1,7 @@
 import { Container, Heading, SocialSignInButton, Span, SpanSecondary } from "components";
 import providers from "config/authProviders";
 import type { GetServerSideProps } from "next";
-import { getServerSession } from "next-auth";
+import { unstable_getServerSession } from "next-auth";
 import { useI18n } from "next-localization";
 import { useRouter } from "next/router";
 import { authOptions } from "pages/api/auth/[...nextauth]";
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }) => {
-  const session = await getServerSession(req, res, authOptions);
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   if (session) {
     return { redirect: { destination: "/" }, props: {} };
