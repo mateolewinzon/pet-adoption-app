@@ -3,6 +3,7 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { Field, FormTextField } from "components";
 import type { PetFormValues } from "utils/formTypes";
 import { useI18n } from "next-localization";
+import countries from "config/countries";
 
 export const LocationSelect = () => {
   const { setFieldValue, values, setFieldError, setFieldTouched } =
@@ -12,16 +13,17 @@ export const LocationSelect = () => {
     setFieldTouched(field, false);
     setFieldError(field, "");
   }
-  const i18n = useI18n()
+  const i18n = useI18n();
 
   return (
     <div className="grid md:grid-cols-2 gap-2">
       <Field name="country" labelId="pet.country">
         <CountryDropdown
+          whitelist={countries}
           classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
           value={values.country}
           onChange={(value) => handleChange("country", value)}
-          defaultOptionLabel={i18n.t('browse.select_country')}
+          defaultOptionLabel={i18n.t("browse.select_country")}
         />
       </Field>
       <Field name="region" labelId="pet.region">

@@ -4,6 +4,7 @@ import { getPets } from "service/pets";
 import type { SetStateAction } from "react";
 import type { PetFields } from "prisma/types";
 import { useI18n } from "next-localization";
+import countries from "config/countries";
 
 type Props = {
   filters: {
@@ -18,6 +19,7 @@ export const PetFilters = ({ filters: { setFilters, filters } }: Props) => {
   return (
     <div className="flex flex-row">
       <CountryDropdown
+      whitelist={countries}
         classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
         value={filters?.country || ""}
         onChange={(value) =>
