@@ -8,8 +8,8 @@ export const PetInformationSection = ({ pet }: { pet: Pet }) => {
   return (
     <div className="flex flex-col">
       <SubHeading className="mb-3">{i18n.t("pet.pet_information")}</SubHeading>
-      <table className="w-full">
-        <tbody className="bg-white">
+      <table>
+        <tbody>
           <TableRow titleId="pet.animal" info={capitalize(pet.animal.name)} />
           <TableRow titleId="pet.breed" info={capitalize(pet.breed.name)} />
           <TableRow titleId="pet.sex" info={capitalize(pet.sex)} />

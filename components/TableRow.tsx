@@ -9,9 +9,9 @@ export const TableRow = ({
 }) => {
   const i18n = useI18n();
   return (
-    <tr className="odd:bg-purple-200 even:bg-purple-100">
-      <td className="border text-purple-900 px-4 font-semibold">{i18n.t(titleId)}</td>
-      <td className="border text-purple-900 px-4">{info}</td>
-    </tr>
+    <div className="flexflex-col justify-between sm:flex-row py-2">
+      <div className="text-purple-900 font-semibold">{i18n.t(titleId)}</div>
+      <div className="text-purple-900">{info}</div>
+    </div>
   );
 };

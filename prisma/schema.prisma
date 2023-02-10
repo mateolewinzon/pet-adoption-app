@@ -38,7 +38,7 @@ model Pet {
   images      PetImage[]
   country     String
   region      String
-  city        String     
+  city        String
   createdAt   DateTime   @default(now()) @map("created_at")
   updatedAt   DateTime   @updatedAt @map("updated_at")
   animal      Animal     @relation(fields: [animalId], references: [id])
@@ -98,13 +98,13 @@ model Account {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String
-  email         String        @unique
+  email         String    @unique
   emailVerified Boolean?
   image         String?
   phone         String?
-  contactInfo   String?
+  contactInfo   String?   @db.Text
   pets          Pet[]
   accounts      Account[]
   sessions      Session[]
