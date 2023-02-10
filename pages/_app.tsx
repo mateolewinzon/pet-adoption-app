@@ -11,12 +11,12 @@ const App = ({
 }: AppProps<{ session: Session; lngDict: {} }>) => {
   const router = useRouter();
 
-  return (  
-    <I18nProvider locale={router.locale as string} lngDict={lngDict}>
-      <SessionProvider session={session}>
+  return (
+    <SessionProvider session={session}>
+      <I18nProvider locale={router.locale as string} lngDict={lngDict}>
         <Component {...pageProps} />
-      </SessionProvider>
-    </I18nProvider>
+      </I18nProvider>
+    </SessionProvider>
   );
 };
 
