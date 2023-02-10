@@ -32,7 +32,7 @@ const ViewPost = ({ pet }: Props) => {
       title={`PetAdopters - ${pet.title}`}
       image={pet.images[0].url}
     >
-      <div className="grid md:grid-cols-2 gap-3">
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="flex flex-col">
           <div className="flex items-center p-2 border border-2 border bg-neutral-50 rounded-t-xl">
             <ProfilePicture user={pet.user} />
