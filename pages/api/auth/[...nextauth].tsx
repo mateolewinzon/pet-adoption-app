@@ -1,6 +1,6 @@
 import NextAuth, {
+  getServerSession,
   NextAuthOptions,
-  unstable_getServerSession,
 } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
@@ -49,7 +49,7 @@ export const getUser = async (
   res: ServerResponse,
   includePets: boolean = false
 ) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     return null;
