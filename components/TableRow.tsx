@@ -9,7 +9,7 @@ export const TableRow = ({
 }) => {
   const i18n = useI18n();
   return (
-    <div className="flexflex-col justify-between sm:flex-row py-2">
+    <div className="flex flex-col justify-between sm:flex-row py-2">
       <div className="text-purple-900 font-semibold">{i18n.t(titleId)}</div>
       <div className="text-purple-900">{info}</div>
     </div>
