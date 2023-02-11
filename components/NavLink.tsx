@@ -17,7 +17,7 @@ export const NavLink = ({ href, text }: Props) => {
       <Link href={href}>
           <Span
             className={twMerge(
-              "px-3 py-1 font-semibold text-purple-100 rounded-xl hover:bg-purple-700 hover:text-purple-50",
+              "px-3 py-1 text-purple-100 rounded-xl hover:bg-purple-700 hover:text-purple-50",
               isActive && "text-white"
             )}
           >
