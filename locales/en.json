@@ -172,7 +172,7 @@
       "signin_required_profile": "You must sign in to see your profile"
     },
     "errors": {
-      "default": "An error occurred when during sign in.",
+      "default": "An error occurred during sign in.",
       "OAuthAccountNotLinked": "This email is already linked to another account. Try another signin method."
     }
   },
