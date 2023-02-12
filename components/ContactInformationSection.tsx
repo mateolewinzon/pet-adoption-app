@@ -7,17 +7,15 @@ export const ContactInformationSection = ({ pet }: { pet: Pet }) => {
 
   return (
     <div className="flex flex-col">
-      <SubHeading className="my-3">{i18n.t("pet.contact_information")}</SubHeading>
-      <table>
-        <tbody>
-          <TableRow titleId="pet.email" info={pet.user.email} />
-          <TableRow titleId="pet.phone" info={pet.user.phone || "-"} />
-          <TableRow
-            titleId="pet.additional_contact"
-            info={pet.user.contactInfo || "-"}
-          />
-        </tbody>
-      </table>
+      <SubHeading className="my-3  text-xl">
+        {i18n.t("pet.contact_information")}
+      </SubHeading>
+      <TableRow titleId="pet.email" info={pet.user.email} />
+      <TableRow titleId="pet.phone" info={pet.user.phone || "-"} />
+      <TableRow
+        titleId="pet.additional_contact"
+        info={pet.user.contactInfo || "-"}
+      />
     </div>
   );
 };

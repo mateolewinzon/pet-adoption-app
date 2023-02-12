@@ -14,7 +14,6 @@ type Props = {
 
 const raleway = Raleway({
   subsets: [],
-  weight: ["200", "300", "400", "500"],
 });
 
 export const Container = ({
@@ -30,7 +29,7 @@ export const Container = ({
     ...customMeta,
   };
   return (
-    <div className={raleway.className}>
+    <div >
       <Head>
         <title>{meta.title}</title>
         <meta name="twitter:title" content={meta.title} />
@@ -47,6 +46,7 @@ export const Container = ({
       <main
         className={twMerge(
           `flex flex-col ${width} px-4 py-4 mx-auto min-h-[96vh]`,
+          raleway.className,
           className
         )}
       >
