@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "lib/prisma";
-import { getUser } from "../auth/[...nextauth]";
 import type { Response } from "utils/fetch";
 import type { PetImage } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,10 +28,10 @@ export default async function handler(
   if (req.method === "PATCH") {
     const { animal, breed, images, ...data } = req.body;
 
-    const user = await getUser(req, res);
+    const session = await getServerSession(req, res, authOptions);
     const pet = await prisma.pet.findUnique({ where: { id } });
 
-    if (!user || user?.id !== pet?.userId) {
+    if (!session?.user || session.user?.id !== pet?.userId) {
       response.error = "login required";
       res.status(401);
       return res.json(response);
@@ -55,10 +56,10 @@ export default async function handler(
   }
 
   if (req.method === "DELETE") {
-    const user = await getUser(req, res);
+    const session = await getServerSession(req, res, authOptions);
     try {
       const pet = await prisma.pet.findUnique({ where: { id } });
-      if (pet?.userId === user?.id) {
+      if (pet?.userId === session?.user?.id) {
         await prisma.pet.delete({ where: { id } });
       } else {
         res.status(401);

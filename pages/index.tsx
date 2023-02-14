@@ -5,23 +5,23 @@ import usePets from "service/usePets";
 import type { GetServerSideProps } from "next";
 import type { Pet } from "prisma/types";
 import { SWRConfig } from "swr";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 
 type Props = {
   fallback: any;
 };
 
 const BrowsePets = () => {
-  const i18n = useI18n();
+  const t = useTranslate();
   const [filters, setFilters] = useState(null);
   const { pets, error } = usePets(filters);
-
+  
   return (
     <>
       <PetFilters filters={{ filters, setFilters }} />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {error && "An error occurred when fetching pets"}
-        {pets?.length === 0 && i18n.t("browse.no_results")}
+        {pets?.length === 0 && t("browse.no_results")}
         {pets?.map((pet: Pet) => (
           <PetCard author={pet.user} key={pet.id} pet={pet} />
         ))}

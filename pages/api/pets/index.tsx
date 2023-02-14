@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "lib/prisma";
-import { getUser } from "../auth/[...nextauth]";
 import type { Response } from "utils/fetch";
 import type { PetImage } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,9 +17,9 @@ export default async function handler(
   const { animal, breed, images, ...data } = req.body;
 
   if (req.method === "POST") {
-    const user = await getUser(req, res);
+    const session = await getServerSession(req, res, authOptions);
 
-    if (!user) {
+    if (!session?.user) {
       response.error = "login required";
       res.status(401);
       return res.json(response);
@@ -28,7 +29,7 @@ export default async function handler(
       const pet = await prisma.pet.create({
         data: {
           ...data,
-          userId: user.id,
+          userId: session?.user.id,
           images: {
             connect: images.map((i: PetImage) => ({ id: i.id })),
           },

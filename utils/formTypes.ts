@@ -18,4 +18,6 @@ export type ProfileFormValues = {
   contactInfo: string;
   phone: string;
   image: ({url: string} | null )[];
+  username: string
+  biography: string
 };

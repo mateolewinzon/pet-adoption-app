@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { Container, Heading, PetForm } from "components";
-import { getUser } from "pages/api/auth/[...nextauth]";
 import { useState } from "react";
 import { updatePet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
@@ -8,6 +7,8 @@ import prisma from "lib/prisma";
 import type { Animal, Pet } from "prisma/types";
 import type { GetServerSideProps } from "next";
 import type { PetFormValues as FormValues } from "utils/formTypes";
+import { getServerSession } from "next-auth";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 type Props = { animals: Animal[]; pet: Pet };
 
@@ -55,12 +56,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
   query,
-  locale
+  locale,
 }) => {
   const { default: lngDict = {} } = await import(`locales/${locale}.json`);
-  const user = await getUser(req, res);
+  const session = await getServerSession(req, res, authOptions);
 
-  if (!user) {
+  if (!session) {
     return {
       redirect: {
         destination: `/api/auth/signin?callbackUrl=%2Fpost/${query.id}}`,
@@ -82,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
-  if (pet.userId !== user.id) {
+  if (pet.userId !== session.user.id) {
     return {
       redirect: {
         destination: "/",
@@ -97,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       animals: JSON.parse(JSON.stringify(animals)),
       pet: JSON.parse(JSON.stringify(pet)),
-      lngDict
+      lngDict,
     },
   };
 };

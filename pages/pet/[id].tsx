@@ -10,10 +10,11 @@ import {
   ThreeDotsDropdown,
   WhatsAppOverlay,
 } from "components";
+import useTranslate from "hooks/useTranslate";
 import prisma from "lib/prisma";
 import type { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
-import { useI18n } from "next-localization";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Pet } from "prisma/types";
 import { deletePet } from "service/pets";
@@ -24,27 +25,29 @@ type Props = { pet: Pet };
 const ViewPost = ({ pet }: Props) => {
   const router = useRouter();
   const { data } = useSession();
-  const i18n = useI18n();
+  const t = useTranslate();
 
   return (
     <Container
-      description={i18n.t('pet.seo_description')}
+      description={t("pet.seo_description")}
       title={`PetAdopters - ${pet.title}`}
       image={pet.images[0].url}
     >
+      {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone} />}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="flex flex-col">
-          <div className="flex items-center p-2 border border-2 border bg-neutral-50 rounded-t-xl">
-            <ProfilePicture user={pet.user} />
-            <div className="flex flex-col">
-              <SpanSecondary className="mx-2 text-gray-400 text-xs">
-                {i18n.t("pet.owner_shelter")}
-              </SpanSecondary>
-              <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+          <Link href={`/${pet.user.username}`}>
+            <div className="flex items-center p-2 border border-2 border bg-neutral-50 rounded-t-xl">
+              <ProfilePicture user={pet.user} />
+              <div className="flex flex-col">
+                <SpanSecondary className="mx-2 text-gray-400 text-xs">
+                  {t("pet.owner_shelter")}
+                </SpanSecondary>
+                <SpanSecondary className="mx-2">{pet.user.name}</SpanSecondary>
+              </div>
             </div>
-          </div>
+          </Link>
           <ImageCarousel alt={pet.title} images={pet.images} />
-          {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone} />}
         </div>
         <div className="flex gap-2 flex-col">
           <div className="flex justify-between items-center ">
@@ -53,11 +56,11 @@ const ViewPost = ({ pet }: Props) => {
               <ThreeDotsDropdown
                 items={[
                   {
-                    text: i18n.t("pet.edit_post"),
+                    text: t("pet.edit_post"),
                     onClick: () => router.push(`/post/${pet.id}`),
                   },
                   {
-                    text: i18n.t("pet.delete_post"),
+                    text: t("pet.delete_post"),
                     className: "text-red-400",
                     onClick: async () => {
                       await confirmDangerousAction(

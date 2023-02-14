@@ -1,5 +1,6 @@
 import NextAuth, {
- getServerSession,
+  AuthOptions,
+  getServerSession,
   NextAuthOptions,
 } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -28,37 +29,38 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    session: async ({ session, token }) => {
+    session: async ({ session, token: { id, uid } }) => {
       if (session?.user) {
-        session.user.id = token.uid as string;
+        session.user.id = (uid as string) || (id as string);
       }
       return session;
     },
     jwt: async ({ user, token }) => {
-      if (user) {
-        token.uid = user.id;
-      }
-      return token;
+      return { ...token, ...user };
     },
   },
 };
-export default NextAuth(authOptions);
 
 export const getUser = async (
-  req: IncomingMessage & { cookies: Partial<{ [key: string]: string }> },
+  req: IncomingMessage & {
+    cookies: Partial<{
+      [key: string]: string;
+    }>;
+  },
   res: ServerResponse,
-  includePets: boolean = false
+  options: AuthOptions
 ) => {
-  const session = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, options);
 
   if (!session) {
     return null;
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session?.user?.email! },
-    include: { pets: { include: { images: includePets } } },
+    where: { id: session?.user.id },
   });
-
+  
   return user;
 };
+
+export default NextAuth(authOptions);
