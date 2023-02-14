@@ -11,7 +11,6 @@ import {
 import type { PetFormValues as FormValues } from "utils/formTypes";
 import type { Animal } from "prisma/types";
 import { savePetImages } from "service/pets";
-import { useI18n } from "next-localization";
 
 type Props = {
   animals: Animal[];
@@ -30,7 +29,6 @@ export const PetForm = ({
   initialValues,
   validationSchema,
 }: Props) => {
-const i18n = useI18n()
   return (
     <Formik
       validationSchema={validationSchema}

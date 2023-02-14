@@ -2,6 +2,8 @@ import { Formik, Form } from "formik";
 import { FormTextField, Span, FormButton, ImageUploader } from "components";
 import type { ProfileFormValues as FormValues } from "utils/formTypes";
 import { uploadProfilePicture } from "service/profile";
+import Link from "next/link";
+import useTranslate from "hooks/useTranslate";
 
 type Props = {
   error: string | null;
@@ -18,6 +20,7 @@ export const ProfileForm = ({
   initialValues,
   validationSchema,
 }: Props) => {
+  const t = useTranslate();
   return (
     <Formik
       validationSchema={validationSchema}
@@ -37,7 +40,34 @@ export const ProfileForm = ({
               setUploads={(values) => setFieldValue("image", values)}
               uploads={values.image}
             />
-            <FormTextField name="phone" labelId="profile.phone" placeholderId="profile.phone_placeholder"/>
+            <FormTextField
+              name="phone"
+              labelId="profile.phone"
+              placeholderId="profile.phone_placeholder"
+            />
+            <FormTextField
+              name="username"
+              extraInfo={
+                <>
+                  {t("profile.username_info")}{" "}
+                  <Link
+                    rel="noreferrer"
+                    target="_blank"
+                    className="text-blue-500"
+                    href="adopcionsanisidro"
+                  >
+                    petadopters.org/adopcionsanisidro
+                  </Link>
+                </>
+              }
+              labelId="profile.username"
+              placeholderId="profile.username_placeholder"
+            />
+            <FormTextField
+              name="biography"
+              labelId="profile.biography"
+              isTextarea
+            />
             <FormTextField
               name="contactInfo"
               labelId="profile.contact_info"

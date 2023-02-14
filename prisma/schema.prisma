@@ -105,6 +105,8 @@ model User {
   image         String?
   phone         String?
   contactInfo   String?   @db.Text
+  username      String?   @unique
+  biography     String?   @db.Text
   pets          Pet[]
   accounts      Account[]
   sessions      Session[]

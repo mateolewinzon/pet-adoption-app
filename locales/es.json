@@ -205,10 +205,31 @@
   },
   "profile": {
     "name": "Nombre",
+    "biography": "Presentación",
     "phone": "Celular (WhatsApp)",
     "phone_placeholder": "",
     "contact_info": "Más información de contacto",
     "contact_info_placeholder": "Agrega la información de contacto que consideres necesaria. Ej: redes sociales, WhatsApp, etc.",
-    "save": "Guardar perfil"
+    "save": "Guardar perfil",
+    "username": "Nombre de usuario",
+    "username_info": "Agregar un nombre de usuario hará que tu perfil sea accesible al público mostrando un listado de tus publicaciones. Esta opción es ideal para refugios y comunidades. Tu perfil quedará en una URL personalizada. ej:",
+    "username_placeholder": "ej: adopcionsanisidro",
+    "edit_profile": "Editar perfil",
+    "number_of_posts": "mascotas publicadas",
+    "number_of_posts_singular": "mascota publicada",
+    "no_posts": "Todavía no ha hecho publicaciones."
+  },
+  "validations": {
+    "invalid_field": "Campo inválido",
+    "invalid_username": "Nombre de usuario inválido",
+    "uploading_images": "Espere a que las imágenes terminen de subirse",
+    "images_min_1": "Suba al menos una imagen",
+    "images_max_5": "Suba hasta 5 imágenes",
+    "images_invalid_format": "Las imágenes deben ser .jpeg, .jpg o .png",
+    "invalid_image_size": "Las imagenes deben ser menores que 5MB",
+    "required": "Campo obligatorio",
+    "invalid_year": "Escriba un año válido",
+    "too_long": "Campo demasiado largo",
+    "too_short": "Campo demasiado corto"
   }
 }

@@ -3,15 +3,17 @@ import { User } from "@prisma/client";
 
 type Props = {
   user: User;
+  size?: number;
 };
 
-export const ProfilePicture = ({ user }: Props) => {
+export const ProfilePicture = ({ user, size = 40 }: Props) => {
   return (
-    <div className="relative h-[40px] w-[40px]">
+    <div className={`relative h-[${size}px] w-[${size}px]`}>
       <Image
         alt={user.name}
-        className="rounded-3xl"
-        fill
+        height={size}
+        width={size}
+        className="rounded-full"
         style={{ objectFit: "cover" }}
         src={user.image || "/pp_placeholder.png"}
       />

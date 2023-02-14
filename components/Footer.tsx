@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { SpanSecondary } from "components";
 import footerLinks from "config/footerLinks";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 
 export const Footer = () => {
-  const i18n = useI18n();
+  const t = useTranslate();
   return (
     <div className="bg-purple-900 min-h-[100px] flex justify-center">
       <div className="m-2 max-w-sm md:max-w-xl flex flex-col items-center justify-evenly">
@@ -21,14 +21,14 @@ export const Footer = () => {
           ))}
         </ul>
         <SpanSecondary className="text-white text-sm">
-          {i18n.t("footer.developed_by")}
+          {t("footer.developed_by")}
  {" "}
           <Link
             target={"_blank"}
             className="font-semibold hover:underline"
             href="https://lewinzon.vercel.app"
           >
-            {i18n.t("footer.personal_page")}
+            {t("footer.personal_page")}
           </Link>
         </SpanSecondary>
       </div>

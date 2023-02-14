@@ -2,8 +2,8 @@ import { useFormikContext } from "formik";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { Field, FormTextField } from "components";
 import type { PetFormValues } from "utils/formTypes";
-import { useI18n } from "next-localization";
 import countries from "config/countries";
+import useTranslate from "hooks/useTranslate";
 
 export const LocationSelect = () => {
   const { setFieldValue, values, setFieldError, setFieldTouched } =
@@ -13,7 +13,7 @@ export const LocationSelect = () => {
     setFieldTouched(field, false);
     setFieldError(field, "");
   }
-  const i18n = useI18n();
+  const t = useTranslate();
 
   return (
     <div className="grid md:grid-cols-2 gap-2">
@@ -23,7 +23,7 @@ export const LocationSelect = () => {
           classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
           value={values.country}
           onChange={(value) => handleChange("country", value)}
-          defaultOptionLabel={i18n.t("browse.select_country")}
+          defaultOptionLabel={t("browse.select_country")}
         />
       </Field>
       <Field name="region" labelId="pet.region">

@@ -1,14 +1,14 @@
 import { SubHeading, TableRow } from "components";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 import type { Pet } from "prisma/types";
 
 export const ContactInformationSection = ({ pet }: { pet: Pet }) => {
-  const i18n = useI18n();
+  const t = useTranslate()
 
   return (
     <div className="flex flex-col">
       <SubHeading className="my-3  text-xl">
-        {i18n.t("pet.contact_information")}
+        {t("pet.contact_information")}
       </SubHeading>
       <TableRow titleId="pet.email" info={pet.user.email} />
       <TableRow titleId="pet.phone" info={pet.user.phone || "-"} />

@@ -205,10 +205,31 @@
   },
   "profile": {
     "name": "Name",
+    "biography": "Presentation",
     "phone": "Phone number (WhatsApp)",
     "phone_placeholder": "",
     "contact_info": "Additional contact information",
     "contact_info_placeholder": "Consider adding any additional contact information in this field",
-    "save": "Save profile"
+    "save": "Save profile",
+    "username": "Username",
+    "username_info": "Setting your username will make your profile discoverable with a custom URL e.g:",
+    "username_placeholder": "e.g: pets4adoption",
+    "edit_profile": "Edit profile",
+    "number_of_posts": "pets posted",
+    "number_of_posts_singular": "pet posted",
+    "no_posts": "Hasn't made a post yet."
+  },
+  "validations": {
+    "invalid_field": "Invalid field",
+    "invalid_username": "Invalid username",
+    "uploading_images": "Wait until images finish uploading",
+    "images_min_1": "Upload at least one image",
+    "images_max_5": "Upload up to 5 images",
+    "images_invalid_format": "Images must be .jpeg, .jpg or .png",
+    "invalid_image_size": "Images size must be less than 5mb",
+    "required": "Required field",
+    "invalid_year": "Must be a valid year",
+    "too_long": "Field too long",
+    "too_short": "Field too short"
   }
 }

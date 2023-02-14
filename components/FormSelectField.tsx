@@ -1,6 +1,6 @@
 import { Field as FormikField } from "formik";
 import { Field } from "components";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 
 type Props = {
   name: string;
@@ -22,7 +22,7 @@ export const FormSelectField = ({
   type = "text",
   options,
 }: Props) => {
-  const i18n = useI18n();
+  const t = useTranslate();
 
   return (
     <Field labelId={labelId} name={name}>
@@ -35,7 +35,7 @@ export const FormSelectField = ({
       >
         {options.map((option: Option, key) => (
           <option key={key} value={option.value}>
-            {i18n.t(option.textId)}
+            {t(option.textId)}
           </option>
         ))}
       </FormikField>

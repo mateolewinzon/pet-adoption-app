@@ -1,13 +1,13 @@
 import { NavLink } from "./NavLink";
 import { signOut, useSession } from "next-auth/react";
 import { Span } from "components";
-import { useI18n } from "next-localization";
 import { useState } from "react";
 import Link from "next/link";
+import useTranslate from "hooks/useTranslate";
 
 export const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const i18n = useI18n();
+  const t = useTranslate();
   const { data: session } = useSession();
 
   return (
@@ -36,22 +36,25 @@ export const Header = () => {
             toggleMenu ? "flex order-2 sm:order-1 my-3" : "hidden"
           } sm:flex sm:my-0 flex-col w-[100vw] sm:w-auto sm:flex-row`}
         >
-          <NavLink href="/" text={i18n.t("nav.browse")} />
-          <NavLink href="/post" text={i18n.t("nav.post")} />
+          <NavLink href="/" text={t("nav.browse")} />
+          <NavLink href="/post" text={t("nav.post")} />
         </div>
 
         <div className="items-center order-1 sm:order-2">
           {session ? (
             <div className="flex flex-row w-full">
-              <NavLink href="/profile" text={i18n.t("nav.profile")} />
+              <NavLink
+                href="/profile"
+                text={t("nav.profile")}
+              />
               <Span className="mx-3  text-white">
                 <a onClick={() => signOut()} href="#">
-                  {i18n.t("nav.sign_out")}
+                  {t("nav.sign_out")}
                 </a>
               </Span>
             </div>
           ) : (
-            <NavLink href="/signin" text={i18n.t("nav.sign_in")} />
+            <NavLink href="/signin" text={t("nav.sign_in")} />
           )}
         </div>
       </div>

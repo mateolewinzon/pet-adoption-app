@@ -1,5 +1,5 @@
 import { Span } from "components";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 
 type Props = {
   textId: string;
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const FormButton = ({ isLoading, textId }: Props) => {
-  const i18n = useI18n();
+  const t = useTranslate();
   return (
     <button
       type="submit"
@@ -17,9 +17,9 @@ export const FormButton = ({ isLoading, textId }: Props) => {
       disabled={isLoading}
     >
       {isLoading ? (
-        <Span>{i18n.t("form.loading")}</Span>
+        <Span>{t("form.loading")}</Span>
       ) : (
-        <Span>{i18n.t(textId)}</Span>
+        <Span>{t(textId)}</Span>
       )}
     </button>
   );

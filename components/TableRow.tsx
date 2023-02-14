@@ -1,4 +1,4 @@
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 
 export const TableRow = ({
   titleId,
@@ -7,10 +7,10 @@ export const TableRow = ({
   titleId: string;
   info: string;
 }) => {
-  const i18n = useI18n();
+  const t = useTranslate()
   return (
     <div className="flex flex-col justify-between sm:flex-row py-2 sm:gap-3">
-      <div className="text-purple-900 font-semibold">{i18n.t(titleId)}</div>
+      <div className="text-purple-900 font-semibold">{t(titleId)}</div>
       <div className="text-purple-900">{info}</div>
     </div>
   );

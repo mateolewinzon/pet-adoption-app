@@ -14,22 +14,23 @@ export const PetCard = ({ pet, author }: Props) => {
   const { locale } = useRouter();
 
   return (
-    <Link href={`/pet/${pet.id}`}>
-      <div className="flex flex-col rounded-xl border border-2 border-neutral-100 hover:border-purple-100">
-        <div className="flex items-center justify-between my-2 px-2">
+    <div className="z-10 flex flex-col rounded-xl border border-2 border-neutral-100 hover:border-purple-100">
+      <div className="flex items-center justify-between my-2 px-2">
+        <Link href={`/${author.username}`}>
           <div className="flex items-center">
             <ProfilePicture user={author} />
             <SpanSecondary className="mx-2 text">{author.name}</SpanSecondary>
           </div>
-          <SpanSecondary className="text-neutral-600 text-sm">
-            {formatDate(pet.createdAt, locale)}
-          </SpanSecondary>
-        </div>
-
+        </Link>
+        <SpanSecondary className="text-neutral-600 text-sm">
+          {formatDate(pet.createdAt, locale)}
+        </SpanSecondary>
+      </div>
+      <Link href={`/pet/${pet.id}`}>
         <div className="relative">
           <Image
             alt={pet.title}
-            className="rounded-b-xl shadow-xl"
+            className="rounded-b-xl shadow-xl "
             style={{ objectFit: "cover" }}
             fill
             src={pet.images[0].url}
@@ -42,7 +43,7 @@ export const PetCard = ({ pet, author }: Props) => {
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };

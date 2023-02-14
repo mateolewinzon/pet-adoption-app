@@ -1,17 +1,25 @@
 import { useField } from "formik";
-import { useI18n } from "next-localization";
+import useTranslate from "hooks/useTranslate";
 import capitalize from "utils/capitalize";
+import { Span } from "./Span";
 
 type Props = {
   name: string;
   id?: string;
   labelId: string;
   children: React.ReactNode;
+  extraInfo?: React.ReactNode;
 };
 
-export const Field = ({ name, id = name, labelId, children }: Props) => {
+export const Field = ({
+  name,
+  id = name,
+  labelId,
+  extraInfo,
+  children,
+}: Props) => {
   const { 1: field } = useField(id);
-  const i18n = useI18n();
+  const t = useTranslate();
 
   return (
     <div className="my-3 max-w-[90vw]">
@@ -19,12 +27,15 @@ export const Field = ({ name, id = name, labelId, children }: Props) => {
         className="block text-purple-900 uppercase font-semibold mb-2"
         htmlFor={id}
       >
-        {i18n.t(labelId)}
+        {t(labelId)}
       </label>
+      {extraInfo && (
+        <div className="bg-purple-50 text-neutral-500 rounded-xl p-3 my-2">{extraInfo}</div>
+      )}
       {children}
 
       {field.touched && field.error ? (
-        <p className="italic text-red-500"> {capitalize(field.error)} </p>
+        <p className="italic text-red-500"> {t(field.error)} </p>
       ) : null}
     </div>
   );
