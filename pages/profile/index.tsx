@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { authOptions, getUser } from "pages/api/auth/[...nextauth]";
 
-export default function () {
+export default function Profile() {
   return <></>;
 }
 
