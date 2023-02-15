@@ -4,13 +4,14 @@ import { useState } from "react";
 import { postPet } from "service/pets";
 import { PetSchema } from "utils/formValidation";
 import prisma from "lib/prisma";
-import type { GetStaticProps } from "next";
+import type { GetServerSideProps, GetStaticProps } from "next";
 import type { Animal } from "prisma/types";
 import type { PetFormValues as FormValues } from "utils/formTypes";
+import { getUser } from "pages/api/auth/[...nextauth]";
 
-type Props = { animals: Animal[] };
+type Props = { animals: Animal[], defaultPhone: string };
 
-const Post = ({ animals }: Props) => {
+const Post = ({ animals, defaultPhone }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
   const router = useRouter();
@@ -40,6 +41,7 @@ const Post = ({ animals }: Props) => {
     region: "",
     city: "",
     sex: "male",
+    phone: defaultPhone || ""
   };
   return (
     <Container>
@@ -58,13 +60,26 @@ const Post = ({ animals }: Props) => {
 
 export default Post;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, req, res }) => {
+
+  const user = await getUser(req, res)
+
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: true
+      }
+    }
+  }
+
   const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   const animals = await prisma.animal.findMany({ include: { breeds: true } });
   return {
     props: {
       animals: JSON.parse(JSON.stringify(animals)),
       lngDict,
+      defaultPhone: user.phone 
     },
   };
 };

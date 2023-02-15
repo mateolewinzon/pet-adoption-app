@@ -41,23 +41,22 @@ export const PetForm = ({
             className={`${isLoading ? "text-gray-400" : ""}`}
             disabled={isLoading}
           >
-            <FormTextField
-              name="title"
-              labelId="pet.title"
-            />
+            <FormTextField name="title" labelId="pet.title" />
             <ImageUploader
               uploadImages={savePetImages}
               limit={5}
               setUploads={(value) => setFieldValue("images", value)}
               uploads={values.images}
             />
-            <FormTextField
-              name="description"
-              labelId="pet.description"
-              placeholderId="pet.description_placeholder"
-              isTextarea
-            />
-            <div className="grid md:grid-cols-2 gap-2">
+              <FormTextField
+                name="description"
+                labelId="pet.description"
+                placeholderId="pet.description_placeholder"
+                isTextarea
+              />
+          
+
+            <div className="grid md:grid-cols-2 md:gap-2">
               <FormTextField
                 name="birthYear"
                 labelId="pet.birth"

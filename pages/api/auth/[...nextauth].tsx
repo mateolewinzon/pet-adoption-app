@@ -48,9 +48,8 @@ export const getUser = async (
     }>;
   },
   res: ServerResponse,
-  options: AuthOptions
 ) => {
-  const session = await getServerSession(req, res, options);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     return null;
@@ -59,7 +58,7 @@ export const getUser = async (
   const user = await prisma.user.findUnique({
     where: { id: session?.user.id },
   });
-  
+
   return user;
 };
 

@@ -37,6 +37,7 @@ export const LocationSelect = () => {
         />
       </Field>
       <FormTextField name="city" labelId="pet.city" />
+      <FormTextField name="phone" labelId="pet.phone" />
     </div>
   );
 };

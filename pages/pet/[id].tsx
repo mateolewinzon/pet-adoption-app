@@ -33,7 +33,7 @@ const ViewPost = ({ pet }: Props) => {
       title={`PetAdopters - ${pet.title}`}
       image={pet.images[0].url}
     >
-      {pet.user.phone && <WhatsAppOverlay phone={pet.user.phone} />}
+      {pet.phone && <WhatsAppOverlay phone={pet.phone} />}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="flex flex-col">
           <Link href={`/${pet.user.username}`}>

@@ -11,6 +11,7 @@ export type PetFormValues = {
   region: string;
   city: string;
   sex: string;
+  phone: string | null
 };
 
 export type ProfileFormValues = {

@@ -1,12 +1,12 @@
 import { GetServerSideProps } from "next";
-import { authOptions, getUser } from "pages/api/auth/[...nextauth]";
+import { getUser } from "pages/api/auth/[...nextauth]";
 
 export default function Profile() {
   return <></>;
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const user = await getUser(req, res, authOptions);
+  const user = await getUser(req, res);
 
   if (!user) {
     return { redirect: { destination: "/signin", permanent: true } };

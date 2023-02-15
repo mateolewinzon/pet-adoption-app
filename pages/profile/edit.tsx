@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Heading, ProfileForm, Span } from "components";
-import { authOptions, getUser} from "pages/api/auth/[...nextauth]";
+import { getUser} from "pages/api/auth/[...nextauth]";
 import { ProfileSchema } from "utils/formValidation";
 import type { GetServerSideProps } from "next";
 import type { User } from "prisma/types";
@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const { default: lngDict = {} } = await import(`locales/${locale}.json`);
   
-  const user = await getUser(req, res, authOptions)
+  const user = await getUser(req, res)
 
   if (!user) {
     return {

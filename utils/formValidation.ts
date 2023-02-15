@@ -69,8 +69,8 @@ export const PetSchema = Yup.object().shape({
   region: yupString(true, 2, 100),
   city: yupString(true, 2, 100),
   images: Yup.array()
-    .min(1, "validations.too_short")
-    .max(5, "validations.too_short")
+    .min(1, "validations.images_min_1")
+    .max(5, "validations.images_max_5")
     .test(
       "containsLoading",
       "validations.uploading_images",
