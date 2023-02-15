@@ -14,7 +14,7 @@ export const PetCard = ({ pet, author }: Props) => {
   const { locale } = useRouter();
 
   return (
-    <div className="z-10 flex flex-col rounded-xl border border-2 border-neutral-100 hover:border-purple-100">
+    <div className="flex flex-col rounded-xl border border-2 border-neutral-100 hover:border-purple-100">
       <div className="flex items-center justify-between my-2 px-2">
         <Link href={`/${author.username}`}>
           <div className="flex items-center">
@@ -27,7 +27,7 @@ export const PetCard = ({ pet, author }: Props) => {
         </SpanSecondary>
       </div>
       <Link href={`/pet/${pet.id}`}>
-        <div className="relative">
+        <div className="relative -z-10">
           <Image
             alt={pet.title}
             className="rounded-b-xl shadow-xl "

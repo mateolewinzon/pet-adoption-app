@@ -1,7 +1,5 @@
 import { useField } from "formik";
 import useTranslate from "hooks/useTranslate";
-import capitalize from "utils/capitalize";
-import { Span } from "./Span";
 
 type Props = {
   name: string;
@@ -30,7 +28,7 @@ export const Field = ({
         {t(labelId)}
       </label>
       {extraInfo && (
-        <div className="bg-purple-50 text-neutral-500 rounded-xl p-3 my-2">{extraInfo}</div>
+        <div className="bg-purple-50 text-neutral-500 text-sm rounded-xl p-3 my-2">{extraInfo}</div>
       )}
       {children}
 

@@ -54,7 +54,7 @@ export const ProfileForm = ({
                     rel="noreferrer"
                     target="_blank"
                     className="text-blue-500"
-                    href="adopcionsanisidro"
+                    href="/adopcionsanisidro"
                   >
                     petadopters.org/adopcionsanisidro
                   </Link>

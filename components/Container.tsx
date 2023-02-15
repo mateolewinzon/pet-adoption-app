@@ -14,6 +14,7 @@ type Props = {
 
 const raleway = Raleway({
   subsets: [],
+  display: 'swap'
 });
 
 export const Container = ({
