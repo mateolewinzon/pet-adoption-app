@@ -40,7 +40,8 @@ const Profile = ({ user }: Props) => {
     contactInfo: user.contactInfo || "",
     phone: user.phone || "",
     username: user.username || "",
-    biography: user.biography || ""
+    biography: user.biography || "",
+    email: user.email || ""
   };
 
   return (

@@ -217,7 +217,8 @@
     "edit_profile": "Editar perfil",
     "number_of_posts": "mascotas publicadas",
     "number_of_posts_singular": "mascota publicada",
-    "no_posts": "Todavía no ha hecho publicaciones."
+    "no_posts": "Todavía no ha hecho publicaciones.",
+    "email": "Email"
   },
   "validations": {
     "invalid_field": "Campo inválido",
@@ -226,6 +227,7 @@
     "images_min_1": "Suba al menos una imagen",
     "images_max_5": "Suba hasta 5 imágenes",
     "images_invalid_format": "Las imágenes deben ser .jpeg, .jpg o .png",
+    "invalid_email": "Escriba un email válido",
     "invalid_image_size": "Las imagenes deben ser menores que 5MB",
     "required": "Campo obligatorio",
     "invalid_year": "Escriba un año válido",

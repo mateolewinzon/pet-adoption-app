@@ -18,6 +18,10 @@ const yupString = (required: boolean, min?: number, max?: number) => {
   return validation;
 };
 
+const checkEmail = (email?: string) => {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email!);
+};
+
 const checkRequired = (files: File[]) => files.length !== 0;
 
 const checkNumberOfFiles = (files: File[]) => files.length < 6;
@@ -87,6 +91,11 @@ export const ProfileSchema = Yup.object().shape({
     "validUsername",
     "validations.invalid_username",
     testUsername
-  ),       
-  biography: yupString(false, 3, 200) 
+  ),
+  biography: yupString(false, 3, 200),
+  email: yupString(false).test(
+    "validEmail",
+    "validations.invalid_email",
+    checkEmail
+  ),
 });

@@ -217,7 +217,8 @@
     "edit_profile": "Edit profile",
     "number_of_posts": "pets posted",
     "number_of_posts_singular": "pet posted",
-    "no_posts": "Hasn't made a post yet."
+    "no_posts": "Hasn't made a post yet.",
+    "email": "Email"
   },
   "validations": {
     "invalid_field": "Invalid field",
@@ -226,6 +227,7 @@
     "images_min_1": "Upload at least one image",
     "images_max_5": "Upload up to 5 images",
     "images_invalid_format": "Images must be .jpeg, .jpg or .png",
+    "invalid_email": "Provide a valid email",
     "invalid_image_size": "Images size must be less than 5mb",
     "required": "Required field",
     "invalid_year": "Must be a valid year",
