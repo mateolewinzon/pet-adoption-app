@@ -10,8 +10,7 @@ export const ContactInformationSection = ({ pet }: { pet: Pet }) => {
       <SubHeading className="my-3  text-xl">
         {t("pet.contact_information")}
       </SubHeading>
-      <TableRow titleId="pet.email" info={pet.user.email} />
-      <TableRow titleId="pet.phone" info={pet.user.phone || "-"} />
+      <TableRow titleId="pet.phone" info={pet.phone || "-"} />
       <TableRow
         titleId="pet.additional_contact"
         info={pet.user.contactInfo || "-"}
