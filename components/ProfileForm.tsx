@@ -45,7 +45,6 @@ export const ProfileForm = ({
               labelId="profile.phone"
               placeholderId="profile.phone_placeholder"
             />
-            <FormTextField name="email" labelId="profile.email" />
             <FormTextField
               name="username"
               extraInfo={

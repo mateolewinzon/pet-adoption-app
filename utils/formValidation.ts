@@ -93,9 +93,4 @@ export const ProfileSchema = Yup.object().shape({
     testUsername
   ),
   biography: yupString(false, 3, 200),
-  email: yupString(false).test(
-    "validEmail",
-    "validations.invalid_email",
-    checkEmail
-  ),
 });

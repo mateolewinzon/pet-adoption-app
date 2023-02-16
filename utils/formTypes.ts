@@ -21,5 +21,4 @@ export type ProfileFormValues = {
   image: ({url: string} | null )[];
   username: string
   biography: string
-  email: string
 };
