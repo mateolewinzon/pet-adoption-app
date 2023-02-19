@@ -13,6 +13,7 @@ import useTranslate from "hooks/useTranslate";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
+import externalLink from "utils/externalLink";
 
 type Props = {
   profile: UserWithPets;
@@ -52,7 +53,7 @@ const Home = ({ profile, loggedUser }: Props) => {
             <Span className="font-semibold text-base">{profile.name}</Span>
             <Span className="text-sm">{profile.biography}</Span>
             {profile.link && (
-              <Link href={profile.link}>
+              <Link target='_blank' rel="noreferrer" href={externalLink(profile.link)}>
                 <Span className="text-sm text-blue-600 hover:underline">{profile.link}</Span>
               </Link>
             )}
