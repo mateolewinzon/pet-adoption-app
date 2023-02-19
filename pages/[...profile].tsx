@@ -25,7 +25,7 @@ const Home = ({ profile, loggedUser }: Props) => {
 
   return (
     <Container
-      description="Mascotas en adopción"
+      description={profile.biography || "Mirá estas mascotas en adopción. ¿Podés ayudar?"}
       title={profile.name}
       image={profile.image!}
     >

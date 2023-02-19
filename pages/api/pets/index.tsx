@@ -46,6 +46,9 @@ export default async function handler(
       const pets = await prisma.pet.findMany({
         where: { ...req.query },
         include: { user: true, images: true },
+        orderBy: {
+          createdAt: 'desc'
+        }
       });
       response.data = pets;
     } catch (error) {
