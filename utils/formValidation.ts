@@ -1,3 +1,4 @@
+import { URL, USERNAME, YEAR } from "config/regex";
 import * as Yup from "yup";
 
 const yupString = (required: boolean, min?: number, max?: number) => {
@@ -16,10 +17,6 @@ const yupString = (required: boolean, min?: number, max?: number) => {
     });
 
   return validation;
-};
-
-const checkEmail = (email?: string) => {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email!);
 };
 
 const checkRequired = (files: File[]) => files.length !== 0;
@@ -59,14 +56,10 @@ export const validateFilesToUpload = Yup.object().shape({
     .test("fileSize", "validations.invalid_image_size", checkFileSize),
 });
 
-const testUsername = (username?: string) => {
-  return /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/.test(username!);
-};
-
 export const PetSchema = Yup.object().shape({
   title: yupString(true, 3, 100),
   description: yupString(true, 10, 500),
-  birthYear: yupString(true).matches(/^\d{4}$/, "validations.invalid_year"),
+  birthYear: yupString(true).matches(YEAR, "validations.invalid_year"),
   animalId: yupString(true, 25, 25),
   breedId: yupString(true, 25, 25),
   country: yupString(true, 2, 100),
@@ -87,10 +80,7 @@ export const ProfileSchema = Yup.object().shape({
   contactInfo: yupString(false, 3, 200),
   phone: yupString(false, 5, 100),
   images: Yup.array().of(Yup.object()).min(1, "validations.too_short").max(5),
-  username: yupString(false, 3, 20).test(
-    "validUsername",
-    "validations.invalid_username",
-    testUsername
-  ),
+  username: yupString(false, 3, 20).matches(USERNAME, "validations.invalid_username"),
   biography: yupString(false, 3, 200),
+  link: yupString(true).matches(URL, "validations.invalid_link")
 });

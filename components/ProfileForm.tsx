@@ -69,6 +69,11 @@ export const ProfileForm = ({
               isTextarea
             />
             <FormTextField
+              name="link"
+              labelId="profile.link"
+              placeholderId="profile.link_placeholder"
+            />
+            <FormTextField
               name="contactInfo"
               labelId="profile.contact_info"
               placeholderId="profile.contact_info_placeholder"

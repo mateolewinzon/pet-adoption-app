@@ -218,7 +218,9 @@
     "number_of_posts": "pets posted",
     "number_of_posts_singular": "pet posted",
     "no_posts": "Hasn't made a post yet.",
-    "email": "Email"
+    "email": "Email",
+    "link": "Link",
+    "link_placeholder": "https://ejemplo.com"
   },
   "validations": {
     "invalid_field": "Invalid field",
@@ -232,6 +234,7 @@
     "required": "Required field",
     "invalid_year": "Must be a valid year",
     "too_long": "Field too long",
-    "too_short": "Field too short"
+    "too_short": "Field too short",
+    "invalid_link": "Invalid link"
   }
 }

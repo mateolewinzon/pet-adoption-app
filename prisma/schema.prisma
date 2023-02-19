@@ -108,6 +108,7 @@ model User {
   contactInfo   String?   @db.Text
   username      String?   @unique
   biography     String?   @db.Text
+  link          String?
   pets          Pet[]
   accounts      Account[]
   sessions      Session[]

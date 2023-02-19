@@ -51,6 +51,11 @@ const Home = ({ profile, loggedUser }: Props) => {
             )}`}</Span>
             <Span className="font-semibold text-base">{profile.name}</Span>
             <Span className="text-sm">{profile.biography}</Span>
+            {profile.link && (
+              <Link href={profile.link}>
+                <Span className="text-sm text-blue-600 hover:underline">{profile.link}</Span>
+              </Link>
+            )}
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 my-4">

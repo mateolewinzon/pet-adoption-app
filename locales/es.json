@@ -218,7 +218,9 @@
     "number_of_posts": "mascotas publicadas",
     "number_of_posts_singular": "mascota publicada",
     "no_posts": "Todavía no ha hecho publicaciones.",
-    "email": "Email"
+    "email": "Email",
+    "link": "Enlace",
+    "link_placeholder": "https://ejemplo.com"
   },
   "validations": {
     "invalid_field": "Campo inválido",
@@ -232,6 +234,7 @@
     "required": "Campo obligatorio",
     "invalid_year": "Escriba un año válido",
     "too_long": "Campo demasiado largo",
-    "too_short": "Campo demasiado corto"
+    "too_short": "Campo demasiado corto",
+    "invalid_link": "Enlace inválido"
   }
 }

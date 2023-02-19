@@ -41,6 +41,7 @@ const Profile = ({ user }: Props) => {
     phone: user.phone || "",
     username: user.username || "",
     biography: user.biography || "",
+    link: user.link || ""
   };
 
   return (
