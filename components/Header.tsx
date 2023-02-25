@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <nav className="bg-gradient-to-r from-purple-700 via-purple-800 to-purple-700  px-4 lg:px-6 py-3">
-      <div className="flex flex-wrap lg:px-4 justify-between items-center mx-auto max-w-5xl">
+      <div className="flex flex-wrap lg:px-4 justify-between items-center mx-auto max-w-3xl">
         <div className="flex items-center gap-3">
           <Link href="/">
             <Span className="text-white font-semibold hidden sm:inline">

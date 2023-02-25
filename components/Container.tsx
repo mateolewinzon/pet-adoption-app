@@ -20,7 +20,7 @@ const raleway = Raleway({
 export const Container = ({
   children,
   className,
-  width = "max-w-5xl",
+  width = "max-w-3xl",
   ...customMeta
 }: Props) => {
   const meta = {

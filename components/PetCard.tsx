@@ -14,7 +14,7 @@ export const PetCard = ({ pet, author }: Props) => {
   const { locale } = useRouter();
 
   return (
-    <div className="flex flex-col rounded-xl border border-2 border-neutral-100 hover:border-purple-100">
+    <div className="flex flex-col rounded-lg shadow hover:shadow-md">
       <div className="flex items-center justify-between my-2 px-2">
         <Link href={`/${author.username}`}>
           <div className="flex items-center">

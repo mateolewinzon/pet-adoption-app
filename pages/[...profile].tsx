@@ -59,7 +59,7 @@ const Home = ({ profile, loggedUser }: Props) => {
             )}
           </div>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
+        <div className="grid sm:grid-cols-2 gap-6 my-4">
           {profile.pets?.length === 0 && t("profile.no_posts")}
           {profile.pets?.map((pet) => (
             <PetCard author={profile} key={pet.id} pet={pet} />
