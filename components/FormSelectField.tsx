@@ -29,7 +29,7 @@ export const FormSelectField = ({
       <FormikField
         type={type}
         component={"select"}
-        className="w-full bg-gray-50 rounded p-2 mb-2"
+        className="w-full rounded p-2 mb-2 shadow"
         id={id}
         name={name}
       >

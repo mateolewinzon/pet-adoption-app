@@ -20,7 +20,7 @@ export const LocationSelect = () => {
       <Field name="country" labelId="pet.country">
         <CountryDropdown
           whitelist={countries}
-          classes="w-full bg-gray-50 p-2 mb-2 rounded focus:bg-white"
+          classes="w-full bg-gray-50 p-2 mb-2 rounded bg-white shadow"
           value={values.country}
           onChange={(value) => handleChange("country", value)}
           defaultOptionLabel={t("browse.select_country")}
@@ -28,7 +28,7 @@ export const LocationSelect = () => {
       </Field>
       <Field name="region" labelId="pet.region">
         <RegionDropdown
-          classes="w-full bg-gray-50 p-2 mr-2 rounded focus:bg-white"
+          classes="w-full bg-gray-50 p-2 mr-2 rounded bg-white shadow"
           country={values.country}
           value={values.region}
           onChange={(value) => {

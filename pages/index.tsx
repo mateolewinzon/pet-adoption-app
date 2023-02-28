@@ -17,7 +17,7 @@ const BrowsePets = () => {
   const { pets, error } = usePets(filters);
   
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <PetFilters filters={{ filters, setFilters }} />
       <div className="grid sm:grid-cols-2 gap-6">
         {error && "An error occurred when fetching pets"}
@@ -26,7 +26,7 @@ const BrowsePets = () => {
           <PetCard author={pet.user} key={pet.id} pet={pet} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

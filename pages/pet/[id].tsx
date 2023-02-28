@@ -37,7 +37,7 @@ const ViewPost = ({ pet }: Props) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col">
           <Link href={`/${pet.user.username}`}>
-            <div className="flex items-center p-2 shadow-xl rounded-t-lg">
+            <div className="flex items-center py-2 ">
               <ProfilePicture user={pet.user} />
               <div className="flex flex-col">
                 <SpanSecondary className="mx-2 text-gray-400 text-xs">

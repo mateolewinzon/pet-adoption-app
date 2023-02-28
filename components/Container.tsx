@@ -30,7 +30,7 @@ export const Container = ({
     ...customMeta,
   };
   return (
-    <div >
+    <div className= {twMerge(raleway.className, 'bg-gradient')}>
       <Head>
         <title>{meta.title}</title>
         <meta name="twitter:title" content={meta.title} />
@@ -47,7 +47,6 @@ export const Container = ({
       <main
         className={twMerge(
           `flex flex-col ${width} px-4 py-4 mx-auto min-h-[96vh]`,
-          raleway.className,
           className
         )}
       >

@@ -27,7 +27,7 @@ export const FormTextField = ({
       <FormikField
         type={type}
         as={isTextarea && "textarea"}
-        className="w-full bg-gray-50 rounded p-2 mb-2"
+        className="w-full rounded p-2 mb-2 shadow"
         id={id}
         name={name}
         {...(placeholderId ? { placeholder: t(placeholderId) } : {})}
