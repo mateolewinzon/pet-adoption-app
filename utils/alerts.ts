@@ -1,7 +1,5 @@
-import { deletePet } from "service/pets";
-import Swal from "sweetalert2";
+import Swal, { SweetAlertIcon } from "sweetalert2";
 import type { SweetAlertOptions } from "sweetalert2";
-import type { Pet } from "@prisma/client";
 
 export const alert = (
   config: SweetAlertOptions = {},
@@ -12,11 +10,10 @@ export const alert = (
   return Swal.fire(config).then(async ({ isConfirmed }) => {
     if (isConfirmed && action) {
       const response = await action();
-      if (successMessage || errorMessage) {
-        response.error
-          ? displayErrorAlert(errorMessage!)
-          : displaySuccessAlert(successMessage!);
-      }
+      alert({
+        title: response.error ? errorMessage : successMessage,
+        icon: response.error ? "error" : "success",
+      });
     }
   });
 };
@@ -41,11 +38,3 @@ export const confirmDangerousAction = (
     successMessage,
     errorMessage
   );
-
-export const displaySuccessAlert = (title: string, message?: string) => {
-  Swal.fire(title, message, "success");
-};
-
-export const displayErrorAlert = (title: string, message?: string) => {
-  Swal.fire(title, message, "error");
-};
